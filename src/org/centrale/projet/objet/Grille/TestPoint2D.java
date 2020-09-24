@@ -1,5 +1,7 @@
 package org.centrale.projet.objet.Grille;
 
+import java.util.Random;
+
 public class TestPoint2D {
 
     public static void main(String[] args) {
@@ -26,6 +28,7 @@ public class TestPoint2D {
         origine.affiche();
 
         System.out.println(origine.getDistance(pointA));
+
 
     }
 

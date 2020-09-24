@@ -45,6 +45,18 @@ public class Point2D {
         this.setY(y);
     }
 
+    public void getNextPosition() {
+        Random radomGenerator = new Random();
+        int dX = 0;
+        int dY = 0;
+        // we check next position is not the same
+        while (dX == 0 && dY == 0) {
+            dX = radomGenerator.nextInt(3) - 1;
+            dY = radomGenerator.nextInt(3) - 1;
+        }
+        this.translater(dX, dY);
+    }
+
     public void translater(int dx, int dy) {
         this.x += dx;
         this.y += dy;

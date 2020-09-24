@@ -27,8 +27,6 @@ public class Archer extends Personnage {
     }
 
     public void affiche() {
-        System.out.println("Archer{" +
-                "nbFleches=" + nbFleches +
-                "} " + super.toString());
+        System.out.printf("Archer{%s, nbFleches=%s}\n",  this.toString(), nbFleches);
     }
 }

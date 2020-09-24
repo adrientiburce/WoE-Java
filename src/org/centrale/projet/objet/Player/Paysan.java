@@ -17,13 +17,7 @@ public class Paysan extends Personnage {
         super(nom, ptVie, ptMana, pourcentageAtt, pourcentagePar, pourcentageMag, pourcentageResistMag, degAtt, degMag, distAttMax, pos);
     }
 
-    @Override
-    public String toString() {
-        return "Paysan{} " + super.toString();
-    }
-
-
     public void affiche() {
-        System.out.println(this);
+        System.out.printf("Paysan{%s}\n",  this.toString());
     }
 }

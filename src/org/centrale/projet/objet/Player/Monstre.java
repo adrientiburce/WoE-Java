@@ -4,6 +4,7 @@ package org.centrale.projet.objet.Player;
 import org.centrale.projet.objet.Grille.Point2D;
 
 public class Monstre {
+
     private int ptVie;
 
     private int pourcentageAtt;
@@ -23,6 +24,14 @@ public class Monstre {
         this.pos = new Point2D();
     }
 
+    /**
+     * Constructeur par attributs
+     * @param ptVie point de vie
+     * @param pourcentageAtt pourcentage d'attaque
+     * @param pourcentagePar pourcentage de défense
+     * @param degAtt degré d'attaque
+     * @param pos position du personnage
+     */
     public Monstre(int ptVie, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos) {
         this.ptVie = ptVie;
         this.pourcentageAtt = pourcentageAtt;
@@ -80,21 +89,20 @@ public class Monstre {
     }
 
     public void deplace() {
-        this.pos = new Point2D();
+        this.pos.getNextPosition();
     }
 
     public void affiche() {
-        System.out.println(this);
+        System.out.printf("Monstre{%s}\n", this.toString());
     }
 
     @Override
     public String toString() {
-        return "Monstre{" +
-                "ptVie=" + ptVie +
+        return
+                "pos=" + pos +
+                ", ptVie=" + ptVie +
                 ", pourcentageAtt=" + pourcentageAtt +
                 ", pourcentagePar=" + pourcentagePar +
-                ", degAtt=" + degAtt +
-                ", pos=" + pos +
-                '}';
+                ", degAtt=" + degAtt;
     }
 }

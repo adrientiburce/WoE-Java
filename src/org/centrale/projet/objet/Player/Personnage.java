@@ -140,17 +140,22 @@ public class Personnage {
     }
 
     public void affiche() {
-        System.out.println(this);
+        System.out.printf("Personnage{%s}\n", this.toString());
     }
 
+    /**
+     * deplace un personnage avec un deplacement d'une unité maximum
+     * selon X et Y
+     */
     public void deplace() {
-        this.pos = new Point2D();
+        this.pos.getNextPosition();
     }
 
     @Override
     public String toString() {
-        return "Personnage{" +
-                "nom='" + nom + '\'' +
+        return
+                "pos=" + pos +
+                ", nom='" + nom + '\'' +
                 ", ptVie=" + ptVie +
                 ", ptMana=" + ptMana +
                 ", pourcentageAtt=" + pourcentageAtt +
@@ -159,8 +164,6 @@ public class Personnage {
                 ", pourcentageResistMag=" + pourcentageResistMag +
                 ", degAtt=" + degAtt +
                 ", degMag=" + degMag +
-                ", distAttMax=" + distAttMax +
-                ", pos=" + pos +
-                '}';
+                ", distAttMax=" + distAttMax;
     }
 }

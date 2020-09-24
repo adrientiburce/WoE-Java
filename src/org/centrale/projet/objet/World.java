@@ -19,6 +19,9 @@ public class World {
         this.bugs = new Lapin();
     }
 
+    /**
+     * Génére un monde aléatoire avec des positions pour cachun des personnages
+     */
     public void creerMondeAlea() {
         World monMonde = new World();
 

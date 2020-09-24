@@ -16,12 +16,7 @@ public class Lapin extends Monstre {
         super(l.getPtVie(), l.getPourcentageAtt(), l.getPourcentagePar(), l.getDegAtt(), l.getPos());
     }
 
-    @Override
-    public String toString() {
-        return "Lapin{} " + super.toString();
-    }
-
     public void affiche() {
-        System.out.println(this);
+        System.out.printf("Lapin{%s}\n", this.toString());
     }
 }

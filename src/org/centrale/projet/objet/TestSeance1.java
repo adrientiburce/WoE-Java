@@ -5,15 +5,22 @@ public class TestSeance1 {
     public static void main(String[] args) {
 
         World monMonde = new World();
-        monMonde.creerMondeAlea();
+//        monMonde.creerMondeAlea();
+
+
+        System.out.println(" ----- CREATION DU MONDE ------ ");
 
         monMonde.robin.affiche(); // archer
         monMonde.peon.affiche(); // paysan
         monMonde.bugs.affiche(); // monstre
 
-        // augmenter l'attaque
-        monMonde.robin.setDegAtt(30);
-        monMonde.robin.affiche();
+        monMonde.robin.deplace();
+        monMonde.peon.deplace();
+        monMonde.bugs.deplace();
 
+        System.out.println(" ----- APRES DEPLACEMENT ------ ");
+        monMonde.robin.affiche(); // archer
+        monMonde.peon.affiche(); // paysan
+        monMonde.bugs.affiche(); // monstre
     }
 }
