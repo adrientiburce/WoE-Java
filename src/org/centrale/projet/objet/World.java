@@ -1,5 +1,10 @@
 package org.centrale.projet.objet;
 
+import org.centrale.projet.objet.Grille.Point2D;
+import org.centrale.projet.objet.Player.Archer;
+import org.centrale.projet.objet.Player.Lapin;
+import org.centrale.projet.objet.Player.Paysan;
+
 public class World {
 
     public Archer robin;

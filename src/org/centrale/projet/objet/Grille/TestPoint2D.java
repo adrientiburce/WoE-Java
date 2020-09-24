@@ -1,4 +1,4 @@
-package org.centrale.projet.objet;
+package org.centrale.projet.objet.Grille;
 
 public class TestPoint2D {
 
