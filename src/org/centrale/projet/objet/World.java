@@ -13,8 +13,13 @@ public class World {
 
     public Lapin bugs;
 
+    public Archer guillaumeT;
+
     public World() {
         this.robin = new Archer();
+        this.robin.setNom("Robin");
+        this.guillaumeT = new Archer(this.robin);
+        this.guillaumeT.setNom("Guillaume");
         this.peon = new Paysan();
         this.bugs = new Lapin();
     }

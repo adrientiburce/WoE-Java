@@ -6,15 +6,57 @@ import org.centrale.projet.objet.Grille.Point2D;
 public class Personnage {
 
     private String nom;
+
+    /**
+     * point de vie
+     */
     private int ptVie;
+
+    /**
+     *  point de mana, donc la réserve d'énergie magique
+     */
     private int ptMana;
+
+    /**
+     * diminution des dégâts subits en cas de parade réussie
+     */
+    private int ptPar;
+
+    /**
+     * pourcentage d'attque, pour donner des dégats
+     */
     private int pourcentageAtt;
+
+    /**
+     * pourcentage de parade, pour diminuer les dégâts subits
+     */
     private int pourcentagePar;
+
+    /**
+     * pourcentage magique, pour les attaques magiques
+     */
     private int pourcentageMag;
+
+    /**
+     * pourcentage de résistance à la magie
+     */
     private int pourcentageResistMag;
+
+    /**
+     * dégâts d'attaque
+     */
     private int degAtt;
+
+    /**
+     *  dégâts magiques
+     */
     private int degMag;
+
+    /**
+     * distance d'attaque maximum
+     */
     private int distAttMax;
+
     private Point2D pos;
 
     public Personnage() {
@@ -139,6 +181,17 @@ public class Personnage {
         this.pourcentageResistMag = pourcentageResistMag;
     }
 
+    public int getPtPar() {
+        return ptPar;
+    }
+
+    public void setPtPar(int ptPar) {
+        this.ptPar = ptPar;
+    }
+
+    /**
+     * affiche les attributs du personnage
+     */
     public void affiche() {
         System.out.printf("Personnage{%s}\n", this.toString());
     }
@@ -148,7 +201,9 @@ public class Personnage {
      * selon X et Y
      */
     public void deplace() {
-        this.pos.getNextPosition();
+        Point2D newPos = new Point2D(this.pos);
+        newPos.getNextPosition();
+        this.pos = newPos;
     }
 
     @Override
