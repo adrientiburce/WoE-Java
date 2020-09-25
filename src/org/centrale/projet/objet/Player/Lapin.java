@@ -6,6 +6,7 @@ import org.centrale.projet.objet.Grille.Point2D;
 public class Lapin extends Monstre {
 
     public Lapin() {
+        super();
     }
 
     public Lapin(int ptVie, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos) {

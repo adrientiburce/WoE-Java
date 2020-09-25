@@ -4,6 +4,9 @@ import org.centrale.projet.objet.Grille.Point2D;
 
 public class Archer extends Personnage {
 
+    /**
+     * nombre de flèches que possede l'archer
+     */
     private int nbFleches;
 
     public Archer() {

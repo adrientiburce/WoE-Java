@@ -5,14 +5,29 @@ import org.centrale.projet.objet.Grille.Point2D;
 
 public class Monstre {
 
+    /**
+     * point de viee
+     */
     private int ptVie;
 
+    /**
+     * pourcentage d'attaque
+     */
     private int pourcentageAtt;
 
+    /**
+     * pourcentage de parade, pour diminuer les dégâts subits
+     */
     private int pourcentagePar;
 
+    /**
+     * dégâts d'attaque
+     */
     private int degAtt;
 
+    /**
+     * position du monstre
+     */
     private Point2D pos;
 
     public Monstre() {
@@ -40,6 +55,10 @@ public class Monstre {
         this.pos = pos;
     }
 
+    /**
+     * constructeur par copie
+     * @param m montre à copier
+     */
     public Monstre(Monstre m) {
         this.ptVie = m.ptVie;
         this.pourcentageAtt = m.pourcentageAtt;

@@ -57,6 +57,9 @@ public class Personnage {
      */
     private int distAttMax;
 
+    /**
+     * position du personnage
+     */
     private Point2D pos;
 
     public Personnage() {
@@ -65,6 +68,10 @@ public class Personnage {
         this.pos = new Point2D();
     }
 
+    /**
+     *  constructeur par copie
+     * @param perso personnage à copier
+     */
     public Personnage(Personnage perso) {
         this.nom = perso.nom;
         this.ptVie = perso.ptVie;
