@@ -7,8 +7,8 @@ public class TestSeance1 {
     public static void main(String[] args) {
 
         World monMonde = new World();
+        System.out.println(monMonde.mapPositions);
 //        monMonde.creerMondeAlea();
-
 
         System.out.println(" ----- CREATION DU MONDE ------ ");
 
@@ -16,9 +16,12 @@ public class TestSeance1 {
         monMonde.guillaumeT.affiche(); // archer
 
         System.out.println("--- deplace robin --- ");
-        monMonde.robin.deplace();
-        monMonde.robin.affiche(); // archer
-        monMonde.guillaumeT.affiche(); // archer
+        monMonde.robin.deplace(monMonde.mapPositions);
+        System.out.println(monMonde.mapPositions);
+
+
+//        monMonde.robin.affiche(); // archer
+//        monMonde.guillaumeT.affiche(); // archer
 
 
 

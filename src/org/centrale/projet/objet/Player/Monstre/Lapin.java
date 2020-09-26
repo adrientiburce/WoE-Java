@@ -1,4 +1,4 @@
-package org.centrale.projet.objet.Player;
+package org.centrale.projet.objet.Player.Monstre;
 
 
 import org.centrale.projet.objet.Grille.Point2D;

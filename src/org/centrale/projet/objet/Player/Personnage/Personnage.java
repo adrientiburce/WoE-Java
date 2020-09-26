@@ -1,9 +1,14 @@
-package org.centrale.projet.objet.Player;
+package org.centrale.projet.objet.Player.Personnage;
 
 
 import org.centrale.projet.objet.Grille.Point2D;
+import org.centrale.projet.objet.Player.Creature;
+import org.centrale.projet.objet.Tools.Mana;
+import org.centrale.projet.objet.Tools.Soin;
 
-public class Personnage {
+import java.util.Map;
+
+public class Personnage extends Creature {
 
     private String nom;
 
@@ -13,7 +18,7 @@ public class Personnage {
     private int ptVie;
 
     /**
-     *  point de mana, donc la réserve d'énergie magique
+     * point de mana, donc la réserve d'énergie magique
      */
     private int ptMana;
 
@@ -48,7 +53,7 @@ public class Personnage {
     private int degAtt;
 
     /**
-     *  dégâts magiques
+     * dégâts magiques
      */
     private int degMag;
 
@@ -66,10 +71,12 @@ public class Personnage {
         // generate random point
         this.nom = "un personnage";
         this.pos = new Point2D();
+
     }
 
     /**
-     *  constructeur par copie
+     * constructeur par copie
+     *
      * @param perso personnage à copier
      */
     public Personnage(Personnage perso) {
@@ -196,6 +203,15 @@ public class Personnage {
         this.ptPar = ptPar;
     }
 
+
+    public void boireMana(Mana m) {
+        this.ptMana += m.getPtManaGagne();
+    }
+
+    public void boireSoin(Soin s) {
+        this.ptVie += s.getPtVieGagne();
+    }
+
     /**
      * affiche les attributs du personnage
      */
@@ -213,19 +229,25 @@ public class Personnage {
         this.pos = newPos;
     }
 
+    public void deplace(Map<Integer, Point2D> mapPositions) {
+        this.deplace();
+        // mis a jour de la positon dans mapPositions
+        mapPositions.put(this.hashCode(), this.getPos());
+    }
+
     @Override
     public String toString() {
         return
                 "pos=" + pos +
-                ", nom='" + nom + '\'' +
-                ", ptVie=" + ptVie +
-                ", ptMana=" + ptMana +
-                ", pourcentageAtt=" + pourcentageAtt +
-                ", pourcentagePar=" + pourcentagePar +
-                ", pourcentageMag=" + pourcentageMag +
-                ", pourcentageResistMag=" + pourcentageResistMag +
-                ", degAtt=" + degAtt +
-                ", degMag=" + degMag +
-                ", distAttMax=" + distAttMax;
+                        ", nom='" + nom + '\'' +
+                        ", ptVie=" + ptVie +
+                        ", ptMana=" + ptMana +
+                        ", pourcentageAtt=" + pourcentageAtt +
+                        ", pourcentagePar=" + pourcentagePar +
+                        ", pourcentageMag=" + pourcentageMag +
+                        ", pourcentageResistMag=" + pourcentageResistMag +
+                        ", degAtt=" + degAtt +
+                        ", degMag=" + degMag +
+                        ", distAttMax=" + distAttMax;
     }
 }

@@ -1,12 +1,13 @@
-package org.centrale.projet.objet.Player;
+package org.centrale.projet.objet.Player.Monstre;
 
 
 import org.centrale.projet.objet.Grille.Point2D;
+import org.centrale.projet.objet.Player.Creature;
 
-public class Monstre {
+public class Monstre extends Creature {
 
     /**
-     * point de viee
+     * point de vie
      */
     private int ptVie;
 
