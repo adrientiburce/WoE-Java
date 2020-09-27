@@ -1,15 +1,22 @@
 package org.centrale.projet.objet.Tools;
 
+import org.centrale.projet.objet.Grille.Point2D;
+
 /**
  * classe générique comprenant des objets modifiants les point de vie et magiques
  */
 public class Potion extends Objet {
 
-
     /**
      * couleur de la potion
      */
-    private int color;
+    private String color;
+
+
+    public Potion(String nom, String color, Point2D pos) {
+        super(nom, pos);
+        this.color = color;
+    }
 
     public Potion() {
         super();

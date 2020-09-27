@@ -4,8 +4,8 @@ import org.centrale.projet.objet.Grille.Point2D;
 import org.centrale.projet.objet.Player.Monstre.Lapin;
 import org.centrale.projet.objet.Player.Monstre.Monstre;
 import org.centrale.projet.objet.Player.Personnage.*;
+import org.centrale.projet.objet.Tools.Mana;
 import org.centrale.projet.objet.Tools.Objet;
-import org.centrale.projet.objet.Tools.Potion;
 import org.centrale.projet.objet.Tools.Soin;
 
 import java.util.Arrays;
@@ -27,13 +27,15 @@ public class World {
 
     public Archer guillaumeT;
 
-    public Potion potion1;
+    public Soin potionVie;
+
+    public Mana potionPanoramix;
 
     /**
      * Map stoquant les positions des joueurs & objets dans notre monde
-     * permet de vérifier que chaque joueur/object est sur une position différente
+     * permet de vérifier que chaque joueur/object est sur une position différente avec les positions en clé
      */
-    public Map<Integer, Point2D> mapPositions;
+    public static Map<Point2D, Integer> mapPositions;
 
     /**
      * crée et remplit mapPositions apres la création de notre monde
@@ -43,19 +45,20 @@ public class World {
      * @param objects
      */
     private void initMapPoisition(List<Monstre> monstres, List<Personnage> personnages, List<Objet> objects) {
-        this.mapPositions = new HashMap<>();
         for (Personnage perso : personnages) {
-            this.mapPositions.put(perso.hashCode(), perso.getPos());
+            this.mapPositions.put(perso.getPos(), perso.hashCode());
         }
         for (Monstre m : monstres) {
-            this.mapPositions.put(m.hashCode(), m.getPos());
+            this.mapPositions.put(m.getPos(), m.hashCode());
         }
         for (Objet o : objects) {
-            this.mapPositions.put(o.hashCode(), o.getPos());
+            this.mapPositions.put(o.getPos(), o.hashCode());
         }
     }
 
+
     public World() {
+        this.mapPositions = new HashMap<>();
         // personnage
         this.robin = new Archer("Robin Hoods", 100, 50, 10, 80, 88, 20, 80, 30, 90, 15,
                 new Point2D(21, 23), 10);
@@ -72,12 +75,13 @@ public class World {
         this.mage = new Mage("Dumbledore", 90, 50, 10, 85, 88, 20, 80, 18, 40, 15,
                 new Point2D(18, 19), 10);
 
-        this.potion1 = new Soin(3);
+        this.potionVie = new Soin("vie++", "rouge", new Point2D(20, 24), 3);
+        this.potionPanoramix = new Mana(8);
 
         initMapPoisition(
                 Arrays.asList(this.bugs),
                 Arrays.asList(this.robin, this.guillaumeT, this.peon, this.hulk, this.mage),
-                Arrays.asList(potion1)
+                Arrays.asList(this.potionVie, this.potionPanoramix)
         );
     }
 

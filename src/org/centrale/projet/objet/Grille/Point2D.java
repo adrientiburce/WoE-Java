@@ -1,5 +1,6 @@
 package org.centrale.projet.objet.Grille;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class Point2D {
@@ -109,5 +110,27 @@ public class Point2D {
     @Override
     public String toString() {
         return "[" + this.x + " ; " + this.y + "]";
+    }
+
+
+    /**
+     * override equals for our HashMap of position
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+
+        if (o == this) return true;
+        if (!(o instanceof Point2D)) {
+            return false;
+        }
+        Point2D pt = (Point2D) o;
+        return x == pt.x && y == pt.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
     }
 }

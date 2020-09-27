@@ -11,6 +11,11 @@ public class Objet {
      */
     private Point2D pos;
 
+    public Objet(String nom, Point2D pos) {
+        this.nom = nom;
+        this.pos = pos;
+    }
+
     public Objet() {
         this.pos = new Point2D();
     }

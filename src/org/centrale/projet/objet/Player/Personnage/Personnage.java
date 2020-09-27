@@ -4,9 +4,10 @@ package org.centrale.projet.objet.Player.Personnage;
 import org.centrale.projet.objet.Grille.Point2D;
 import org.centrale.projet.objet.Player.Creature;
 import org.centrale.projet.objet.Tools.Mana;
+import org.centrale.projet.objet.Tools.Potion;
 import org.centrale.projet.objet.Tools.Soin;
+import org.centrale.projet.objet.World;
 
-import java.util.Map;
 import java.util.Random;
 
 public class Personnage extends Creature {
@@ -227,17 +228,6 @@ public class Personnage extends Creature {
 
     public void setPtPar(int ptPar) {
         this.ptPar = Integer.min(ptPar, 100);
-        ;
-        ;
-    }
-
-
-    public void boireMana(Mana m) {
-        this.ptMana += m.getPtManaGagne();
-    }
-
-    public void boireSoin(Soin s) {
-        this.ptVie += s.getPtVieGagne();
     }
 
     /**
@@ -247,20 +237,67 @@ public class Personnage extends Creature {
         System.out.printf("Personnage{%s}\n", this.toString());
     }
 
+
     /**
-     * deplace un personnage avec un deplacement d'une unité maximum
-     * selon X et Y
+     * action de déplacement aléatoire (de 1 unité maximum selon X et Y)
      */
     public void deplace() {
         Point2D newPos = new Point2D(this.pos);
         newPos.getNextPosition();
-        this.pos = newPos;
+        if (this.verifDeplacement(this, newPos)) {
+            this.setPos(newPos);
+        }
     }
 
-    public void deplace(Map<Integer, Point2D> mapPositions) {
-        this.deplace();
-        // mis a jour de la positon dans mapPositions
-        mapPositions.put(this.hashCode(), this.getPos());
+    /**
+     * action de déplacement avec la nouvelle position
+     *
+     * @param newPos
+     */
+    public void deplace(Point2D newPos) {
+        if (this.getPos().distance(newPos) > Math.sqrt(2)) {
+            System.out.println("⛔ déplacement non autorisé");
+        } else if (this.verifDeplacement(this, newPos)) {
+            this.setPos(newPos);
+        }
+    }
+
+    public void deplaceEtConsome(Point2D newPos, Potion p) {
+        if (this.getPos().distance(newPos) > Math.sqrt(2)) {
+            System.out.println("⛔ déplacement non autorisé");
+        } else if (newPos.equals(p.getPos())) {
+            System.out.println("👌 potion consomée");
+            World.mapPositions.remove(this.getPos());
+            World.mapPositions.put(newPos, this.hashCode());
+            this.boire(p);
+            this.setPos(newPos);
+            p = null;
+        }
+    }
+
+    private boolean verifDeplacement(Creature c, Point2D newPos) {
+        if (!World.mapPositions.containsKey(newPos)) {
+            World.mapPositions.remove(this.getPos());
+            World.mapPositions.put(newPos, c.hashCode());
+            return true;
+        } else {
+            System.out.println("⛔ case occupé");
+            return false;
+        }
+    }
+
+
+    /**
+     * action de boire une potion pour récupérer des points de vie ou mana
+     *
+     * @param p potion
+     */
+    private void boire(Potion p) {
+        if (p.getClass() == Soin.class) {
+            this.setPtVie(this.getPtVie() + ((Soin) p).getPtVieGagne());
+        } else if (p.getClass() == Mana.class) {
+            this.setPtMana(this.getPtMana() + ((Mana) p).getPtManaGagne());
+        }
     }
 
     @Override
