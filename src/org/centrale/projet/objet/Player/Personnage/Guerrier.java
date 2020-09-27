@@ -42,7 +42,7 @@ public class Guerrier extends Personnage {
         this.force = force;
     }
 
-    public void combatre(Personnage defenseur) {
+    public void combattre(Personnage defenseur) {
         double distCombatants = this.getPos().distance(defenseur.getPos());
         if (distCombatants <= 1) {
             super.combatCorpsACorps(defenseur);

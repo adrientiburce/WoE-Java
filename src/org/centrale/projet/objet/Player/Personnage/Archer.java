@@ -32,7 +32,7 @@ public class Archer extends Personnage {
         this.nbFleches = a.nbFleches;
     }
 
-    public void combatre(Personnage defenseur) {
+    public void combattre(Personnage defenseur) {
         double distCombatants = this.getPos().distance(defenseur.getPos());
         // contact
         if (distCombatants <= 1) {

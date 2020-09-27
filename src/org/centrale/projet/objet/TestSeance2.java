@@ -1,5 +1,7 @@
 package org.centrale.projet.objet;
 
+import org.centrale.projet.objet.Grille.Point2D;
+
 public class TestSeance2 {
 
     public static void main(String[] args) {
@@ -15,12 +17,12 @@ public class TestSeance2 {
 
         // corps a corps de hulk
         monMonde.robin.affiche();
-        monMonde.hulk.combatre(monMonde.robin);
+        monMonde.hulk.combattre(monMonde.robin);
         monMonde.robin.affiche();
         System.out.println("\n");
 
         // combat distance de robin
-        monMonde.robin.combatre(monMonde.guillaumeT);
+        monMonde.robin.combattre(monMonde.guillaumeT);
         monMonde.robin.affiche();
         monMonde.guillaumeT.affiche();
         System.out.println("\n");
@@ -29,6 +31,11 @@ public class TestSeance2 {
         monMonde.mage.combatre(monMonde.hulk);
         monMonde.mage.affiche();
         monMonde.hulk.affiche();
+
+        System.out.println("\n ----- Potion ------ ");
+        monMonde.robin.affiche();
+        monMonde.robin.deplaceEtConsome(new Point2D(20, 24), monMonde.potionVie);
+        monMonde.robin.affiche();
 
     }
 }

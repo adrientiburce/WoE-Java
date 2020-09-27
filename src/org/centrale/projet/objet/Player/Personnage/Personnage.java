@@ -262,6 +262,17 @@ public class Personnage extends Creature {
         }
     }
 
+    private boolean verifDeplacement(Creature c, Point2D newPos) {
+        if (!World.mapPositions.containsKey(newPos)) {
+            World.mapPositions.remove(this.getPos());
+            World.mapPositions.put(newPos, c.hashCode());
+            return true;
+        } else {
+            System.out.println("⛔ case occupé");
+            return false;
+        }
+    }
+
     public void deplaceEtConsome(Point2D newPos, Potion p) {
         if (this.getPos().distance(newPos) > Math.sqrt(2)) {
             System.out.println("⛔ déplacement non autorisé");
@@ -274,18 +285,6 @@ public class Personnage extends Creature {
             p = null;
         }
     }
-
-    private boolean verifDeplacement(Creature c, Point2D newPos) {
-        if (!World.mapPositions.containsKey(newPos)) {
-            World.mapPositions.remove(this.getPos());
-            World.mapPositions.put(newPos, c.hashCode());
-            return true;
-        } else {
-            System.out.println("⛔ case occupé");
-            return false;
-        }
-    }
-
 
     /**
      * action de boire une potion pour récupérer des points de vie ou mana

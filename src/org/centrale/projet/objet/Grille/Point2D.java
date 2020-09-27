@@ -104,7 +104,7 @@ public class Point2D {
     }
 
     public double distance(Point2D point) {
-        return Math.sqrt((this.y - point.y) * (this.y - point.y) + (this.x - point.x) * (this.x - point.x));
+        return Math.sqrt(Math.pow(this.y - point.y, 2) + Math.pow(this.x - point.x, 2));
     }
 
     @Override
