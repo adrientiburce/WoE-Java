@@ -102,7 +102,7 @@ public class Point2D {
         }
     }
 
-    public double getDistance(Point2D point) {
+    public double distance(Point2D point) {
         return Math.sqrt((this.y - point.y) * (this.y - point.y) + (this.x - point.x) * (this.x - point.x));
     }
 

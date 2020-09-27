@@ -7,6 +7,7 @@ import org.centrale.projet.objet.Tools.Mana;
 import org.centrale.projet.objet.Tools.Soin;
 
 import java.util.Map;
+import java.util.Random;
 
 public class Personnage extends Creature {
 
@@ -28,7 +29,7 @@ public class Personnage extends Creature {
     private int ptPar;
 
     /**
-     * pourcentage d'attque, pour donner des dégats
+     * pourcentage d'attaque, pour donner des dégats
      */
     private int pourcentageAtt;
 
@@ -93,10 +94,11 @@ public class Personnage extends Creature {
         this.pos = perso.pos;
     }
 
-    public Personnage(String nom, int ptVie, int ptMana, int pourcentageAtt, int pourcentagePar, int pourcentageMag, int pourcentageResistMag, int degAtt, int degMag, int distAttMax, Point2D pos) {
+    public Personnage(String nom, int ptVie, int ptMana, int ptPar, int pourcentageAtt, int pourcentagePar, int pourcentageMag, int pourcentageResistMag, int degAtt, int degMag, int distAttMax, Point2D pos) {
         this.nom = nom;
         this.ptVie = ptVie;
         this.ptMana = ptMana;
+        this.ptPar = ptPar;
         this.pourcentageAtt = pourcentageAtt;
         this.pourcentagePar = pourcentagePar;
         this.pourcentageMag = pourcentageMag;
@@ -106,6 +108,29 @@ public class Personnage extends Creature {
         this.distAttMax = distAttMax;
         this.pos = pos;
     }
+
+    public void combatCorpsACorps(Personnage defenseur) {
+        Random randomGenerator = new Random();
+        System.out.printf("⚔️ Combat au corps à corps:  %s attaque %s ⚔️ \n", this.getNom(), defenseur.getNom());
+        // attaque réussie
+        if (randomGenerator.nextInt(101) <= this.getPourcentageAtt()) {
+            int newPtvie;
+            String res = "";
+            // parade réussie
+            if (randomGenerator.nextInt(101) <= defenseur.getPourcentagePar()) {
+                newPtvie = Integer.max(defenseur.getPtVie() - this.getDegAtt() + defenseur.getPtPar(), 0);
+                res = "🛡️ Parade,";
+            } // aucune parade
+            else {
+                newPtvie = Integer.max(defenseur.getPtVie() - this.getDegAtt(), 0);
+            }
+            System.out.printf("%s 👌 Perte de vie engendré: %d\n", res, defenseur.getPtVie() - newPtvie);
+            defenseur.setPtVie(newPtvie);
+        } else {
+            System.out.println("⛔ échec de l'attaque");
+        }
+    }
+
 
     public String getNom() {
         return nom;
@@ -176,7 +201,7 @@ public class Personnage extends Creature {
     }
 
     public void setPourcentagePar(int pourcentagePar) {
-        this.pourcentagePar = pourcentagePar;
+        this.pourcentageMag = Integer.min(pourcentagePar, 100);
     }
 
     public int getPourcentageMag() {
@@ -184,7 +209,7 @@ public class Personnage extends Creature {
     }
 
     public void setPourcentageMag(int pourcentageMag) {
-        this.pourcentageMag = pourcentageMag;
+        this.pourcentageMag = Integer.min(pourcentageMag, 100);
     }
 
     public int getPourcentageResistMag() {
@@ -192,7 +217,8 @@ public class Personnage extends Creature {
     }
 
     public void setPourcentageResistMag(int pourcentageResistMag) {
-        this.pourcentageResistMag = pourcentageResistMag;
+        this.pourcentageResistMag = Integer.min(pourcentageResistMag, 100);
+        ;
     }
 
     public int getPtPar() {
@@ -200,7 +226,9 @@ public class Personnage extends Creature {
     }
 
     public void setPtPar(int ptPar) {
-        this.ptPar = ptPar;
+        this.ptPar = Integer.min(ptPar, 100);
+        ;
+        ;
     }
 
 
@@ -242,6 +270,7 @@ public class Personnage extends Creature {
                         ", nom='" + nom + '\'' +
                         ", ptVie=" + ptVie +
                         ", ptMana=" + ptMana +
+                        ", ptPar=" + ptPar +
                         ", pourcentageAtt=" + pourcentageAtt +
                         ", pourcentagePar=" + pourcentagePar +
                         ", pourcentageMag=" + pourcentageMag +

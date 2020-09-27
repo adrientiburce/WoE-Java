@@ -2,6 +2,7 @@ package org.centrale.projet.objet.Player.Monstre;
 
 
 import org.centrale.projet.objet.Grille.Point2D;
+import org.centrale.projet.objet.Player.Personnage.Personnage;
 
 public class Loup extends Monstre {
 
