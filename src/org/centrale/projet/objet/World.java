@@ -1,35 +1,30 @@
 package org.centrale.projet.objet;
 
 import org.centrale.projet.objet.Grille.Point2D;
+import org.centrale.projet.objet.Player.Creature;
 import org.centrale.projet.objet.Player.Monstre.Lapin;
+import org.centrale.projet.objet.Player.Monstre.Loup;
 import org.centrale.projet.objet.Player.Monstre.Monstre;
 import org.centrale.projet.objet.Player.Personnage.*;
 import org.centrale.projet.objet.Tools.Mana;
 import org.centrale.projet.objet.Tools.Objet;
 import org.centrale.projet.objet.Tools.Soin;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class World {
 
-    public Archer robin;
+    /**
+     * ensemble des créaturse contenus dans notre monde
+     */
+    public List<Creature> creatures;
 
-    public Paysan peon;
-
-    public Guerrier hulk;
-
-    public Mage mage;
-
-    public Lapin bugs;
-
-    public Archer guillaumeT;
-
-    public Soin potionVie;
-
-    public Mana potionPanoramix;
+    /**
+     * ensemble des objets de notre monde
+     */
+    public List<Objet> objets;
 
     /**
      * Map stoquant les positions des joueurs & objets dans notre monde
@@ -57,49 +52,55 @@ public class World {
     }
 
 
+    /**
+     * constructeur par défaut
+     */
     public World() {
         this.mapPositions = new HashMap<>();
-        // personnage
-        this.robin = new Archer("Robin Hoods", 100, 50, 10, 80, 88, 20, 80, 30, 90, 15,
-                new Point2D(21, 23), 10);
-        this.robin.setNom("Robin");
-        this.guillaumeT = new Archer(this.robin);
-        this.guillaumeT.setNom("Guillaume");
-        this.guillaumeT.setPos(new Point2D(16, 21));
-        this.peon = new Paysan();
-        this.hulk = new Guerrier("Hulk", 70, 50, 12, 85, 32, 20, 90, 65, 90, 20,
-                new Point2D(21, 23), 8);
-        // monstre
-        this.bugs = new Lapin();
-
-        this.mage = new Mage("Dumbledore", 90, 50, 10, 85, 88, 20, 80, 18, 40, 15,
-                new Point2D(18, 19), 10);
-
-        this.potionVie = new Soin("vie++", "rouge", new Point2D(20, 24), 3);
-        this.potionPanoramix = new Mana(8);
-
-        initMapPoisition(
-                Arrays.asList(this.bugs),
-                Arrays.asList(this.robin, this.guillaumeT, this.peon, this.hulk, this.mage),
-                Arrays.asList(this.potionVie, this.potionPanoramix)
-        );
+        this.creatures = new ArrayList<>();
+        this.objets = new ArrayList<>();
     }
 
     /**
      * Génére un monde aléatoire avec des positions pour cachun des personnages
      */
     public void creerMondeAlea() {
-        World monMonde = new World();
+        Random radomGenerator = new Random();
+        List<Archer> archers = Stream.generate(Archer::new).limit(25).collect(Collectors.toList());
+        List<Mage> mages = Stream.generate(Mage::new).limit(25).collect(Collectors.toList());
+        List<Guerrier> guerriers = Stream.generate(Guerrier::new).limit(25).collect(Collectors.toList());
+        List<Paysan> paysans = Stream.generate(Paysan::new).limit(25).collect(Collectors.toList());
+        this.creatures.addAll(archers);
+        this.creatures.addAll(mages);
+        this.creatures.addAll(guerriers);
+        this.creatures.addAll(paysans);
+
+        int i = 1;
+        for (Creature c : this.creatures) {
+            if(c.getClass().getSuperclass() == Personnage.class) {
+               ((Personnage) c).deplace();
+               ((Personnage) c).setNom(((Personnage) c).getNom() + i);
+               i++;
+            }
+        }
 
         // on vérifie que nos personnages sont assez proche de la position initiale de l'archer
         // et que les positions sont différentes
-        while ((this.robin.getPos().distance(this.peon.getPos()) > 5) || (this.robin.getPos() == this.peon.getPos())) {
-            // si le paysan est trop loin on regénére  une position
-            this.peon.setPos(new Point2D());
-        }
-        while ((this.robin.getPos().distance(this.bugs.getPos()) > 5) || (this.robin.getPos() == this.bugs.getPos())) {
-            // si le lapin est trop loin on regénére une position
-            this.bugs.setPos(new Point2D());
-        }
+//        while ((this.robin.getPos().distance(this.peon.getPos()) > 5) || (this.robin.getPos() == this.peon.getPos())) {
+//            // si le paysan est trop loin on regénére  une position
+//            this.peon.setPos(new Point2D());
+//        }
+//        while ((this.robin.getPos().distance(this.bugs.getPos()) > 5) || (this.robin.getPos() == this.bugs.getPos())) {
+//            // si le lapin est trop loin on regénére une position
+//            this.bugs.setPos(new Point2D());
+//        }
+    }
+
+    @Override
+    public String toString() {
+        return "World{" +
+                creatures.size() + " creatures, " +
+                objets.size() + " objets" +
+                '}';
     }
 }

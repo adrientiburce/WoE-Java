@@ -7,11 +7,12 @@ public class TestSeance1 {
     public static void main(String[] args) {
 
         World monMonde = new World();
-        System.out.println(World.mapPositions);
+        System.out.println(monMonde.mapPositions);
 //        monMonde.creerMondeAlea();
 
         System.out.println(" ----- CREATION DU MONDE ------ ");
 
+        /*
         monMonde.robin.affiche(); // archer
 //        monMonde.guillaumeT.affiche(); // archer
 
@@ -31,5 +32,6 @@ public class TestSeance1 {
 //        monMonde.robin.affiche(); // archer
 //        monMonde.peon.affiche(); // paysan
 //        monMonde.bugs.affiche(); // monstre
+         */
     }
 }

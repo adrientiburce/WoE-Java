@@ -9,6 +9,8 @@ public class TestSeance2 {
         World monMonde = new World();
 //        monMonde.creerMondeAlea();
         System.out.println(" ----- CREATION DU MONDE ------ ");
+
+        /*
         monMonde.robin.affiche();
         monMonde.guillaumeT.affiche();
         monMonde.hulk.affiche();
@@ -36,6 +38,8 @@ public class TestSeance2 {
         monMonde.robin.affiche();
         monMonde.robin.deplaceEtConsome(new Point2D(20, 24), monMonde.potionVie);
         monMonde.robin.affiche();
+
+         */
 
     }
 }

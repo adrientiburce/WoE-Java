@@ -9,26 +9,28 @@ public class Point2D {
 
     private int y;
 
+    public static final int TAILLE_GRILLE = 10;
+
     /**
-     * génération d'un point avec une position aléatoire sur notre grille de 100*100
+     * génération d'un point avec une position aléatoire sur notre grille de TAILLE_GRILLE*TAILLE_GRILLE
      */
     public Point2D() {
         Random radomGenerator = new Random();
-        this.x = radomGenerator.nextInt(101);
-        this.y = radomGenerator.nextInt(101);
+        this.x = radomGenerator.nextInt(TAILLE_GRILLE);
+        this.y = radomGenerator.nextInt(TAILLE_GRILLE);
     }
 
 
     public Point2D(int x, int y) {
-        if (x <= 100 && y <= 100) {
+        if (x <= TAILLE_GRILLE && y <= TAILLE_GRILLE) {
             this.x = x;
             this.y = y;
         } else {
             // on vérifie que les coordonées sont dans la grille,
             // si en dehors on réaffecte aléatoirement
             Random radomGenerator = new Random();
-            this.x = radomGenerator.nextInt(101);
-            this.y = radomGenerator.nextInt(101);
+            this.x = radomGenerator.nextInt(TAILLE_GRILLE + 1);
+            this.y = radomGenerator.nextInt(TAILLE_GRILLE + 1);
         }
     }
 
@@ -46,6 +48,9 @@ public class Point2D {
         this.setY(y);
     }
 
+    /**
+     * genere aléatoirement la prochaine positon d'un perso
+     */
     public void getNextPosition() {
         Random radomGenerator = new Random();
         int dX = 0;
@@ -58,19 +63,25 @@ public class Point2D {
         this.translater(dX, dY);
     }
 
+    /**
+     * translatte un point en vérifiant qu'il reste dans la grille
+     *
+     * @param dx distance de translation selon X
+     * @param dy distance de translation selon Y
+     */
     public void translater(int dx, int dy) {
         this.x += dx;
         this.y += dy;
 
         // si x sort de la grille on le met en bordure de la grille.
-        if (this.x > 100) {
-            this.x = 100;
+        if (this.x > TAILLE_GRILLE) {
+            this.x = TAILLE_GRILLE;
         } else if (this.x < 0) {
             this.x = 0;
         }
         // même chose pour y
-        if (this.y > 100) {
-            this.y = 100;
+        if (this.y > TAILLE_GRILLE) {
+            this.y = TAILLE_GRILLE;
         } else if (this.y < 0) {
             this.y = 0;
         }
@@ -82,11 +93,11 @@ public class Point2D {
     }
 
     public void setX(int x) {
-        if (x <= 100 && x >= 0) {
+        if (x <= TAILLE_GRILLE && x >= 0) {
             this.x = x;
         } else {
             Random radomGenerator = new Random();
-            this.x = radomGenerator.nextInt(101);
+            this.x = radomGenerator.nextInt(TAILLE_GRILLE + 1);
         }
     }
 
@@ -95,11 +106,11 @@ public class Point2D {
     }
 
     public void setY(int y) {
-        if (y >= 0 && y <= 100) {
+        if (y >= 0 && y <= TAILLE_GRILLE) {
             this.y = y;
         } else {
             Random radomGenerator = new Random();
-            this.y = radomGenerator.nextInt(101);
+            this.y = radomGenerator.nextInt(TAILLE_GRILLE + 1);
         }
     }
 
@@ -115,12 +126,12 @@ public class Point2D {
 
     /**
      * override equals for our HashMap of position
-     * @param o
-     * @return
+     *
+     * @param o objet à tester
+     * @return boolean
      */
     @Override
     public boolean equals(Object o) {
-
         if (o == this) return true;
         if (!(o instanceof Point2D)) {
             return false;
