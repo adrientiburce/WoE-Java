@@ -241,12 +241,14 @@ public class Personnage extends Creature {
     /**
      * action de déplacement aléatoire (de 1 unité maximum selon X et Y)
      */
-    public void deplace() {
+    public boolean deplace() {
         Point2D newPos = new Point2D(this.pos);
         newPos.getNextPosition();
         if (this.verifDeplacement(this, newPos)) {
             this.setPos(newPos);
+            return true;
         }
+        return false;
     }
 
     /**
@@ -268,7 +270,6 @@ public class Personnage extends Creature {
             World.mapPositions.put(newPos, c.hashCode());
             return true;
         } else {
-            System.out.println("⛔ case occupé");
             return false;
         }
     }

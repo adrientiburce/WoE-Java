@@ -1,5 +1,7 @@
 package org.centrale.projet.objet.Grille;
 
+import org.centrale.projet.objet.World;
+
 import java.util.Objects;
 import java.util.Random;
 
@@ -9,28 +11,27 @@ public class Point2D {
 
     private int y;
 
-    public static final int TAILLE_GRILLE = 10;
 
     /**
-     * génération d'un point avec une position aléatoire sur notre grille de TAILLE_GRILLE*TAILLE_GRILLE
+     * génération d'un point avec une position aléatoire sur notre grille de World.TAILLE_GRILLE*World.TAILLE_GRILLE
      */
     public Point2D() {
         Random radomGenerator = new Random();
-        this.x = radomGenerator.nextInt(TAILLE_GRILLE);
-        this.y = radomGenerator.nextInt(TAILLE_GRILLE);
+        this.x = radomGenerator.nextInt(World.TAILLE_GRILLE);
+        this.y = radomGenerator.nextInt(World.TAILLE_GRILLE);
     }
 
 
     public Point2D(int x, int y) {
-        if (x <= TAILLE_GRILLE && y <= TAILLE_GRILLE) {
+        if (x <= World.TAILLE_GRILLE && y <= World.TAILLE_GRILLE) {
             this.x = x;
             this.y = y;
         } else {
             // on vérifie que les coordonées sont dans la grille,
             // si en dehors on réaffecte aléatoirement
             Random radomGenerator = new Random();
-            this.x = radomGenerator.nextInt(TAILLE_GRILLE + 1);
-            this.y = radomGenerator.nextInt(TAILLE_GRILLE + 1);
+            this.x = radomGenerator.nextInt(World.TAILLE_GRILLE + 1);
+            this.y = radomGenerator.nextInt(World.TAILLE_GRILLE + 1);
         }
     }
 
@@ -74,14 +75,14 @@ public class Point2D {
         this.y += dy;
 
         // si x sort de la grille on le met en bordure de la grille.
-        if (this.x > TAILLE_GRILLE) {
-            this.x = TAILLE_GRILLE;
+        if (this.x > World.TAILLE_GRILLE) {
+            this.x = World.TAILLE_GRILLE;
         } else if (this.x < 0) {
             this.x = 0;
         }
         // même chose pour y
-        if (this.y > TAILLE_GRILLE) {
-            this.y = TAILLE_GRILLE;
+        if (this.y > World.TAILLE_GRILLE) {
+            this.y = World.TAILLE_GRILLE;
         } else if (this.y < 0) {
             this.y = 0;
         }
@@ -93,11 +94,11 @@ public class Point2D {
     }
 
     public void setX(int x) {
-        if (x <= TAILLE_GRILLE && x >= 0) {
+        if (x <= World.TAILLE_GRILLE && x >= 0) {
             this.x = x;
         } else {
             Random radomGenerator = new Random();
-            this.x = radomGenerator.nextInt(TAILLE_GRILLE + 1);
+            this.x = radomGenerator.nextInt(World.TAILLE_GRILLE + 1);
         }
     }
 
@@ -106,11 +107,11 @@ public class Point2D {
     }
 
     public void setY(int y) {
-        if (y >= 0 && y <= TAILLE_GRILLE) {
+        if (y >= 0 && y <= World.TAILLE_GRILLE) {
             this.y = y;
         } else {
             Random radomGenerator = new Random();
-            this.y = radomGenerator.nextInt(TAILLE_GRILLE + 1);
+            this.y = radomGenerator.nextInt(World.TAILLE_GRILLE + 1);
         }
     }
 

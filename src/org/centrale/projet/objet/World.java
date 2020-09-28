@@ -2,13 +2,9 @@ package org.centrale.projet.objet;
 
 import org.centrale.projet.objet.Grille.Point2D;
 import org.centrale.projet.objet.Player.Creature;
-import org.centrale.projet.objet.Player.Monstre.Lapin;
-import org.centrale.projet.objet.Player.Monstre.Loup;
-import org.centrale.projet.objet.Player.Monstre.Monstre;
-import org.centrale.projet.objet.Player.Personnage.*;
-import org.centrale.projet.objet.Tools.Mana;
+import org.centrale.projet.objet.Player.Personnage.Archer;
+import org.centrale.projet.objet.Player.Personnage.Personnage;
 import org.centrale.projet.objet.Tools.Objet;
-import org.centrale.projet.objet.Tools.Soin;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -19,7 +15,7 @@ public class World {
     /**
      * ensemble des créaturse contenus dans notre monde
      */
-    public List<Creature> creatures;
+    public ArrayList<Creature> creatures;
 
     /**
      * ensemble des objets de notre monde
@@ -32,25 +28,8 @@ public class World {
      */
     public static Map<Point2D, Integer> mapPositions;
 
-    /**
-     * crée et remplit mapPositions apres la création de notre monde
-     *
-     * @param monstres
-     * @param personnages
-     * @param objects
-     */
-    private void initMapPoisition(List<Monstre> monstres, List<Personnage> personnages, List<Objet> objects) {
-        for (Personnage perso : personnages) {
-            this.mapPositions.put(perso.getPos(), perso.hashCode());
-        }
-        for (Monstre m : monstres) {
-            this.mapPositions.put(m.getPos(), m.hashCode());
-        }
-        for (Objet o : objects) {
-            this.mapPositions.put(o.getPos(), o.hashCode());
-        }
-    }
 
+    public static int TAILLE_GRILLE = 50;
 
     /**
      * constructeur par défaut
@@ -61,39 +40,52 @@ public class World {
         this.objets = new ArrayList<>();
     }
 
-    /**
-     * Génére un monde aléatoire avec des positions pour cachun des personnages
-     */
-    public void creerMondeAlea() {
-        Random radomGenerator = new Random();
-        List<Archer> archers = Stream.generate(Archer::new).limit(25).collect(Collectors.toList());
-        List<Mage> mages = Stream.generate(Mage::new).limit(25).collect(Collectors.toList());
-        List<Guerrier> guerriers = Stream.generate(Guerrier::new).limit(25).collect(Collectors.toList());
-        List<Paysan> paysans = Stream.generate(Paysan::new).limit(25).collect(Collectors.toList());
-        this.creatures.addAll(archers);
-        this.creatures.addAll(mages);
-        this.creatures.addAll(guerriers);
-        this.creatures.addAll(paysans);
+    public World(int tailleGrille) {
+        TAILLE_GRILLE = tailleGrille;
+        this.mapPositions = new HashMap<>();
+        this.creatures = new ArrayList<>();
+        this.objets = new ArrayList<>();
+    }
 
-        int i = 1;
+    /**
+     * Génére un monde aléatoire avec des positions pour chacun des personnages
+     */
+    public void creerMondeAlea(int nombrePersos) {
+        if (TAILLE_GRILLE * TAILLE_GRILLE * 10 <= nombrePersos) {
+            System.out.println("⛔ Grille trop petite");
+            return;
+        }
+        // generate all personnages
+        List<Archer> archers = Stream.generate(Archer::new).limit(nombrePersos).collect(Collectors.toList());
+        this.creatures.addAll(archers);
+
         for (Creature c : this.creatures) {
-            if(c.getClass().getSuperclass() == Personnage.class) {
-               ((Personnage) c).deplace();
-               ((Personnage) c).setNom(((Personnage) c).getNom() + i);
-               i++;
+            if (c.getClass().getSuperclass() == Personnage.class) {
+                boolean newPosValide = false;
+                while (!newPosValide) {
+                    newPosValide = ((Personnage) c).deplace();
+                }
             }
         }
+    }
 
-        // on vérifie que nos personnages sont assez proche de la position initiale de l'archer
-        // et que les positions sont différentes
-//        while ((this.robin.getPos().distance(this.peon.getPos()) > 5) || (this.robin.getPos() == this.peon.getPos())) {
-//            // si le paysan est trop loin on regénére  une position
-//            this.peon.setPos(new Point2D());
+    public static Point2D caculBarycentrePersos(World world) {
+        int xG = 0;
+        int yG = 0;
+
+        for (Creature c : world.creatures) {
+            xG += ((Personnage) c).getPos().getX();
+            yG += ((Personnage) c).getPos().getY();
+        }
+//        Iterator<Creature> it = world.creatures.iterator();
+//        while (it.hasNext()) {
+//            Creature c = it.next();
+//            xG += ((Personnage) c).getPos().getX();
+//            yG += ((Personnage) c).getPos().getY();
 //        }
-//        while ((this.robin.getPos().distance(this.bugs.getPos()) > 5) || (this.robin.getPos() == this.bugs.getPos())) {
-//            // si le lapin est trop loin on regénére une position
-//            this.bugs.setPos(new Point2D());
-//        }
+        xG = xG / world.creatures.size();
+        yG = yG / world.creatures.size();
+        return new Point2D(xG, yG);
     }
 
     @Override
