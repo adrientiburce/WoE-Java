@@ -73,7 +73,6 @@ public class Personnage extends Creature {
         // generate random point
         this.nom = "un personnage";
         this.pos = new Point2D();
-
     }
 
     /**
@@ -219,7 +218,6 @@ public class Personnage extends Creature {
 
     public void setPourcentageResistMag(int pourcentageResistMag) {
         this.pourcentageResistMag = Integer.min(pourcentageResistMag, 100);
-        ;
     }
 
     public int getPtPar() {
@@ -242,9 +240,9 @@ public class Personnage extends Creature {
      * action de déplacement aléatoire (de 1 unité maximum selon X et Y)
      */
     public boolean deplace() {
-        Point2D newPos = new Point2D(this.pos);
+        Point2D newPos = new Point2D();
         newPos.getNextPosition();
-        if (this.verifDeplacement(this, newPos)) {
+        if (this.verifDeplacementMin3(this, newPos)) {
             this.setPos(newPos);
             return true;
         }
@@ -259,11 +257,48 @@ public class Personnage extends Creature {
     public void deplace(Point2D newPos) {
         if (this.getPos().distance(newPos) > Math.sqrt(2)) {
             System.out.println("⛔ déplacement non autorisé");
-        } else if (this.verifDeplacement(this, newPos)) {
+        } else if (this.verifDeplacementMin3(this, newPos)) {
             this.setPos(newPos);
         }
     }
 
+    /**
+     * vérifie si la nouvelle position sera éloigné de 3 des autres perso
+     * @param c
+     * @param newPos nouvelle position
+     * @return si le déplacement a été effectué
+     */
+    private boolean verifDeplacementMin3(Creature c, Point2D newPos) {
+        int x = newPos.getX();
+        int y = newPos.getY();
+        int xC = ((Personnage) c).getPos().getX();
+        int yC = ((Personnage) c).getPos().getY();
+
+        //tous les points compris dans une grille de taille 5*5 autour de newPos
+        // sont a une distance inférieur a 3
+        for (int xToCheck = x - 2; xToCheck < x + 3; xToCheck++) {
+            for (int yToCheck = y - 2; yToCheck < y + 3; yToCheck++) {
+                // l'ancienne position
+                if (xToCheck == xC && yToCheck == yC) {
+                    continue;
+                } else {
+                    if (World.mapPositions.containsKey(new Point2D(xToCheck, yToCheck))) {
+                        return false;
+                    }
+                }
+            }
+        }
+        World.mapPositions.remove(this.getPos());
+        World.mapPositions.put(newPos, c.hashCode());
+        return true;
+    }
+
+    /**
+     * verifie que la nouvelle positon est valable
+     * @param c Creature a déplacer
+     * @param newPos nouvelle position
+     * @return si le déplacement a été effectué
+     */
     private boolean verifDeplacement(Creature c, Point2D newPos) {
         if (!World.mapPositions.containsKey(newPos)) {
             World.mapPositions.remove(this.getPos());
@@ -274,6 +309,11 @@ public class Personnage extends Creature {
         }
     }
 
+    /**
+     * deplace un personnage sur un case de potion
+     * @param newPos nouvelle positon
+     * @param p Potion a consomé
+     */
     public void deplaceEtConsome(Point2D newPos, Potion p) {
         if (this.getPos().distance(newPos) > Math.sqrt(2)) {
             System.out.println("⛔ déplacement non autorisé");

@@ -6,9 +6,9 @@ import org.centrale.projet.objet.Player.Personnage.Archer;
 import org.centrale.projet.objet.Player.Personnage.Personnage;
 import org.centrale.projet.objet.Tools.Objet;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class World {
 
@@ -20,7 +20,7 @@ public class World {
     /**
      * ensemble des objets de notre monde
      */
-    public List<Objet> objets;
+    public ArrayList<Objet> objets;
 
     /**
      * Map stoquant les positions des joueurs & objets dans notre monde
@@ -28,7 +28,9 @@ public class World {
      */
     public static Map<Point2D, Integer> mapPositions;
 
-
+    /**
+     * permet de définir la taille du monde
+     */
     public static int TAILLE_GRILLE = 50;
 
     /**
@@ -40,6 +42,11 @@ public class World {
         this.objets = new ArrayList<>();
     }
 
+    /**
+     * constructeur
+     *
+     * @param tailleGrille taille du monde
+     */
     public World(int tailleGrille) {
         TAILLE_GRILLE = tailleGrille;
         this.mapPositions = new HashMap<>();
@@ -55,20 +62,24 @@ public class World {
             System.out.println("⛔ Grille trop petite");
             return;
         }
-        // generate all personnages
-        List<Archer> archers = Stream.generate(Archer::new).limit(nombrePersos).collect(Collectors.toList());
-        this.creatures.addAll(archers);
 
-        for (Creature c : this.creatures) {
-            if (c.getClass().getSuperclass() == Personnage.class) {
-                boolean newPosValide = false;
-                while (!newPosValide) {
-                    newPosValide = ((Personnage) c).deplace();
-                }
+        for (int i = 0; i < nombrePersos; i++) {
+            Archer a = new Archer();
+            this.creatures.add(a);
+            boolean newPosValide = false;
+            // Be careful with the size of the world
+            while (!newPosValide) {
+                newPosValide = a.deplace();
             }
         }
     }
 
+    /**
+     * cacul du barycentre des positions des personnages
+     *
+     * @param world
+     * @return
+     */
     public static Point2D caculBarycentrePersos(World world) {
         int xG = 0;
         int yG = 0;
