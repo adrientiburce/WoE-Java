@@ -7,7 +7,6 @@ public class TestSeance1 {
     public static void main(String[] args) {
 
         World monMonde = new World();
-        System.out.println(monMonde.mapPositions);
 //        monMonde.creerMondeAlea();
 
         System.out.println(" ----- CREATION DU MONDE ------ ");

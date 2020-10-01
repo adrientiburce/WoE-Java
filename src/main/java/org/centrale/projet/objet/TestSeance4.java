@@ -20,9 +20,4 @@ public class TestSeance4 {
         System.out.printf("Temps d'exécution %d ms \n", fin - debut);
         System.out.printf("Temps d'exécution %d nanos", (finN - debutN)/1000);
     }
-
-
-
 }
-
-
