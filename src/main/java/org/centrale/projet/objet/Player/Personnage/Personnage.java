@@ -3,9 +3,9 @@ package org.centrale.projet.objet.Player.Personnage;
 
 import org.centrale.projet.objet.Grille.Point2D;
 import org.centrale.projet.objet.Player.Creature;
-import org.centrale.projet.objet.Tools.Mana;
-import org.centrale.projet.objet.Tools.Potion;
-import org.centrale.projet.objet.Tools.Soin;
+import org.centrale.projet.objet.Objects.Mana;
+import org.centrale.projet.objet.Objects.Potion;
+import org.centrale.projet.objet.Objects.Soin;
 import org.centrale.projet.objet.World;
 
 import java.util.Random;

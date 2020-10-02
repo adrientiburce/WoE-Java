@@ -1,4 +1,4 @@
-package org.centrale.projet.objet.Tools;
+package org.centrale.projet.objet.Objects;
 
 import org.centrale.projet.objet.Grille.Point2D;
 

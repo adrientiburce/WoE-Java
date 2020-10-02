@@ -7,8 +7,8 @@ import org.centrale.projet.objet.Player.Personnage.Personnage;
 public class TestSeance4 {
 
     public static void main(String[] args) {
-        World monde = new World(100);
-        monde.creerMondeAlea(100);
+        World monde = new World(200);
+        monde.creerMondeAlea(1000);
         System.out.println("Monde 1: " + monde);
 
         // calcul barycentre :

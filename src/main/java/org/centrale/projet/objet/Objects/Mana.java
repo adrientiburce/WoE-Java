@@ -1,4 +1,4 @@
-package org.centrale.projet.objet.Tools;
+package org.centrale.projet.objet.Objects;
 
 /**
  * potion magique pour récupérer des points de vie

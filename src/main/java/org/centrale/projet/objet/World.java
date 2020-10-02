@@ -4,7 +4,7 @@ import org.centrale.projet.objet.Grille.Point2D;
 import org.centrale.projet.objet.Player.Creature;
 import org.centrale.projet.objet.Player.Personnage.Archer;
 import org.centrale.projet.objet.Player.Personnage.Personnage;
-import org.centrale.projet.objet.Tools.Objet;
+import org.centrale.projet.objet.Objects.Objet;
 
 import java.util.*;
 import java.util.stream.Collectors;
