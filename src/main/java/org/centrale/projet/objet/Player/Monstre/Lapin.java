@@ -9,12 +9,12 @@ public class Lapin extends Monstre {
         super();
     }
 
-    public Lapin(int ptVie, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos) {
-        super(ptVie, pourcentageAtt, pourcentagePar, degAtt, pos);
+    public Lapin(String nom, int ptVie, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos) {
+        super(nom, ptVie, pourcentageAtt, pourcentagePar, degAtt, pos);
     }
 
     public Lapin(Lapin l) {
-        super(l.getPtVie(), l.getPourcentageAtt(), l.getPourcentagePar(), l.getDegAtt(), l.getPos());
+        super(l.getNom(), l.getPtVie(), l.getPourcentageAtt(), l.getPourcentagePar(), l.getDegAtt(), l.getPos());
     }
 
     public void affiche() {

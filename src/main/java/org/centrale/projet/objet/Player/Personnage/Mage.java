@@ -1,10 +1,12 @@
 package org.centrale.projet.objet.Player.Personnage;
 
 import org.centrale.projet.objet.Grille.Point2D;
+import org.centrale.projet.objet.Player.Combattant;
+import org.centrale.projet.objet.Player.Creature;
 
 import java.util.Random;
 
-public class Mage extends Personnage {
+public class Mage extends Personnage implements Combattant {
 
     public Mage() {
         super();
@@ -28,14 +30,18 @@ public class Mage extends Personnage {
         System.out.printf("Mage{%s}\n", this.toString());
     }
 
-    public void combatre(Personnage defenseur) {
+    /**
+     * combat avec combat magique et corps à corps
+     * @param defenseur
+     */
+    public void combattre(Creature defenseur) {
         double distCombatants = this.getPos().distance(defenseur.getPos());
         // contact
         if (distCombatants <= 1) {
             super.combatCorpsACorps(defenseur);
-        } else if (distCombatants <= this.getDistAttMax()) {
+        } else if (distCombatants <= this.getDistAttMax() && defenseur instanceof Personnage) {
             System.out.printf("🎩 Combat magique: %s attaque %s 🎩 \n", this.getNom(), defenseur.getNom());
-            this.combatMagique(defenseur);
+            this.combatMagique((Personnage) defenseur);
         } else {
             System.out.println("⛔ Trop loin pour attaquer");
         }

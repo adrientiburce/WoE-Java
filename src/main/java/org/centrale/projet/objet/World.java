@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 public class World {
 
     /**
-     * ensemble des créaturse contenus dans notre monde
+     * ensemble des créatures contenus dans notre monde
      */
     public ArrayList<Creature> creatures;
 
@@ -23,7 +23,7 @@ public class World {
     public List<Objet> objets;
 
     /**
-     * Map stoquant les positions des joueurs & objets dans notre monde
+     * Map stockant les positions des joueurs & objets dans notre monde
      * permet de vérifier que chaque joueur/object est sur une position différente avec les positions en clé
      */
     public static Map<Point2D, Integer> mapPositions;
@@ -48,7 +48,7 @@ public class World {
     }
 
     /**
-     * Génére un monde aléatoire avec des positions pour chacun des personnages
+     * Génère un monde aléatoire avec des positions pour chacun des personnages
      */
     public void creerMondeAlea(int nombrePersos) {
         if (TAILLE_GRILLE * TAILLE_GRILLE * 10 <= nombrePersos) {

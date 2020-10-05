@@ -1,10 +1,12 @@
 package org.centrale.projet.objet.Player.Personnage;
 
 import org.centrale.projet.objet.Grille.Point2D;
+import org.centrale.projet.objet.Player.Combattant;
+import org.centrale.projet.objet.Player.Creature;
 
 import java.util.Random;
 
-public class Archer extends Personnage {
+public class Archer extends Personnage implements Combattant {
 
     /**
      * nombre de flèches que possède l'archer
@@ -32,7 +34,7 @@ public class Archer extends Personnage {
         this.nbFleches = a.nbFleches;
     }
 
-    public void combattre(Personnage defenseur) {
+    public void combattre(Creature defenseur) {
         double distCombatants = this.getPos().distance(defenseur.getPos());
         // contact
         if (distCombatants <= 1) {
@@ -45,13 +47,13 @@ public class Archer extends Personnage {
         }
     }
 
-    private void combatADistance(Personnage defenseur) {
+    private void combatADistance(Creature defenseur) {
         Random randomGenerator = new Random();
         // attaque réussie
         if (randomGenerator.nextInt(101) <= this.getPourcentageAtt()) {
             int newPtvie = Integer.max(defenseur.getPtVie() - this.getDegAtt(), 0);
             defenseur.setPtVie(newPtvie);
-            System.out.println("\uD83D\uDC4C perte de vie de : " + this.getDegAtt());
+            System.out.println("👌 perte de vie de : " + this.getDegAtt());
         } else {
             System.out.println("⛔ échec de l'attaque");
         }
