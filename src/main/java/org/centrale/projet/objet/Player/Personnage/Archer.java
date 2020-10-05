@@ -7,7 +7,7 @@ import java.util.Random;
 public class Archer extends Personnage {
 
     /**
-     * nombre de flèches que possede l'archer
+     * nombre de flèches que possède l'archer
      */
     private int nbFleches;
 

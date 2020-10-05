@@ -84,10 +84,6 @@ public class Monstre extends Creature {
         return degAtt;
     }
 
-    public Point2D getPos() {
-        return pos;
-    }
-
     public void setPtVie(int ptVie) {
         this.ptVie = ptVie;
     }
@@ -102,14 +98,6 @@ public class Monstre extends Creature {
 
     public void setDegAtt(int degAtt) {
         this.degAtt = degAtt;
-    }
-
-    public void setPos(Point2D pos) {
-        this.pos = pos;
-    }
-
-    public void deplace() {
-        this.pos.getNextPosition();
     }
 
     public void affiche() {

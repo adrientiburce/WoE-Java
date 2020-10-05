@@ -64,16 +64,10 @@ public class Personnage extends Creature {
      */
     private int distAttMax;
 
-    /**
-     * position du personnage
-     */
-    private Point2D pos;
-
     public Personnage() {
         // generate random point
         this.nom = "un personnage";
-        this.pos = new Point2D();
-
+        this.setPos(new Point2D());
     }
 
     /**
@@ -92,7 +86,7 @@ public class Personnage extends Creature {
         this.degAtt = perso.degAtt;
         this.degMag = perso.degMag;
         this.distAttMax = perso.distAttMax;
-        this.pos = perso.pos;
+        this.setPos(perso.getPos());
     }
 
     public Personnage(String nom, int ptVie, int ptMana, int ptPar, int pourcentageAtt, int pourcentagePar, int pourcentageMag, int pourcentageResistMag, int degAtt, int degMag, int distAttMax, Point2D pos) {
@@ -107,7 +101,7 @@ public class Personnage extends Creature {
         this.degAtt = degAtt;
         this.degMag = degMag;
         this.distAttMax = distAttMax;
-        this.pos = pos;
+        this.setPos(pos);
     }
 
     public void combatCorpsACorps(Personnage defenseur) {
@@ -189,14 +183,6 @@ public class Personnage extends Creature {
         this.distAttMax = distAttMax;
     }
 
-    public Point2D getPos() {
-        return pos;
-    }
-
-    public void setPos(Point2D pos) {
-        this.pos = pos;
-    }
-
     public int getPourcentagePar() {
         return pourcentagePar;
     }
@@ -238,43 +224,7 @@ public class Personnage extends Creature {
     }
 
 
-    /**
-     * action de déplacement aléatoire (de 1 unité maximum selon X et Y)
-     */
-    public boolean deplace() {
-        Point2D newPos = new Point2D(this.pos);
-        newPos.getNextPosition();
-        if (this.verifDeplacement(this, newPos)) {
-            this.setPos(newPos);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * action de déplacement avec la nouvelle position
-     *
-     * @param newPos
-     */
-    public void deplace(Point2D newPos) {
-        if (this.getPos().distance(newPos) > Math.sqrt(2)) {
-            System.out.println("⛔ déplacement non autorisé");
-        } else if (this.verifDeplacement(this, newPos)) {
-            this.setPos(newPos);
-        }
-    }
-
-    private boolean verifDeplacement(Creature c, Point2D newPos) {
-        if (!World.mapPositions.containsKey(newPos)) {
-            World.mapPositions.remove(this.getPos());
-            World.mapPositions.put(newPos, c.hashCode());
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    public void deplaceEtConsome(Point2D newPos, Potion p) {
+    public void dplaceEtConsome(Point2D newPos, Potion p) {
         if (this.getPos().distance(newPos) > Math.sqrt(2)) {
             System.out.println("⛔ déplacement non autorisé");
         } else if (newPos.equals(p.getPos())) {
@@ -303,7 +253,7 @@ public class Personnage extends Creature {
     @Override
     public String toString() {
         return
-                "pos=" + pos +
+                "pos=" + this.getPos() +
                         ", nom='" + nom + '\'' +
                         ", ptVie=" + ptVie +
                         ", ptMana=" + ptMana +

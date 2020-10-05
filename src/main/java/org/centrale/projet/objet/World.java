@@ -69,7 +69,7 @@ public class World {
         }
     }
 
-    public static Point2D caculBarycentrePersos(World world) {
+    public static Point2D calculBarycentrePersos(World world) {
         int xG = 0;
         int yG = 0;
 
@@ -92,7 +92,8 @@ public class World {
     public String toString() {
         return "World{" +
                 creatures.size() + " creatures, " +
-                objets.size() + " objets" +
+                objets.size() + " objets, " +
+                " Taille:  " + World.TAILLE_GRILLE +
                 '}';
     }
 }

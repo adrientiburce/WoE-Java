@@ -19,5 +19,5 @@ Maven Project struture :
 ## TP 
 
 For each TP :
-- we create a branch is created to easily point to the last commit of the TP.
+- a branch is created to easily point to the last commit of the TP.
 - we create a Test class `TestSeanceX.java` to test our main class : `Wordl.java`.

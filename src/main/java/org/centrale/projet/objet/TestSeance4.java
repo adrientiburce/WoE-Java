@@ -11,7 +11,7 @@ public class TestSeance4 {
         // calcul barycentre :
         long debut = System.currentTimeMillis();
         long debutN = System.nanoTime();
-        System.out.println(monde.caculBarycentrePersos(monde));
+        System.out.println(World.calculBarycentrePersos(monde));
         long fin = System.currentTimeMillis();
         long finN = System.nanoTime();
         System.out.printf("Temps d'exécution %d ms \n", fin - debut);
