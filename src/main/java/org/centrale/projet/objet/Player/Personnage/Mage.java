@@ -34,6 +34,7 @@ public class Mage extends Personnage implements Combattant {
      * combat avec combat magique et corps à corps
      * @param defenseur
      */
+    @Override
     public void combattre(Creature defenseur) {
         double distCombatants = this.getPos().distance(defenseur.getPos());
         // contact

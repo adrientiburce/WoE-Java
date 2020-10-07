@@ -96,7 +96,7 @@ public class Test {
     private static void getNullPointerException() {
         System.out.println("Tentons d'avoir une exception de type NullPointerException :");
         Test t = initTest();
-        // utiliser une methode de string
+        // utiliser une methode sur null
         t.foo("Hi");
     }
 

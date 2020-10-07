@@ -34,6 +34,7 @@ public class Archer extends Personnage implements Combattant {
         this.nbFleches = a.nbFleches;
     }
 
+    @Override
     public void combattre(Creature defenseur) {
         double distCombatants = this.getPos().distance(defenseur.getPos());
         // contact

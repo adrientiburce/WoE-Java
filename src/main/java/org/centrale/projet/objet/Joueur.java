@@ -1,6 +1,7 @@
 package org.centrale.projet.objet;
 
 import org.centrale.projet.objet.Grille.Point2D;
+import org.centrale.projet.objet.Player.Creature;
 import org.centrale.projet.objet.Player.Personnage.Archer;
 import org.centrale.projet.objet.Player.Personnage.Guerrier;
 import org.centrale.projet.objet.Player.Personnage.Mage;
@@ -9,6 +10,9 @@ import org.centrale.projet.objet.Player.Personnage.Personnage;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * classe responsable de la sélection d'un personnage par le joueur
+ */
 public class Joueur {
 
     public Personnage getPerso() {
@@ -18,15 +22,65 @@ public class Joueur {
     /**
      * personnage choisit par le joueur
      */
-    private Personnage perso;
+    public Personnage perso;
 
     public Joueur() {
     }
 
+    private void deplaceAvecChoix(String deplaceChoice) {
+        deplaceChoice = deplaceChoice.toUpperCase();
+        Point2D oldPos = this.perso.getPos();
+        switch (deplaceChoice) {
+            // avance
+            case "Z": {
+                Point2D newPos = new Point2D(oldPos.getX(), oldPos.getY() + 1);
+                this.perso.deplace(newPos);
+                break;
+            }
+            // recule
+            case "S": {
+                this.perso.deplace(new Point2D(oldPos.getX(), oldPos.getY() - 1));
+                break;
+            }
+            // vers la droite
+            case "D": {
+                this.perso.deplace(new Point2D(oldPos.getX() + 1, oldPos.getY()));
+                break;
+            }
+            // vers la gauche
+            case "Q": {
+                this.perso.deplace(new Point2D(oldPos.getX() - 1, oldPos.getY()));
+                break;
+            }
+            default: {
+                System.out.println("Déplacement non compris");
+            }
+        }
+    }
 
-    public void choosePerso() {
+    public void askNextAction(World monde) {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Choisit votre personnage : Archer, Guerrier ou Mage");
+        System.out.println("Veux tu te déplacer (D) ou combattre (C) ?");
+        String choix = myObj.nextLine();
+        if (choix.equals("D")) {
+            System.out.println("Choisis ton déplacement avec les touches Z, Q, S, D :");
+            deplaceAvecChoix(myObj.nextLine());
+            System.out.println("Nouvelle position " + this.perso.getPos());
+        } else if (choix.equals("C")) {
+            this.perso.combattre(monde.creatures.get(2));
+        } else {
+            this.askNextAction(monde);
+        }
+    }
+
+
+
+    /**
+     * permet à l'utilisateur de choisir un personnage
+     */
+    public Creature choosePerso() {
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("Choisit ton personnage : Archer, Guerrier ou Mage");
         Random random = new Random();
 
         String userPerso = myObj.nextLine();
@@ -59,6 +113,8 @@ public class Joueur {
                 this.choosePerso();
             }
         }
+
+        return this.perso;
     }
 }
 

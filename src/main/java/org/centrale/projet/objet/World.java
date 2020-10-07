@@ -1,12 +1,17 @@
 package org.centrale.projet.objet;
 
 import org.centrale.projet.objet.Grille.Point2D;
-import org.centrale.projet.objet.Player.Creature;
-import org.centrale.projet.objet.Player.Personnage.Archer;
-import org.centrale.projet.objet.Player.Personnage.Personnage;
 import org.centrale.projet.objet.Objects.Objet;
+import org.centrale.projet.objet.Player.Creature;
+import org.centrale.projet.objet.Player.Monstre.Loup;
+import org.centrale.projet.objet.Player.Personnage.Archer;
+import org.centrale.projet.objet.Player.Personnage.Guerrier;
+import org.centrale.projet.objet.Player.Personnage.Personnage;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -15,7 +20,7 @@ public class World {
     /**
      * ensemble des créatures contenus dans notre monde
      */
-    public ArrayList<Creature> creatures;
+    public List<Creature> creatures;
 
     /**
      * ensemble des objets de notre monde
@@ -57,18 +62,39 @@ public class World {
         }
         // generate all personnages
         List<Archer> archers = Stream.generate(Archer::new).limit(nombrePersos).collect(Collectors.toList());
+        List<Loup> loups = Stream.generate(Loup::new).limit(nombrePersos).collect(Collectors.toList());
+        List<Guerrier> guerriers = Stream.generate(Guerrier::new).limit(nombrePersos).collect(Collectors.toList());
         this.creatures.addAll(archers);
+        this.creatures.addAll(loups);
+        this.creatures.addAll(guerriers);
 
         for (Creature c : this.creatures) {
-            if (c.getClass().getSuperclass() == Personnage.class) {
-                boolean newPosValide = false;
-                while (!newPosValide) {
-                    newPosValide = ((Personnage) c).deplace();
-                }
+            boolean newPosValide = false;
+            while (!newPosValide) {
+                newPosValide = c.deplace();
             }
         }
     }
 
+    /**
+     * ajouter une créature au monde
+     * @param creature
+     */
+    public void addToWorld(Creature creature) {
+        this.creatures.add(creature);
+        boolean newPosValide = false;
+        while (!newPosValide) {
+            newPosValide = creature.deplace();
+        }
+
+    }
+
+
+    /**
+     * method used in TP4 to calculate List performance
+     * @param world
+     * @return Point: barycentre
+     */
     public static Point2D calculBarycentrePersos(World world) {
         int xG = 0;
         int yG = 0;

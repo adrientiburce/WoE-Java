@@ -34,6 +34,7 @@ public class Guerrier extends Personnage implements Combattant {
      *
      * @param defenseur Creature attaquée
      */
+    @Override
     public void combattre(Creature defenseur) {
         double distCombatants = this.getPos().distance(defenseur.getPos());
         if (distCombatants <= 1) {

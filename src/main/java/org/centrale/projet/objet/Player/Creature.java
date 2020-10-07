@@ -160,4 +160,9 @@ public abstract class Creature implements Deplacable {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+
+    public void combattre(Creature defenseur){
+
+    }
 }
