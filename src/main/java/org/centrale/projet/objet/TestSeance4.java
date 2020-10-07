@@ -37,7 +37,7 @@ public class TestSeance4 {
 
     public static void testCombatGuerrier(World monde) {
         monde.creatures.add(new Guerrier("Hulk", 70, 50, 12, 85, 32, 20, 90,
-                65, 90, 20, new Point2D(21, 23), 8));
+                65, 90, 20, new Point2D(21, 23)));
         monde.creatures.add(new Archer("Robin Hoods", 100, 50, 10, 80, 50, 20, 80,
                 30, 90, 15, new Point2D(20, 23), 10));
 
@@ -50,7 +50,7 @@ public class TestSeance4 {
 
     public static void testCombatMage(World monde) {
         monde.creatures.add(new Mage("Dumbledore", 90, 50, 10, 85, 88, 20, 80,
-                18, 40, 15, new Point2D(18, 19), 10));
+                18, 40, 15, new Point2D(18, 19)));
         Mage m = (Mage) monde.creatures.get(2);
         Archer archer = (Archer) monde.creatures.get(1);
         m.combattre(archer);
