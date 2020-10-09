@@ -32,6 +32,7 @@ public class Mage extends Personnage implements Combattant {
 
     /**
      * combat avec combat magique et corps à corps
+     *
      * @param defenseur
      */
     @Override
@@ -49,9 +50,13 @@ public class Mage extends Personnage implements Combattant {
     }
 
     private void combatMagique(Personnage defenseur) {
+        if (this.getPtMana() <= 0) {
+            System.out.println("⛔ réserve magique vide");
+            return;
+        }
         Random randomGenerator = new Random();
         // attaque réussie
-        if (randomGenerator.nextInt(101) <= this.getPourcentageAtt()) {
+        if (randomGenerator.nextInt(101) <= this.getPourcentageMag()) {
             int newPtvie;
             String res = "";
             // parade réussie
@@ -67,7 +72,7 @@ public class Mage extends Personnage implements Combattant {
         } else {
             System.out.println("⛔ échec de l'attaque");
         }
-        this.setPtMana(Integer.max(this.getPtMana() - 1, 0));
+        this.setPtMana(this.getPtMana() - 1);
     }
 
 }

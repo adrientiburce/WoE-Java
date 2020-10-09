@@ -116,7 +116,6 @@ public abstract class Personnage extends Creature {
 
     public void setPourcentageResistMag(int pourcentageResistMag) {
         this.pourcentageResistMag = Integer.min(pourcentageResistMag, 100);
-        ;
     }
 
     /**

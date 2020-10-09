@@ -49,6 +49,11 @@ public class Archer extends Personnage implements Combattant {
     }
 
     private void combatADistance(Creature defenseur) {
+        if (this.getNbFleches() <= 0) {
+            System.out.println("⛔ plus de flèches");
+            return;
+        }
+
         Random randomGenerator = new Random();
         // attaque réussie
         if (randomGenerator.nextInt(101) <= this.getPourcentageAtt()) {
@@ -58,7 +63,7 @@ public class Archer extends Personnage implements Combattant {
         } else {
             System.out.println("⛔ échec de l'attaque");
         }
-        this.setNbFleches(Integer.max(this.getNbFleches() - 1, 0));
+        this.setNbFleches(this.getNbFleches() - 1);
     }
 
     public void affiche() {
