@@ -1,19 +1,21 @@
+![Java CI](https://github.com/adrientiburce/WoE-Java/workflows/Java%20CI/badge.svg) ![](https://img.shields.io/badge/JDK-12-f39f37)
 ## World of ECN
-
 
 Javen project build with Maven to learn OOP : object-oriented programming 
 
 Maven Project struture : 
 
 ```
- src >
-    main >
-       java >
-           SOURCE CODE
-
+ > src
+    > main
+       > java
+            SOURCE CODE
+    > test
+       > java
+            TEST CODE
 ```
 
-`java` is the source root folder !
+`main/java` is the source root folder !
 
 
 ## TP 

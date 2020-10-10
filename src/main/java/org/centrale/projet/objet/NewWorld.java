@@ -65,23 +65,27 @@ public class NewWorld {
 
     private ElementDeJeu getRandomPerso() {
         Random random = new Random();
-        int r = random.nextInt(19);
+        int r = random.nextInt(12);
         switch (r) {
-            case 0, 1:
+            case 0:
                 return new Archer("archer généré", random);
-            case 2, 3:
+            case 1:
                 return new Mage("mage généré", random);
-            case 4, 5:
+            case 2:
                 return new Guerrier("guerrier généré", random);
-            case 6, 7:
+            case 3:
                 return new Loup("loup généré", random);
-            case 8, 9, 10:
+            case 4:
+            case 5:
                 return new Soin("potion Vie", random);
-            case 11, 12, 13:
+            case 6:
+            case 7:
                 return new Mana("potion", random);
-            case 14, 15:
+            case 8:
+            case 9:
                 return new CigueToxique("Cigüe", random);
-            case 16, 17, 18:
+            case 10:
+            case 11:
                 return new VitamineB2("Vitamine", random);
         }
         return new Archer("archer généré", random);
