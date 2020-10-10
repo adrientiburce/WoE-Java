@@ -1,24 +1,22 @@
 package org.centrale.projet.objet.Objects;
 
-import org.centrale.projet.objet.Grille.Point2D;
-
 /**
- * potion magique pour récupérer des points de vie
+ * potion de soin pour récupérer des points de vie
  */
 public class Soin extends Potion {
 
     /**
-     * nombre de point de vie que la potion permet de récuperer
+     * nombre de point de vie que la potion permet de récupérer
      */
-    private int ptVieGagne;
+    private final int ptVieGagne;
 
     public Soin(int ptVieGagne) {
         super();
         this.ptVieGagne = ptVieGagne;
     }
 
-    public Soin(String nom, String color, Point2D pos, int ptVieGagne) {
-        super(nom, color, pos);
+    public Soin(String nom, int ptVieGagne) {
+        super(nom);
         this.ptVieGagne = ptVieGagne;
     }
 

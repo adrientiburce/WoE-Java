@@ -8,6 +8,7 @@ import java.util.Random;
 
 public class Archer extends Personnage implements Combattant {
 
+
     /**
      * nombre de flèches que possède l'archer
      */
@@ -17,6 +18,12 @@ public class Archer extends Personnage implements Combattant {
         super();
         this.setNom("un archer");
         this.nbFleches = 0;
+    }
+
+    public Archer(String nom, Random random) {
+        super(nom, random.nextInt(50) + 50, random.nextInt(50) + 50, random.nextInt(30), random.nextInt(80) + 20, random.nextInt(80) + 20, random.nextInt(50) + 50, random.nextInt(50) + 50,
+                random.nextInt(50) + 10, random.nextInt(50) + 50, random.nextInt(15) + 2, new Point2D());
+        this.setNbFleches(random.nextInt(15) + 5);
     }
 
     public Archer(String nom, int ptVie, int ptMana, int ptPar, int pAtt, int pPar, int pMag, int pResistMag, int degAtt, int degMag, int distAttMax, Point2D pos, int nbFleches) {

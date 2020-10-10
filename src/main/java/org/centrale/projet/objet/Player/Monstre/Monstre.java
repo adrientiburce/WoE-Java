@@ -55,6 +55,7 @@ public abstract class Monstre extends Creature {
     public String toString() {
         return
                 "pos=" + pos +
+                        ", nom=" + nom +
                         ", ptVie=" + ptVie +
                         ", pourcentageAtt=" + pourcentageAtt +
                         ", pourcentagePar=" + pourcentagePar +

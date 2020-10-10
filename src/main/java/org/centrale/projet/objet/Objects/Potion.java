@@ -8,14 +8,13 @@ import org.centrale.projet.objet.Grille.Point2D;
 public class Potion extends Objet {
 
     /**
-     * couleur de la potion
+     * nom de la potion
      */
-    private String color;
+    private String nom;
 
 
-    public Potion(String nom, String color, Point2D pos) {
-        super(nom, pos);
-        this.color = color;
+    public Potion(String nom) {
+        super(nom, new Point2D());
     }
 
     public Potion() {

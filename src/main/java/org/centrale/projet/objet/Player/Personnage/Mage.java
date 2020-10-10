@@ -13,6 +13,11 @@ public class Mage extends Personnage implements Combattant {
         this.setNom("un mage");
     }
 
+    public Mage(String nom, Random random) {
+        super(nom, random.nextInt(50) + 50, random.nextInt(50) + 50, random.nextInt(30), random.nextInt(80) + 20, random.nextInt(80) + 20, random.nextInt(50) + 50, random.nextInt(50) + 50,
+                random.nextInt(50) + 10, random.nextInt(50) + 50, random.nextInt(8) + 2, new Point2D());
+    }
+
     public Mage(String nom, int ptVie, int ptMana, int ptPar, int pourcentageAtt, int pourcentagePar, int pourcentageMag, int pourcentageResistMag, int degAtt, int degMag, int distAttMax, Point2D pos) {
         super(nom, ptVie, ptMana, ptPar, pourcentageAtt, pourcentagePar, pourcentageMag, pourcentageResistMag, degAtt, degMag, distAttMax, pos);
     }

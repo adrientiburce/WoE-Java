@@ -4,11 +4,23 @@ import org.centrale.projet.objet.Grille.Point2D;
 import org.centrale.projet.objet.Player.Combattant;
 import org.centrale.projet.objet.Player.Creature;
 
+import java.util.Random;
+
 public class Guerrier extends Personnage implements Combattant {
 
     public Guerrier() {
         super();
         this.setNom("un guerrier");
+    }
+
+    /**
+     * attributs random
+     * @param nom
+     * @param random
+     */
+    public Guerrier(String nom, Random random) {
+        super(nom, random.nextInt(50) + 50, random.nextInt(40), random.nextInt(30), random.nextInt(80) + 20, random.nextInt(80) + 20, random.nextInt(20) + 10, random.nextInt(30) + 10,
+                random.nextInt(50) + 50, random.nextInt(20) + 10, 1, new Point2D());
     }
 
     public Guerrier(String nom, int ptVie, int ptMana, int ptPar, int pourcentageAtt, int pourcentagePar, int pourcentageMag, int pourcentageResistMag, int degAtt, int degMag, int distAttMax, Point2D pos) {

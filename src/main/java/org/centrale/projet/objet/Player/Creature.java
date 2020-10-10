@@ -1,6 +1,7 @@
 package org.centrale.projet.objet.Player;
 
 import org.centrale.projet.objet.Grille.Point2D;
+import org.centrale.projet.objet.NewWorld;
 import org.centrale.projet.objet.World;
 
 import java.util.Random;
@@ -76,6 +77,37 @@ public abstract class Creature implements Deplacable {
         if (this.verifDeplacement(this, newPos)) {
             this.setPos(newPos);
             return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * placement initiale sur la map
+     *
+     * @param newPos nouvelle position
+     */
+    public boolean putOnMap(Point2D newPos) {
+        if (NewWorld.map.get(newPos) == null) {
+            NewWorld.map.remove(this.pos);
+            this.setPos(newPos);
+            NewWorld.map.put(newPos, this);
+        }
+        return false;
+    }
+
+    /**
+     * action de déplacement vers la nouvelle position
+     *
+     * @param newPos nouvelle position
+     */
+    public boolean move(Point2D newPos) {
+        if (this.getPos().distance(newPos) > Math.sqrt(2)) {
+            System.out.println("⛔ déplacement non autorisé");
+        } else if (NewWorld.map.get(newPos) == null) {
+            NewWorld.map.remove(this.pos);
+            this.setPos(newPos);
+            NewWorld.map.put(newPos, this);
         }
         return false;
     }
