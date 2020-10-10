@@ -1,5 +1,7 @@
 package org.centrale.projet.objet.Objects;
 
+import java.util.Random;
+
 /**
  * potion de soin pour récupérer des points de vie
  */
@@ -10,9 +12,9 @@ public class Soin extends Potion {
      */
     private final int ptVieGagne;
 
-    public Soin(int ptVieGagne) {
-        super();
-        this.ptVieGagne = ptVieGagne;
+    public Soin(String nom, Random random) {
+        super(nom);
+        this.ptVieGagne = random.nextInt(10) + 3;
     }
 
     public Soin(String nom, int ptVieGagne) {

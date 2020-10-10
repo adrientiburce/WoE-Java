@@ -1,19 +1,15 @@
 package org.centrale.projet.objet.Player;
 
+import org.centrale.projet.objet.ElementDeJeu;
 import org.centrale.projet.objet.Grille.Point2D;
 import org.centrale.projet.objet.NewWorld;
 import org.centrale.projet.objet.World;
 
 import java.util.Random;
 
-public abstract class Creature implements Deplacable {
+public abstract class Creature extends ElementDeJeu implements Deplacable {
 
     protected String nom;
-
-    /**
-     * position du personnage
-     */
-    protected Point2D pos;
 
     /**
      * point de vie
@@ -43,6 +39,7 @@ public abstract class Creature implements Deplacable {
     /**
      * méthode de combat au corps à corps
      * utilisé par tous les combattants
+     *
      * @param defenseur Créature attaquée
      */
     protected void combatCorpsACorps(Creature defenseur) {
@@ -77,21 +74,6 @@ public abstract class Creature implements Deplacable {
         if (this.verifDeplacement(this, newPos)) {
             this.setPos(newPos);
             return true;
-        }
-        return false;
-    }
-
-
-    /**
-     * placement initiale sur la map
-     *
-     * @param newPos nouvelle position
-     */
-    public boolean putOnMap(Point2D newPos) {
-        if (NewWorld.map.get(newPos) == null) {
-            NewWorld.map.remove(this.pos);
-            this.setPos(newPos);
-            NewWorld.map.put(newPos, this);
         }
         return false;
     }
@@ -145,14 +127,6 @@ public abstract class Creature implements Deplacable {
         this.ptPar = Integer.min(ptPar, 100);
     }
 
-    public Point2D getPos() {
-        return pos;
-    }
-
-    public void setPos(Point2D pos) {
-        this.pos = pos;
-    }
-
     public int getPtVie() {
         return ptVie;
     }
@@ -194,7 +168,7 @@ public abstract class Creature implements Deplacable {
     }
 
 
-    public void combattre(Creature defenseur){
+    public void combattre(Creature defenseur) {
 
     }
 }

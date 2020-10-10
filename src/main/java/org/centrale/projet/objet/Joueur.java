@@ -1,6 +1,7 @@
 package org.centrale.projet.objet;
 
 import org.centrale.projet.objet.Grille.Point2D;
+import org.centrale.projet.objet.Objects.Potion;
 import org.centrale.projet.objet.Player.Creature;
 import org.centrale.projet.objet.Player.Personnage.Archer;
 import org.centrale.projet.objet.Player.Personnage.Guerrier;
@@ -34,46 +35,99 @@ public class Joueur {
             // avance
             case "Z": {
                 Point2D newPos = new Point2D(oldPos.getX(), oldPos.getY() + 1);
-                this.perso.deplace(newPos);
+                this.perso.move(newPos);
                 break;
             }
             // recule
             case "S": {
-                this.perso.deplace(new Point2D(oldPos.getX(), oldPos.getY() - 1));
+                this.perso.move(new Point2D(oldPos.getX(), oldPos.getY() - 1));
                 break;
             }
             // vers la droite
             case "D": {
-                this.perso.deplace(new Point2D(oldPos.getX() + 1, oldPos.getY()));
+                this.perso.move(new Point2D(oldPos.getX() + 1, oldPos.getY()));
                 break;
             }
             // vers la gauche
             case "Q": {
-                this.perso.deplace(new Point2D(oldPos.getX() - 1, oldPos.getY()));
+                this.perso.move(new Point2D(oldPos.getX() - 1, oldPos.getY()));
                 break;
             }
             default: {
                 System.out.println("Déplacement non compris");
             }
         }
+        System.out.println("Ta nouvelle position " + perso.getPos());
     }
 
-    public void askNextAction(World monde) {
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Veux tu te déplacer (D) ou combattre (C) ?");
-        String choix = myObj.nextLine();
-        if (choix.equals("D")) {
-            System.out.println("Choisis ton déplacement avec les touches Z, Q, S, D :");
-            deplaceAvecChoix(myObj.nextLine());
-            System.out.println("Nouvelle position " + this.perso.getPos());
-        } else if (choix.equals("C")) {
-            this.perso.combattre(monde.creatures.get(2));
+    private void combatAvecChoix(String choixCombat) {
+        String[] posArray = choixCombat.split("\\s+");
+        Point2D newPos = new Point2D(Integer.parseInt((posArray[0])), Integer.parseInt((posArray[1])));
+
+        if (NewWorld.map.get(newPos) == null) {
+            System.out.println("⛔ Case vide");
+        } else if (NewWorld.map.get(newPos) instanceof Creature) {
+            perso.combattre((Creature) NewWorld.map.get(newPos));
         } else {
-            this.askNextAction(monde);
+            System.out.println("⛔ Case avec une potion");
         }
     }
 
+    private void boirePotion(String choix) {
+        String[] posArray = choix.split("\\s+");
+        Point2D newPos = new Point2D(Integer.parseInt((posArray[0])), Integer.parseInt((posArray[1])));
 
+        if (NewWorld.map.get(newPos) == null) {
+            System.out.println("⛔ Case vide");
+        } else if (NewWorld.map.get(newPos) instanceof Potion) {
+            perso.deplaceEtBoirePotion((Potion) NewWorld.map.get(newPos));
+        } else {
+            System.out.println("⛔ Case avec une Creature");
+        }
+    }
+
+    public void askNextAction() {
+        showInfos();
+        showElementAround();
+        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("Veux tu te déplacer (D) ou combattre (C), boire une potion (P) ?");
+        String choix = myObj.nextLine();
+        if (choix.equals("D")) {
+            System.out.println("Ta position actuelle: " + perso.getPos());
+            System.out.println("Choisis ton déplacement avec les touches Z, Q, S, D :");
+            deplaceAvecChoix(myObj.nextLine());
+
+        } else if (choix.equals("C")) {
+            System.out.println("Position du perso que tu attaques sous la forme: 'X Y'");
+            combatAvecChoix(myObj.nextLine());
+        } else if (choix.equals("P")) {
+            System.out.println("Position de la potion: 'X Y'");
+            boirePotion(myObj.nextLine());
+        } else {
+            this.askNextAction();
+        }
+    }
+
+    private void showElementAround() {
+        System.out.println("======= Ton entourage =======");
+        int x = perso.getPos().getX();
+        int y = perso.getPos().getY();
+        for (int i = x - 1; i < x + 3; i++) {
+            for (int j = y - 1; j < y + 3; j++) {
+                Point2D pt = new Point2D(i, j);
+                if (!pt.equals(perso.getPos())) {
+                    System.out.println(pt.toString() + " -> " + NewWorld.map.get(pt));
+                } else {
+                    System.out.println(pt.toString() + " -> " + " << Toi 🙋 >>");
+                }
+            }
+        }
+    }
+
+    private void showInfos() {
+        System.out.println("======= 🙋 Ton Perso 🙋 =======");
+        System.out.println(perso);
+    }
 
     /**
      * permet à l'utilisateur de choisir un personnage

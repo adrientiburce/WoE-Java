@@ -4,6 +4,7 @@ package org.centrale.projet.objet;
 import org.centrale.projet.objet.Player.Creature;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class TestSeance5 {
 
@@ -36,7 +37,7 @@ public class TestSeance5 {
         // Tours de jeux
         int i = 0;
         while (i < NOMBRE_TOUR) {
-            j.askNextAction(monde);
+//            j.askNextAction(monde);
             i++;
         }
     }

@@ -1,15 +1,11 @@
 package org.centrale.projet.objet.Objects;
 
+import org.centrale.projet.objet.ElementDeJeu;
 import org.centrale.projet.objet.Grille.Point2D;
 
-public class Objet {
+public class Objet extends ElementDeJeu {
 
     private String nom;
-
-    /**
-     * position de l'objet sur la grille
-     */
-    private Point2D pos;
 
     public Objet(String nom, Point2D pos) {
         this.nom = nom;
@@ -28,11 +24,12 @@ public class Objet {
         this.nom = nom;
     }
 
-    public Point2D getPos() {
-        return pos;
-    }
 
-    public void setPos(Point2D pos) {
-        this.pos = pos;
+    @Override
+    public String toString() {
+        return "Potion{" +
+                "nom='" + nom + '\'' +
+                ", pos=" + pos +
+                "}";
     }
 }

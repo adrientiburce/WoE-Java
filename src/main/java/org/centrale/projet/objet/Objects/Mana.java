@@ -1,5 +1,7 @@
 package org.centrale.projet.objet.Objects;
 
+import java.util.Random;
+
 /**
  * potion pour récupérer des points magiques
  */
@@ -10,9 +12,9 @@ public class Mana extends Potion {
      */
     private final int ptManaGagne;
 
-    public Mana(int ptVieMana) {
-        super();
-        this.ptManaGagne = ptVieMana;
+    public Mana(String nom, Random random) {
+        super(nom);
+        this.ptManaGagne = random.nextInt(10) + 3;
     }
 
     public int getPtManaGagne() {

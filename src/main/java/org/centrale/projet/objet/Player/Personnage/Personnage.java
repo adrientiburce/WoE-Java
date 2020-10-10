@@ -2,6 +2,7 @@ package org.centrale.projet.objet.Player.Personnage;
 
 
 import org.centrale.projet.objet.Grille.Point2D;
+import org.centrale.projet.objet.NewWorld;
 import org.centrale.projet.objet.Objects.Mana;
 import org.centrale.projet.objet.Objects.Potion;
 import org.centrale.projet.objet.Objects.Soin;
@@ -126,16 +127,18 @@ public abstract class Personnage extends Creature {
     }
 
 
-    public void dplaceEtConsome(Point2D newPos, Potion p) {
-        if (this.getPos().distance(newPos) > Math.sqrt(2)) {
-            System.out.println("⛔ déplacement non autorisé");
-        } else if (newPos.equals(p.getPos())) {
-            System.out.println("👌 potion consomée");
-            World.mapPositions.remove(this.getPos());
-            World.mapPositions.put(newPos, this.hashCode());
-            this.boire(p);
-            this.setPos(newPos);
-            p = null;
+    /**
+     * se déplace sur une case avec une potion et la boit
+     * @param p la potion
+     */
+    public void deplaceEtBoirePotion(Potion p) {
+        if (p.getPos().distance(p.getPos()) > Math.sqrt(2)) {
+            System.out.println("⛔ Potion trop éloigné");
+        } else if (NewWorld.map.get(p.getPos()) instanceof Potion) {
+            this.setPos(p.getPos());
+            NewWorld.map.remove(this.pos);
+            NewWorld.map.put(this.pos, this);
+            boirePotion(p);
         }
     }
 
@@ -144,11 +147,13 @@ public abstract class Personnage extends Creature {
      *
      * @param p potion
      */
-    private void boire(Potion p) {
-        if (p.getClass() == Soin.class) {
+    private void boirePotion(Potion p) {
+        if (p instanceof Soin) {
             this.setPtVie(this.getPtVie() + ((Soin) p).getPtVieGagne());
-        } else if (p.getClass() == Mana.class) {
+            System.out.printf("👌 Potion consomée: + %s point Vie \n", ((Soin) p).getPtVieGagne());
+        } else if (p instanceof Mana) {
             this.setPtMana(this.getPtMana() + ((Mana) p).getPtManaGagne());
+            System.out.printf("👌 Potion consomée: + %s point Mana \n", ((Mana) p).getPtManaGagne());
         }
     }
 
