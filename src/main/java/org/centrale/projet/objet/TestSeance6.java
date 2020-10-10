@@ -17,7 +17,7 @@ public class TestSeance6 {
 
         // creation du monde avec 60 creatures
         NewWorld monde = new NewWorld(10);
-        monde.creerMondeAlea(60);
+        monde.creerMondeAlea(50);
 
         // shortcut to debug
         Personnage persoSelected = new Archer("Robin Hood", random);

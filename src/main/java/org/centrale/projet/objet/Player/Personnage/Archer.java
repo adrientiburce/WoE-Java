@@ -1,9 +1,13 @@
 package org.centrale.projet.objet.Player.Personnage;
 
 import org.centrale.projet.objet.Grille.Point2D;
+import org.centrale.projet.objet.Objects.Nourriture.CigueToxique;
+import org.centrale.projet.objet.Objects.Nourriture.Nourriture;
+import org.centrale.projet.objet.Objects.Nourriture.VitamineB2;
 import org.centrale.projet.objet.Player.Combattant;
 import org.centrale.projet.objet.Player.Creature;
 
+import java.util.Iterator;
 import java.util.Random;
 
 public class Archer extends Personnage implements Combattant {
@@ -64,9 +68,11 @@ public class Archer extends Personnage implements Combattant {
         Random randomGenerator = new Random();
         // attaque réussie
         if (randomGenerator.nextInt(101) <= this.getPourcentageAtt()) {
-            int newPtvie = Integer.max(defenseur.getPtVie() - this.getDegAtt(), 0);
+            int bonus = getPointsBonus();
+            int malus = getPointsMalus();
+            int newPtvie = defenseur.getPtVie() - this.getDegAtt() - bonus + malus;
             defenseur.setPtVie(newPtvie);
-            System.out.println("👌 perte de vie de : " + this.getDegAtt());
+            System.out.println("👌 perte de vie de : " + (this.getDegAtt() + bonus - malus));
         } else {
             System.out.println("⛔ échec de l'attaque");
         }

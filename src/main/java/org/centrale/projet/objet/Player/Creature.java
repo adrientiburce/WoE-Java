@@ -80,6 +80,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
 
     /**
      * action de déplacement vers la nouvelle position
+     * met a jour la map
      *
      * @param newPos nouvelle position
      */
@@ -144,7 +145,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
     }
 
     public void setPtVie(int ptVie) {
-        this.ptVie = ptVie;
+        this.ptVie = Integer.max(0, ptVie);
     }
 
     public void setPourcentageAtt(int pourcentageAtt) {

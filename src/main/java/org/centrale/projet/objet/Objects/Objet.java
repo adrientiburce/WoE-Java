@@ -7,9 +7,9 @@ public class Objet extends ElementDeJeu {
 
     private String nom;
 
-    public Objet(String nom, Point2D pos) {
+    public Objet(String nom) {
         this.nom = nom;
-        this.pos = pos;
+        this.pos = new Point2D();
     }
 
     public Objet() {

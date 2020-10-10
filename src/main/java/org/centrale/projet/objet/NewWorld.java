@@ -1,10 +1,10 @@
 package org.centrale.projet.objet;
 
 import org.centrale.projet.objet.Grille.Point2D;
-import org.centrale.projet.objet.Objects.Mana;
-import org.centrale.projet.objet.Objects.Potion;
-import org.centrale.projet.objet.Objects.Soin;
-import org.centrale.projet.objet.Player.Creature;
+import org.centrale.projet.objet.Objects.Nourriture.CigueToxique;
+import org.centrale.projet.objet.Objects.Nourriture.VitamineB2;
+import org.centrale.projet.objet.Objects.Potion.Mana;
+import org.centrale.projet.objet.Objects.Potion.Soin;
 import org.centrale.projet.objet.Player.Monstre.Loup;
 import org.centrale.projet.objet.Player.Personnage.Archer;
 import org.centrale.projet.objet.Player.Personnage.Guerrier;
@@ -51,7 +51,7 @@ public class NewWorld {
 
         for (int i = 0; i < TAILLE_GRILLE; i++) {
             for (int j = 0; j < TAILLE_GRILLE; j++) {
-                if (random.nextInt(10) > 7 && (i != 3 && j != 3)) {
+                if (random.nextInt(TAILLE_GRILLE * TAILLE_GRILLE + nombrePersos) > nombrePersos && (i != 3 && j != 3)) {
                     ElementDeJeu elem = getRandomPerso();
                     elem.putOnMap(new Point2D(i, j));
                     persoToPut--;
@@ -65,7 +65,7 @@ public class NewWorld {
 
     private ElementDeJeu getRandomPerso() {
         Random random = new Random();
-        int r = random.nextInt(14);
+        int r = random.nextInt(19);
         switch (r) {
             case 0, 1:
                 return new Archer("archer généré", random);
@@ -76,9 +76,13 @@ public class NewWorld {
             case 6, 7:
                 return new Loup("loup généré", random);
             case 8, 9, 10:
-                return new Soin("potion", random);
+                return new Soin("potion Vie", random);
             case 11, 12, 13:
                 return new Mana("potion", random);
+            case 14, 15:
+                return new CigueToxique("Cigüe", random);
+            case 16, 17, 18:
+                return new VitamineB2("Vitamine", random);
         }
         return new Archer("archer généré", random);
     }

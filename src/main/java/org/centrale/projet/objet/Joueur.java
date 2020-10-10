@@ -1,7 +1,8 @@
 package org.centrale.projet.objet;
 
 import org.centrale.projet.objet.Grille.Point2D;
-import org.centrale.projet.objet.Objects.Potion;
+import org.centrale.projet.objet.Objects.Nourriture.Nourriture;
+import org.centrale.projet.objet.Objects.Potion.Potion;
 import org.centrale.projet.objet.Player.Creature;
 import org.centrale.projet.objet.Player.Personnage.Archer;
 import org.centrale.projet.objet.Player.Personnage.Guerrier;
@@ -81,6 +82,8 @@ public class Joueur {
             System.out.println("⛔ Case vide");
         } else if (NewWorld.map.get(newPos) instanceof Potion) {
             perso.deplaceEtBoirePotion((Potion) NewWorld.map.get(newPos));
+        }else if (NewWorld.map.get(newPos) instanceof Nourriture) {
+            perso.ramasseNourriture((Nourriture) NewWorld.map.get(newPos));
         } else {
             System.out.println("⛔ Case avec une Creature");
         }
@@ -90,7 +93,7 @@ public class Joueur {
         showInfos();
         showElementAround();
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Veux tu te déplacer (D) ou combattre (C), boire une potion (P) ?");
+        System.out.println("Veux tu te déplacer (D) ou combattre (C), ramasser un objet (R) ?");
         String choix = myObj.nextLine();
         if (choix.equals("D")) {
             System.out.println("Ta position actuelle: " + perso.getPos());
@@ -100,8 +103,8 @@ public class Joueur {
         } else if (choix.equals("C")) {
             System.out.println("Position du perso que tu attaques sous la forme: 'X Y'");
             combatAvecChoix(myObj.nextLine());
-        } else if (choix.equals("P")) {
-            System.out.println("Position de la potion: 'X Y'");
+        } else if (choix.equals("R")) {
+            System.out.println("Position de l'objet: 'X Y'");
             boirePotion(myObj.nextLine());
         } else {
             this.askNextAction();

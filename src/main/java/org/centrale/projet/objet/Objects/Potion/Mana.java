@@ -1,4 +1,4 @@
-package org.centrale.projet.objet.Objects;
+package org.centrale.projet.objet.Objects.Potion;
 
 import java.util.Random;
 
@@ -15,6 +15,11 @@ public class Mana extends Potion {
     public Mana(String nom, Random random) {
         super(nom);
         this.ptManaGagne = random.nextInt(10) + 3;
+    }
+
+    public Mana(String nom, int ptManaGagne) {
+        super(nom);
+        this.ptManaGagne = ptManaGagne;
     }
 
     public int getPtManaGagne() {

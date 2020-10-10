@@ -3,14 +3,18 @@ package org.centrale.projet.objet.Player.Personnage;
 
 import org.centrale.projet.objet.Grille.Point2D;
 import org.centrale.projet.objet.NewWorld;
-import org.centrale.projet.objet.Objects.Mana;
-import org.centrale.projet.objet.Objects.Potion;
-import org.centrale.projet.objet.Objects.Soin;
+import org.centrale.projet.objet.Objects.Nourriture.CigueToxique;
+import org.centrale.projet.objet.Objects.Nourriture.Nourriture;
+import org.centrale.projet.objet.Objects.Nourriture.VitamineB2;
+import org.centrale.projet.objet.Objects.Potion.Mana;
+import org.centrale.projet.objet.Objects.Potion.Potion;
+import org.centrale.projet.objet.Objects.Potion.Soin;
 import org.centrale.projet.objet.Player.Creature;
-import org.centrale.projet.objet.Player.Monstre.Monstre;
-import org.centrale.projet.objet.World;
 
-import java.util.Random;
+import java.awt.print.Book;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public abstract class Personnage extends Creature {
 
@@ -39,10 +43,16 @@ public abstract class Personnage extends Creature {
      */
     private int distAttMax;
 
+    /**
+     * nourriture dans la besace du personnage
+     * permet d'appliquer des bonus/malus temporaires
+     */
+    private List<Nourriture> nourritures;
+
     public Personnage() {
-        // generate random point
         this.nom = "un personnage";
         this.setPos(new Point2D());
+        this.nourritures = new ArrayList<>();
     }
 
     /**
@@ -62,6 +72,7 @@ public abstract class Personnage extends Creature {
         this.degMag = perso.degMag;
         this.distAttMax = perso.distAttMax;
         this.setPos(perso.getPos());
+        this.nourritures = new ArrayList<>();
     }
 
     public Personnage(String nom, int ptVie, int ptMana, int ptPar, int pourcentageAtt, int pourcentagePar, int pourcentageMag, int pourcentageResistMag, int degAtt, int degMag, int distAttMax, Point2D pos) {
@@ -77,6 +88,7 @@ public abstract class Personnage extends Creature {
         this.degMag = degMag;
         this.distAttMax = distAttMax;
         this.setPos(pos);
+        this.nourritures = new ArrayList<>();
     }
 
     public int getPtMana() {
@@ -119,24 +131,71 @@ public abstract class Personnage extends Creature {
         this.pourcentageResistMag = Integer.min(pourcentageResistMag, 100);
     }
 
-    /**
-     * affiche les attributs du personnage
-     */
-    public void affiche() {
-        System.out.printf("Personnage{%s}\n", this.toString());
+    public List<Nourriture> getNourritures() {
+        return nourritures;
     }
 
+    public void setNourritures(List<Nourriture> nourritures) {
+        this.nourritures = nourritures;
+    }
+
+    protected int getPointsMalus() {
+        Iterator<Nourriture> iter = this.getNourritures().iterator();
+        List<Nourriture> nourritureEmpty = new ArrayList<>();
+        int resMalus = 0;
+        while (iter.hasNext()) {
+            Nourriture n = iter.next();
+            if (n instanceof CigueToxique) {
+                resMalus += ((CigueToxique) n).getDegAttMalus();
+                n.setDureeEffet(n.getDureeEffet() - 1);
+                nourritureEmpty.add(n);
+            }
+        }
+        nourritures.removeAll(nourritureEmpty);
+        return resMalus;
+    }
+
+    protected int getPointsBonus() {
+        Iterator<Nourriture> iter = this.getNourritures().iterator();
+        List<Nourriture> nourritureEmpty = new ArrayList<>();
+        int resBonus = 0;
+        while (iter.hasNext()) {
+            Nourriture n = iter.next();
+            if (n instanceof VitamineB2) {
+                resBonus += ((VitamineB2) n).getDegAttBonus();
+                n.setDureeEffet(n.getDureeEffet() - 1);
+            }
+        }
+        nourritures.removeAll(nourritureEmpty);
+        return resBonus;
+    }
 
     /**
-     * se déplace sur une case avec une potion et la boit
+     * ajoute la nourriture dans la besace d'un personnage et met a jour la map
+     * @param n Nourriture à ramasser
+     */
+    public void ramasseNourriture(Nourriture n) {
+        if (this.getPos().distance(n.getPos()) > Math.sqrt(2)) {
+            System.out.println("⛔ nourriture trop éloigné");
+        } else if (NewWorld.map.get(n.getPos()) instanceof Nourriture) {
+            NewWorld.map.remove(this.pos);
+            this.setPos(n.getPos());
+            NewWorld.map.put(this.pos, this);
+            this.nourritures.add(n);
+            System.out.println("👌 Nourriture ajoutée");
+        }
+    }
+
+    /**
+     * se déplace sur une case avec une potion et la boit et met a jour la map
      * @param p la potion
      */
     public void deplaceEtBoirePotion(Potion p) {
-        if (p.getPos().distance(p.getPos()) > Math.sqrt(2)) {
+        if (pos.distance(p.getPos()) > Math.sqrt(2)) {
             System.out.println("⛔ Potion trop éloigné");
         } else if (NewWorld.map.get(p.getPos()) instanceof Potion) {
-            this.setPos(p.getPos());
             NewWorld.map.remove(this.pos);
+            this.setPos(p.getPos());
             NewWorld.map.put(this.pos, this);
             boirePotion(p);
         }
@@ -147,7 +206,7 @@ public abstract class Personnage extends Creature {
      *
      * @param p potion
      */
-    private void boirePotion(Potion p) {
+    protected void boirePotion(Potion p) {
         if (p instanceof Soin) {
             this.setPtVie(this.getPtVie() + ((Soin) p).getPtVieGagne());
             System.out.printf("👌 Potion consomée: + %s point Vie \n", ((Soin) p).getPtVieGagne());
@@ -156,6 +215,14 @@ public abstract class Personnage extends Creature {
             System.out.printf("👌 Potion consomée: + %s point Mana \n", ((Mana) p).getPtManaGagne());
         }
     }
+
+    /**
+     * affiche les attributs du personnage
+     */
+    public void affiche() {
+        System.out.printf("Personnage{%s}\n", this.toString());
+    }
+
 
     @Override
     public String toString() {

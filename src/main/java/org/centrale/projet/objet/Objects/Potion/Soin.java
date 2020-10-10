@@ -1,4 +1,4 @@
-package org.centrale.projet.objet.Objects;
+package org.centrale.projet.objet.Objects.Potion;
 
 import java.util.Random;
 
