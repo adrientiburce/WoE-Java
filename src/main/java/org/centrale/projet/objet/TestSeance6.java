@@ -2,14 +2,12 @@ package org.centrale.projet.objet;
 
 
 import org.centrale.projet.objet.Grille.Point2D;
-import org.centrale.projet.objet.Player.Personnage.Archer;
-import org.centrale.projet.objet.Player.Personnage.Personnage;
 
 import java.util.Random;
 
 public class TestSeance6 {
 
-    public static int NOMBRE_TOUR = 3;
+    public static int NOMBRE_TOUR = 10;
 
     public static void main(String[] args) throws Exception {
         Joueur joueur = new Joueur();
@@ -19,18 +17,20 @@ public class TestSeance6 {
         NewWorld monde = new NewWorld(10);
         monde.creerMondeAlea(50);
 
-        // shortcut to debug
-        Personnage persoSelected = new Archer("Robin Hood", random);
-        joueur.perso = persoSelected;
+        joueur.perso = joueur.choosePerso();
+
+
         // shortcut to debug
         joueur.perso.putOnMap(new Point2D(3, 3));
 
-
         // Tours de jeux
-        for (int i = 0; i < NOMBRE_TOUR; i++) {
-            joueur.askNextAction();
+//        for (int i = 0; i < NOMBRE_TOUR; i++) {
+//
+//        }
+
+        boolean res = true;
+        while (res) {
+            res = joueur.askNextAction();
         }
-
-
     }
 }

@@ -89,11 +89,11 @@ public class Joueur {
         }
     }
 
-    public void askNextAction() {
+    public boolean askNextAction() {
         showInfos();
         showElementAround();
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Veux tu te déplacer (D), combattre (C) ou ramasser un objet (R) ?");
+        System.out.println("Veux tu te déplacer (D), combattre (C) ou ramasser un objet (R) ou quitter(Q) ?");
         String choix = myObj.nextLine();
         switch (choix) {
             case "D":
@@ -109,10 +109,14 @@ public class Joueur {
                 System.out.println("Position de l'objet: 'X Y'");
                 boirePotion(myObj.nextLine());
                 break;
+            case "Q":
+                System.out.println("Arret du jeu");
+                return false;
             default:
                 this.askNextAction();
-                break;
+                return true;
         }
+        return true;
     }
 
     private void showElementAround() {
@@ -139,7 +143,7 @@ public class Joueur {
     /**
      * permet à l'utilisateur de choisir un personnage
      */
-    public Creature choosePerso() {
+    public Personnage choosePerso() {
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
         System.out.println("Choisit ton personnage : Archer, Guerrier ou Mage");
         Random random = new Random();
@@ -149,7 +153,7 @@ public class Joueur {
 
         switch (userPerso) {
             case "archer": {
-                System.out.println("Nom du mage ?");
+                System.out.println("Nom de l'archer ?");
                 String name = myObj.nextLine();
                 this.perso = new Archer(name, 100, random.nextInt(50) + 50, random.nextInt(30), random.nextInt(80) + 20, random.nextInt(80) + 20, random.nextInt(50) + 50, random.nextInt(50) + 50,
                         random.nextInt(50) + 10, random.nextInt(50) + 50, random.nextInt(15) + 2, new Point2D(21, 23), random.nextInt(15) + 5);

@@ -5,7 +5,7 @@ import junit.framework.TestCase;
 public class Point2DTest extends TestCase {
 
     public void testAffiche() {
-        assertEquals("[2 ; 3]", (new Point2D(2, 3)).toString());
+        assertEquals("[2;3]", (new Point2D(2, 3)).toString());
     }
 
     public void testTranslater() {

@@ -41,7 +41,7 @@ public class Point2D {
     }
 
     public void affiche() {
-        System.out.println("[" + this.x + " ; " + this.y + "]");
+        System.out.println("[" + this.x + ";" + this.y + "]");
     }
 
     public void setPosition(int x, int y) {
@@ -121,7 +121,7 @@ public class Point2D {
 
     @Override
     public String toString() {
-        return "[" + this.x + " ; " + this.y + "]";
+        return "[" + this.x + ";" + this.y + "]";
     }
 
 

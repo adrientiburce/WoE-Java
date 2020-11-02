@@ -80,7 +80,7 @@ public class Archer extends Personnage implements Combattant {
     }
 
     public String saveObject() {
-        return String.format("Archer %s\n", this.toSave());
+        return String.format("Archer %s\n", this.toSave() + " " + nbFleches);
     }
 
     public int getNbFleches() {

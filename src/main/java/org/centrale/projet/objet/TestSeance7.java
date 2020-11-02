@@ -3,6 +3,7 @@ package org.centrale.projet.objet;
 
 import org.centrale.projet.objet.Player.Personnage.Archer;
 import org.centrale.projet.objet.Player.Personnage.Personnage;
+import org.centrale.projet.objet.Save.LoadGame;
 import org.centrale.projet.objet.Save.Save;
 
 import java.util.Random;
@@ -17,10 +18,13 @@ public class TestSeance7 {
         joueur.perso = persoSelected;
 
         // creation du monde avec 60 creatures
-        NewWorld monde = new NewWorld(50);
+        NewWorld monde = new NewWorld(10);
         monde.creerMondeAlea(20);
 
 //        System.out.println(NewWorld.map);
         Save.saveGame(monde, joueur.perso, "game.txt");
+
+//        LoadGame.load("game.txt");
+
     }
 }

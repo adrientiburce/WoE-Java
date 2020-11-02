@@ -26,7 +26,6 @@ public class Save {
             for (int i = 0; i < NewWorld.TAILLE_GRILLE; i++) {
                 for (int j = 0; j < NewWorld.TAILLE_GRILLE; j++) {
                     if (NewWorld.map.get(new Point2D(i, j)) != null) {
-
                         Point2D pt = new Point2D(i, j);
                         if (!pt.equals(perso.getPos())) {
                             saveElemeDeJeuInLine(bw, NewWorld.map.get(pt));
