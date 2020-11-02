@@ -26,4 +26,8 @@ public class CigueToxique extends Nourriture {
     public void setDegAttMalus(int degAttMalus) {
         this.degAttMalus = degAttMalus;
     }
+
+    public String saveObject() {
+        return String.format("CigueToxique %s\n", this.getPos() + " " + degAttMalus);
+    }
 }

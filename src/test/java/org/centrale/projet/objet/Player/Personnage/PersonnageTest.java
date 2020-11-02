@@ -3,7 +3,7 @@ package org.centrale.projet.objet.Player.Personnage;
 import junit.framework.TestCase;
 import org.centrale.projet.objet.Grille.Point2D;
 import org.centrale.projet.objet.NewWorld;
-import org.centrale.projet.objet.Objects.Nourriture.VitamineB2;
+import org.centrale.projet.objet.Objects.Nourriture.Vitamine;
 import org.centrale.projet.objet.Objects.Potion.Mana;
 import org.centrale.projet.objet.Objects.Potion.Soin;
 
@@ -15,13 +15,13 @@ public class PersonnageTest extends TestCase {
 
     private Mana mana;
 
-    private VitamineB2 vitamine;
+    private Vitamine vitamine;
 
     protected void setUp() throws Exception {
         new NewWorld(10);
         soinVie = new Soin("vie", 5);
         mana = new Mana("potion magique", 8);
-        vitamine = new VitamineB2("vitamine", 2, 6);
+        vitamine = new Vitamine("vitamine", 2, 6);
 
         guerrier = new Guerrier("Hulk", 70, 50, 12, 100, 32, 20, 90,
                 50, 90, 20, new Point2D(3, 3));

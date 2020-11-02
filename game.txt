@@ -1,0 +1,22 @@
+Largeur 50
+Hauteur 50
+Soin [0 ; 0] 7
+Vitamine [0 ; 1] 6
+Mana [0 ; 2] 5
+Archer ArcherGénéré 90 55 7 91 28 88 77 59 90 13 [0 ; 4]
+Soin [0 ; 5] 8
+Soin [0 ; 6] 12
+Vitamine [0 ; 7] 3
+Vitamine [0 ; 8] 3
+CigueToxique [0 ; 9] 5
+CigueToxique [0 ; 10] 6
+CigueToxique [0 ; 11] 6
+CigueToxique [0 ; 12] 5
+CigueToxique [0 ; 13] 3
+Guerrier guerrierGénéré 65 1 18 39 98 22 22 78 15 1 [0 ; 14]
+Soin [0 ; 15] 10
+Guerrier guerrierGénéré 74 31 5 46 34 19 14 89 18 1 [0 ; 16]
+Soin [0 ; 17] 3
+CigueToxique [0 ; 18] 3
+Loup loupGénéré 87 7 14 79 [0 ; 19]
+Archer ArcherGénéré 60 83 25 93 49 86 73 25 87 2 [0 ; 20]

@@ -40,6 +40,9 @@ public class Guerrier extends Personnage implements Combattant {
         System.out.printf("Guerrier{%s}\n", this.toString());
     }
 
+    public String saveObject() {
+        return String.format("Guerrier %s\n", this.toSave());
+    }
 
     /**
      * Guerrier ne peut attaquer qu'au corps à corps

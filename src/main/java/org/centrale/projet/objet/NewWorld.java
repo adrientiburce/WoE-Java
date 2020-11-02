@@ -2,7 +2,7 @@ package org.centrale.projet.objet;
 
 import org.centrale.projet.objet.Grille.Point2D;
 import org.centrale.projet.objet.Objects.Nourriture.CigueToxique;
-import org.centrale.projet.objet.Objects.Nourriture.VitamineB2;
+import org.centrale.projet.objet.Objects.Nourriture.Vitamine;
 import org.centrale.projet.objet.Objects.Potion.Mana;
 import org.centrale.projet.objet.Objects.Potion.Soin;
 import org.centrale.projet.objet.Player.Monstre.Loup;
@@ -68,27 +68,27 @@ public class NewWorld {
         int r = random.nextInt(12);
         switch (r) {
             case 0:
-                return new Archer("archer généré", random);
+                return new Archer("ArcherGénéré", random);
             case 1:
-                return new Mage("mage généré", random);
+                return new Mage("mageGénéré", random);
             case 2:
-                return new Guerrier("guerrier généré", random);
+                return new Guerrier("guerrierGénéré", random);
             case 3:
-                return new Loup("loup généré", random);
+                return new Loup("loupGénéré", random);
             case 4:
             case 5:
-                return new Soin("potion Vie", random);
+                return new Soin("potionVie", random);
             case 6:
             case 7:
-                return new Mana("potion", random);
+                return new Mana("potionMagique", random);
             case 8:
             case 9:
                 return new CigueToxique("Cigüe", random);
             case 10:
             case 11:
-                return new VitamineB2("Vitamine", random);
+                return new Vitamine("Vitamine", random);
         }
-        return new Archer("archer généré", random);
+        return new Archer("archerGénéré", random);
     }
 
 

@@ -35,6 +35,10 @@ public class Mage extends Personnage implements Combattant {
         System.out.printf("Mage{%s}\n", this.toString());
     }
 
+    public String saveObject() {
+        return String.format("Mage %s\n", this.toSave());
+    }
+
     /**
      * combat avec combat magique et corps à corps
      *

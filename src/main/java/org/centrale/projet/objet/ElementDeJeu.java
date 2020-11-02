@@ -33,4 +33,7 @@ public class ElementDeJeu {
         this.pos = pos;
     }
 
+    public String saveObject() {
+        return "case vide";
+    }
 }

@@ -34,6 +34,10 @@ public class Loup extends Monstre implements Combattant {
         System.out.printf("Loup{%s}\n", this.toString());
     }
 
+    public String saveObject() {
+        return String.format("Loup %s\n", this.toSave());
+    }
+
     @Override
     public void combattre(Creature defenseur) {
         double distCombatants = this.getPos().distance(defenseur.getPos());

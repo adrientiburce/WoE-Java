@@ -25,4 +25,8 @@ public class Soin extends Potion {
     public int getPtVieGagne() {
         return ptVieGagne;
     }
+
+    public String saveObject() {
+       return String.format("Soin %s\n", this.getPos() + " " + ptVieGagne);
+    }
 }

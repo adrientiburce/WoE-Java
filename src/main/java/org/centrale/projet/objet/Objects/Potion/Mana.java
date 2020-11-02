@@ -25,4 +25,8 @@ public class Mana extends Potion {
     public int getPtManaGagne() {
         return ptManaGagne;
     }
+
+    public String saveObject() {
+        return String.format("Mana %s\n", this.getPos() + " " + ptManaGagne);
+    }
 }

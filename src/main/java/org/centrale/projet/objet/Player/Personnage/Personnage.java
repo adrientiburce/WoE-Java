@@ -5,13 +5,12 @@ import org.centrale.projet.objet.Grille.Point2D;
 import org.centrale.projet.objet.NewWorld;
 import org.centrale.projet.objet.Objects.Nourriture.CigueToxique;
 import org.centrale.projet.objet.Objects.Nourriture.Nourriture;
-import org.centrale.projet.objet.Objects.Nourriture.VitamineB2;
+import org.centrale.projet.objet.Objects.Nourriture.Vitamine;
 import org.centrale.projet.objet.Objects.Potion.Mana;
 import org.centrale.projet.objet.Objects.Potion.Potion;
 import org.centrale.projet.objet.Objects.Potion.Soin;
 import org.centrale.projet.objet.Player.Creature;
 
-import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -161,8 +160,8 @@ public abstract class Personnage extends Creature {
         int resBonus = 0;
         while (iter.hasNext()) {
             Nourriture n = iter.next();
-            if (n instanceof VitamineB2) {
-                resBonus += ((VitamineB2) n).getDegAttBonus();
+            if (n instanceof Vitamine) {
+                resBonus += ((Vitamine) n).getDegAttBonus();
                 n.setDureeEffet(n.getDureeEffet() - 1);
             }
         }
@@ -172,6 +171,7 @@ public abstract class Personnage extends Creature {
 
     /**
      * ajoute la nourriture dans la besace d'un personnage et met a jour la map
+     *
      * @param n Nourriture à ramasser
      */
     public void ramasseNourriture(Nourriture n) {
@@ -188,6 +188,7 @@ public abstract class Personnage extends Creature {
 
     /**
      * se déplace sur une case avec une potion et la boit et met a jour la map
+     *
      * @param p la potion
      */
     public void deplaceEtBoirePotion(Potion p) {
@@ -239,5 +240,10 @@ public abstract class Personnage extends Creature {
                         ", degAtt=" + degAtt +
                         ", degMag=" + degMag +
                         ", distAttMax=" + distAttMax;
+    }
+
+    public String toSave() {
+        return nom + " " + ptVie + " " + ptMana + " " + ptPar + " " + pourcentageAtt + " " + pourcentagePar + " " +
+                pourcentageMag + " " + pourcentageResistMag + " " + degAtt + " " + degMag + " " + distAttMax + " " + pos;
     }
 }

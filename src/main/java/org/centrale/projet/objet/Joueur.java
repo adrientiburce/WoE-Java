@@ -93,21 +93,25 @@ public class Joueur {
         showInfos();
         showElementAround();
         Scanner myObj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Veux tu te déplacer (D) ou combattre (C), ramasser un objet (R) ?");
+        System.out.println("Veux tu te déplacer (D), combattre (C) ou ramasser un objet (R) ?");
         String choix = myObj.nextLine();
-        if (choix.equals("D")) {
-            System.out.println("Ta position actuelle: " + perso.getPos());
-            System.out.println("Choisis ton déplacement avec les touches Z, Q, S, D :");
-            deplaceAvecChoix(myObj.nextLine());
-
-        } else if (choix.equals("C")) {
-            System.out.println("Position du perso que tu attaques sous la forme: 'X Y'");
-            combatAvecChoix(myObj.nextLine());
-        } else if (choix.equals("R")) {
-            System.out.println("Position de l'objet: 'X Y'");
-            boirePotion(myObj.nextLine());
-        } else {
-            this.askNextAction();
+        switch (choix) {
+            case "D":
+                System.out.println("Ta position actuelle: " + perso.getPos());
+                System.out.println("Choisis ton déplacement avec les touches Z (monte), Q (gauche), S (descend), D (droite) :");
+                deplaceAvecChoix(myObj.nextLine());
+                break;
+            case "C":
+                System.out.println("Position du perso que tu attaques sous la forme: 'X Y'");
+                combatAvecChoix(myObj.nextLine());
+                break;
+            case "R":
+                System.out.println("Position de l'objet: 'X Y'");
+                boirePotion(myObj.nextLine());
+                break;
+            default:
+                this.askNextAction();
+                break;
         }
     }
 
@@ -121,7 +125,7 @@ public class Joueur {
                 if (!pt.equals(perso.getPos())) {
                     System.out.println(pt.toString() + " -> " + NewWorld.map.get(pt));
                 } else {
-                    System.out.println(pt.toString() + " -> " + " << Toi 🙋 >>");
+                    System.out.println(pt.toString() + " -> " + " << ----- 🙋 Ton Perso ---- >>");
                 }
             }
         }
@@ -172,6 +176,10 @@ public class Joueur {
         }
 
         return this.perso;
+    }
+
+    public String saveObject() {
+        return String.format("Joueur %s", this.perso.toSave());
     }
 }
 

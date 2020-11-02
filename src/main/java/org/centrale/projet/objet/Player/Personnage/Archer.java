@@ -1,13 +1,9 @@
 package org.centrale.projet.objet.Player.Personnage;
 
 import org.centrale.projet.objet.Grille.Point2D;
-import org.centrale.projet.objet.Objects.Nourriture.CigueToxique;
-import org.centrale.projet.objet.Objects.Nourriture.Nourriture;
-import org.centrale.projet.objet.Objects.Nourriture.VitamineB2;
 import org.centrale.projet.objet.Player.Combattant;
 import org.centrale.projet.objet.Player.Creature;
 
-import java.util.Iterator;
 import java.util.Random;
 
 public class Archer extends Personnage implements Combattant {
@@ -81,6 +77,10 @@ public class Archer extends Personnage implements Combattant {
 
     public void affiche() {
         System.out.printf("Archer{%s, nbFleches=%s}\n", this.toString(), nbFleches);
+    }
+
+    public String saveObject() {
+        return String.format("Archer %s\n", this.toSave());
     }
 
     public int getNbFleches() {

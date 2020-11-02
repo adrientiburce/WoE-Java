@@ -61,4 +61,8 @@ public abstract class Monstre extends Creature {
                         ", pourcentagePar=" + pourcentagePar +
                         ", degAtt=" + degAtt;
     }
+
+    public String toSave() {
+        return nom + " " + ptVie + " " + pourcentageAtt + " " + pourcentagePar + " " + degAtt + " " + pos;
+    }
 }

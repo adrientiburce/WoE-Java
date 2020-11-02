@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 import org.centrale.projet.objet.Grille.Point2D;
 import org.centrale.projet.objet.NewWorld;
 import org.centrale.projet.objet.Objects.Nourriture.CigueToxique;
-import org.centrale.projet.objet.Objects.Nourriture.VitamineB2;
+import org.centrale.projet.objet.Objects.Nourriture.Vitamine;
 
 public class ArcherTest extends TestCase {
 
@@ -12,7 +12,7 @@ public class ArcherTest extends TestCase {
 
     private Archer defenseur;
 
-    private VitamineB2 vitamine;
+    private Vitamine vitamine;
     private CigueToxique cigue;
 
 
@@ -25,7 +25,7 @@ public class ArcherTest extends TestCase {
 
 
         new NewWorld(10);
-        vitamine = new VitamineB2("vitamine", 2, 6);
+        vitamine = new Vitamine("vitamine", 2, 6);
         cigue = new CigueToxique("cigue", 1, 3);
         vitamine.putOnMap(new Point2D(18, 18));
         cigue.putOnMap(new Point2D(19, 19));

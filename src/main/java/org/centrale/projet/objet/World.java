@@ -15,6 +15,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * @deprecated used before TP6, now use NewWorld
+ */
 public class World {
 
     /**
