@@ -29,4 +29,7 @@ public class Mana extends Potion {
     public String saveObject() {
         return String.format("Mana %s\n", this.getPos() + " " + ptManaGagne);
     }
+    public void afficheMap() {
+        System.out.print("🍷Mana");
+    }
 }

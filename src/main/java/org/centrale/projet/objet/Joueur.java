@@ -1,5 +1,6 @@
 package org.centrale.projet.objet;
 
+import org.centrale.projet.objet.GameBackup.Save;
 import org.centrale.projet.objet.Grille.Point2D;
 import org.centrale.projet.objet.Objects.Nourriture.Nourriture;
 import org.centrale.projet.objet.Objects.Potion.Potion;
@@ -111,6 +112,7 @@ public class Joueur {
                 break;
             case "Q":
                 System.out.println("Arret du jeu");
+                Save.saveGame(this, "game.txt");
                 return false;
             default:
                 this.askNextAction();
@@ -123,21 +125,27 @@ public class Joueur {
         System.out.println("======= Ton entourage =======");
         int x = perso.getPos().getX();
         int y = perso.getPos().getY();
-        for (int i = x - 1; i < x + 3; i++) {
-            for (int j = y - 1; j < y + 3; j++) {
+        for (int i = x - 1; i < x + 2; i++) {
+            for (int j = y - 1; j < y + 2; j++) {
                 Point2D pt = new Point2D(i, j);
                 if (!pt.equals(perso.getPos())) {
-                    System.out.println(pt.toString() + " -> " + NewWorld.map.get(pt));
+                    System.out.println(pt.toString() + " -> " + (NewWorld.map.get(pt) != null ? NewWorld.map.get(pt) : "Case vide"));
                 } else {
                     System.out.println(pt.toString() + " -> " + " << ----- 🙋 Ton Perso ---- >>");
                 }
             }
         }
+        System.out.println("======= La Map =======");
+        NewWorld.showMap(this);
     }
 
     private void showInfos() {
         System.out.println("======= 🙋 Ton Perso 🙋 =======");
         System.out.println(perso);
+    }
+
+    public void afficheMap() {
+        System.out.print("🙋" + perso.getNom().substring(0, 4));
     }
 
     /**
@@ -183,7 +191,7 @@ public class Joueur {
     }
 
     public String saveObject() {
-        return String.format("Joueur %s", this.perso.toSave());
+        return String.format("Joueur %s\n", this.perso.toSave());
     }
 }
 

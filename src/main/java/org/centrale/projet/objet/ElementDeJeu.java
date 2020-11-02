@@ -36,4 +36,8 @@ public class ElementDeJeu {
     public String saveObject() {
         return "case vide";
     }
+
+    public void afficheMap() {
+        System.out.print("  o   ");
+    }
 }

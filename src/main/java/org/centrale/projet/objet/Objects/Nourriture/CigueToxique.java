@@ -30,4 +30,8 @@ public class CigueToxique extends Nourriture {
     public String saveObject() {
         return String.format("CigueToxique %s\n", this.getPos() + " " + degAttMalus);
     }
+
+    public void afficheMap() {
+        System.out.print( "Toxiq");
+    }
 }

@@ -1,7 +1,8 @@
-package org.centrale.projet.objet.Save;
+package org.centrale.projet.objet.GameBackup;
 
 import org.centrale.projet.objet.ElementDeJeu;
 import org.centrale.projet.objet.Grille.Point2D;
+import org.centrale.projet.objet.Joueur;
 import org.centrale.projet.objet.NewWorld;
 import org.centrale.projet.objet.Player.Personnage.Personnage;
 
@@ -13,9 +14,8 @@ public class Save {
 
     /**
      * sauvegarde un jeu avec tous les objets sur la Map et le Joueur
-     * @param world monde du jeu a sauvegardé
      */
-    public static void saveGame(NewWorld world, Personnage perso, String backupName) {
+    public static void saveGame(Joueur joueur, String backupName) {
 
         try (FileWriter writer = new FileWriter(backupName); // saved at project's root
              BufferedWriter bw = new BufferedWriter(writer)) {
@@ -27,11 +27,11 @@ public class Save {
                 for (int j = 0; j < NewWorld.TAILLE_GRILLE; j++) {
                     if (NewWorld.map.get(new Point2D(i, j)) != null) {
                         Point2D pt = new Point2D(i, j);
-                        if (!pt.equals(perso.getPos())) {
+                        if (!pt.equals(joueur.perso.getPos())) {
                             saveElemeDeJeuInLine(bw, NewWorld.map.get(pt));
                         } else {
                             // sauvegarde du joueur
-                            bw.write(perso.saveObject());
+                            bw.write(joueur.saveObject());
                         }
                     }
                 }

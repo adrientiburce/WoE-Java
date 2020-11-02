@@ -30,4 +30,8 @@ public class Vitamine extends Nourriture {
     public String saveObject() {
         return String.format("Vitamine %s\n", this.getPos() + " " + degAttBonus);
     }
+
+    public void afficheMap() {
+        System.out.print( "🥝Vita");
+    }
 }

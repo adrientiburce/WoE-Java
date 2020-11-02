@@ -32,11 +32,15 @@ public class Mage extends Personnage implements Combattant {
     }
 
     public void affiche() {
-        System.out.printf("Mage{%s}\n", this.toString());
+        System.out.printf("🎩 Mage{%s}\n", this.toString());
     }
 
     public String saveObject() {
         return String.format("Mage %s\n", this.toSave());
+    }
+
+    public void afficheMap() {
+        System.out.print("🎩Mage");
     }
 
     /**
@@ -49,7 +53,7 @@ public class Mage extends Personnage implements Combattant {
         double distCombatants = this.getPos().distance(defenseur.getPos());
         // contact
         if (distCombatants <= 1) {
-            super.combatCorpsACorps(defenseur);
+            super.combatCorpsACorps(defenseur, getPointsBonus(), getPointsMalus());
         } else if (distCombatants <= this.getDistAttMax() && defenseur instanceof Personnage) {
             System.out.printf("🎩 Combat magique: %s attaque %s 🎩 \n", this.getNom(), defenseur.getNom());
             this.combatMagique((Personnage) defenseur);

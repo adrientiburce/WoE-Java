@@ -1,22 +1,43 @@
 Largeur 10
 Hauteur 10
-Soin [0;0] 6
-CigueToxique [0;1] 6
-CigueToxique [0;2] 5
-Guerrier guerrierGénéré 50 17 4 42 55 23 32 95 19 1 [0;6]
-Loup loupGénéré 87 8 27 50 [0;7]
-Vitamine [0;9] 6
-Loup loupGénéré 75 28 20 68 [1;0]
-Soin [1;1] 3
-Vitamine [1;2] 3
-CigueToxique [1;4] 3
-Vitamine [1;5] 2
-Loup loupGénéré 75 37 26 57 [1;6]
-Soin [1;8] 6
-Mage mageGénéré 94 69 24 52 97 90 55 48 69 7 [1;9]
-Archer ArcherGénéré 59 84 5 98 33 64 52 19 73 11 [2;0] 10
-Soin [2;1] 9
-Archer ArcherGénéré 96 69 20 82 73 74 62 25 67 10 [2;2] 11
-Mana [2;4] 12
-Guerrier guerrierGénéré 82 30 14 42 94 24 37 90 16 1 [2;5]
-Guerrier guerrierGénéré 89 10 23 38 45 96 17 58 24 1 [2;6]
+Guerrier guerrierGénéré 99 30 18 68 80 26 29 82 22 1 [1;4]
+Mana [1;5] 11
+Mana [1;6] 5
+CigueToxique [1;7] 5
+Soin [1;8] 7
+CigueToxique [1;9] 5
+Mage mageGénéré 71 89 3 41 21 55 95 20 54 8 [2;1]
+Loup loupGénéré 68 35 15 90 [2;2]
+Loup loupGénéré 56 6 4 54 [2;4]
+CigueToxique [2;7] 6
+Mage mageGénéré 90 60 15 80 92 87 51 11 98 2 [4;1]
+Mage mageGénéré 94 52 18 22 79 73 69 59 78 2 [4;2]
+Vitamine [4;4] 6
+Archer 🏹archerGénéré 62 92 9 83 68 89 73 52 69 8 [4;5] 12
+Vitamine [4;6] 5
+Archer 🏹archerGénéré 55 87 26 96 23 68 90 58 58 9 [4;7] 17
+Mana [4;9] 3
+Joueur Archer Dumbledore 73 99 3 85 45 59 72 17 75 7 [5;3]
+Soin [5;4] 6
+CigueToxique [5;5] 6
+Loup loupGénéré 71 12 2 89 [5;6]
+Archer 🏹archerGénéré 96 64 0 86 79 85 67 45 58 7 [5;7] 15
+CigueToxique [5;8] 6
+CigueToxique [5;9] 4
+CigueToxique [6;1] 3
+CigueToxique [6;5] 5
+Soin [7;1] 6
+Guerrier guerrierGénéré 96 7 8 73 89 14 26 77 16 1 [7;4]
+Archer 🏹archerGénéré 91 54 14 84 30 63 72 29 66 3 [7;5] 19
+CigueToxique [7;6] 3
+CigueToxique [7;8] 4
+Vitamine [8;1] 3
+Vitamine [8;2] 4
+Guerrier guerrierGénéré 75 34 5 77 71 21 36 85 24 1 [8;6]
+Soin [8;8] 6
+Vitamine [9;2] 2
+Mana [9;4] 11
+Archer 🏹archerGénéré 92 99 6 80 91 74 52 38 84 2 [9;5] 19
+Archer 🏹archerGénéré 54 64 7 99 67 52 77 40 80 3 [9;6] 7
+Vitamine [9;7] 6
+Soin [9;9] 12

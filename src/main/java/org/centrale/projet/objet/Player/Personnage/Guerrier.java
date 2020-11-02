@@ -40,6 +40,10 @@ public class Guerrier extends Personnage implements Combattant {
         System.out.printf("Guerrier{%s}\n", this.toString());
     }
 
+    public void afficheMap() {
+        System.out.print("⚔️Guer");
+    }
+
     public String saveObject() {
         return String.format("Guerrier %s\n", this.toSave());
     }
@@ -53,7 +57,7 @@ public class Guerrier extends Personnage implements Combattant {
     public void combattre(Creature defenseur) {
         double distCombatants = this.getPos().distance(defenseur.getPos());
         if (distCombatants <= 1) {
-            super.combatCorpsACorps(defenseur);
+            super.combatCorpsACorps(defenseur, getPointsBonus(), getPointsMalus());
         } else {
             System.out.println("⛔ Trop loin pour attaquer");
         }

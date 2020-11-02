@@ -35,6 +35,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
      * dégâts d'attaque
      */
     protected int degAtt;
+    private String nameDefenseur;
 
     /**
      * méthode de combat au corps à corps
@@ -42,13 +43,13 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
      *
      * @param defenseur Créature attaquée
      */
-    protected void combatCorpsACorps(Creature defenseur) {
+    protected void combatCorpsACorps(Creature defenseur, int bonus, int malus) {
         Random randomGenerator = new Random();
         String nameDefenseur = "";
         System.out.printf("⚔️ Combat au corps à corps:  %s attaque %s ⚔️ \n", this.getNom(), defenseur.getNom());
         // attaque réussie
         if (randomGenerator.nextInt(101) <= this.getPourcentageAtt()) {
-            int newPtvie;
+            int newPtvie = defenseur.getPtVie() - this.getDegAtt() - bonus + malus;
             String res = "";
             // parade réussie
             if (randomGenerator.nextInt(101) <= defenseur.getPourcentagePar()) {

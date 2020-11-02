@@ -49,8 +49,8 @@ public class NewWorld {
         int persoToPut = nombrePersos;
         Random random = new Random();
 
-        for (int i = 0; i < TAILLE_GRILLE; i++) {
-            for (int j = 0; j < TAILLE_GRILLE; j++) {
+        for (int i = 1; i <= TAILLE_GRILLE; i++) {
+            for (int j = 1; j <= TAILLE_GRILLE; j++) {
                 if (random.nextInt(TAILLE_GRILLE * TAILLE_GRILLE + nombrePersos) > nombrePersos && (i != 3 && j != 3)) {
                     ElementDeJeu elem = getRandomPerso();
                     elem.putOnMap(new Point2D(i, j));
@@ -68,7 +68,7 @@ public class NewWorld {
         int r = random.nextInt(12);
         switch (r) {
             case 0:
-                return new Archer("ArcherGénéré", random);
+                return new Archer("🏹archerGénéré", random);
             case 1:
                 return new Mage("mageGénéré", random);
             case 2:
@@ -89,6 +89,25 @@ public class NewWorld {
                 return new Vitamine("Vitamine", random);
         }
         return new Archer("archerGénéré", random);
+    }
+
+    public static void showMap(Joueur joueur) {
+        for (int j = TAILLE_GRILLE; j >= 1; j--) {
+            System.out.print("|"); // début ligne
+            for (int i = 1; i <= TAILLE_GRILLE; i++) {
+                Point2D pt = new Point2D(i, j);
+                System.out.print(" ");
+                if (map.get(pt) == null) {
+                    System.out.print("      "); // 5 espaces
+                } else if (pt.equals(joueur.perso.getPos())) {
+                    joueur.afficheMap();
+                } else {
+                    map.get(pt).afficheMap();
+                }
+                System.out.print(" |");
+            }
+            System.out.println();
+        }
     }
 
 

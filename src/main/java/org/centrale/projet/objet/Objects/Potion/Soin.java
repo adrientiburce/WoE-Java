@@ -29,4 +29,8 @@ public class Soin extends Potion {
     public String saveObject() {
        return String.format("Soin %s\n", this.getPos() + " " + ptVieGagne);
     }
+
+    public void afficheMap() {
+        System.out.print("🍵 Vie");
+    }
 }

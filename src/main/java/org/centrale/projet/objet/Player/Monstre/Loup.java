@@ -34,6 +34,11 @@ public class Loup extends Monstre implements Combattant {
         System.out.printf("Loup{%s}\n", this.toString());
     }
 
+    public void afficheMap() {
+        System.out.print( "🐺Loup");
+    }
+
+
     public String saveObject() {
         return String.format("Loup %s\n", this.toSave());
     }
@@ -42,7 +47,7 @@ public class Loup extends Monstre implements Combattant {
     public void combattre(Creature defenseur) {
         double distCombatants = this.getPos().distance(defenseur.getPos());
         if (distCombatants <= 1) {
-            super.combatCorpsACorps(defenseur);
+            super.combatCorpsACorps(defenseur, 0, 0);
         } else {
             System.out.println("⛔ Trop loin pour attaquer");
         }

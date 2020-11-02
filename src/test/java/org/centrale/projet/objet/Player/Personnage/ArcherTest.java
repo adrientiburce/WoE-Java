@@ -13,6 +13,7 @@ public class ArcherTest extends TestCase {
     private Archer defenseur;
 
     private Vitamine vitamine;
+
     private CigueToxique cigue;
 
 
@@ -79,5 +80,7 @@ public class ArcherTest extends TestCase {
         super.tearDown();
         attaquant = null;
         defenseur = null;
+        vitamine = null;
+        cigue = null;
     }
 }

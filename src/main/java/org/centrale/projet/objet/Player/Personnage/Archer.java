@@ -46,9 +46,9 @@ public class Archer extends Personnage implements Combattant {
         double distCombatants = this.getPos().distance(defenseur.getPos());
         // contact
         if (distCombatants <= 1) {
-            super.combatCorpsACorps(defenseur);
+            super.combatCorpsACorps(defenseur, getPointsBonus(), getPointsMalus());
         } else if (distCombatants <= this.getDistAttMax()) {
-            System.out.printf("\uD83C\uDFF9 Combat à distance: %s attaque %s \uD83C\uDFF9 \n", this.getNom(), defenseur.getNom());
+            System.out.printf("🏹 Combat à distance: %s attaque %s 🏹 \n", this.getNom(), defenseur.getNom());
             this.combatADistance(defenseur);
         } else {
             System.out.println("⛔ Trop loin pour attaquer");
@@ -60,7 +60,6 @@ public class Archer extends Personnage implements Combattant {
             System.out.println("⛔ plus de flèches");
             return;
         }
-
         Random randomGenerator = new Random();
         // attaque réussie
         if (randomGenerator.nextInt(101) <= this.getPourcentageAtt()) {
@@ -77,6 +76,10 @@ public class Archer extends Personnage implements Combattant {
 
     public void affiche() {
         System.out.printf("Archer{%s, nbFleches=%s}\n", this.toString(), nbFleches);
+    }
+
+    public void afficheMap() {
+        System.out.print("🏹Arch");
     }
 
     public String saveObject() {
