@@ -5,6 +5,7 @@ import org.centrale.projet.objet.Grille.Point2D;
 import org.centrale.projet.objet.Objects.Nourriture.Nourriture;
 import org.centrale.projet.objet.Objects.Potion.Potion;
 import org.centrale.projet.objet.Player.Creature;
+import org.centrale.projet.objet.Player.Monstre.Loup;
 import org.centrale.projet.objet.Player.Personnage.Archer;
 import org.centrale.projet.objet.Player.Personnage.Guerrier;
 import org.centrale.projet.objet.Player.Personnage.Mage;
@@ -23,6 +24,15 @@ public class Joueur {
     }
 
     /**
+     * nom de la classe du personnage
+     */
+    private String className;
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    /**
      * personnage choisit par le joueur
      */
     public Personnage perso;
@@ -33,33 +43,35 @@ public class Joueur {
     private void deplaceAvecChoix(String deplaceChoice) {
         deplaceChoice = deplaceChoice.toUpperCase();
         Point2D oldPos = this.perso.getPos();
+        boolean effected = false;
         switch (deplaceChoice) {
             // avance
             case "Z": {
-                Point2D newPos = new Point2D(oldPos.getX(), oldPos.getY() + 1);
-                this.perso.move(newPos);
+                effected = this.perso.move(new Point2D(oldPos.getX(), oldPos.getY() + 1));
                 break;
             }
             // recule
             case "S": {
-                this.perso.move(new Point2D(oldPos.getX(), oldPos.getY() - 1));
+                effected = this.perso.move(new Point2D(oldPos.getX(), oldPos.getY() - 1));
                 break;
             }
             // vers la droite
             case "D": {
-                this.perso.move(new Point2D(oldPos.getX() + 1, oldPos.getY()));
+                effected = this.perso.move(new Point2D(oldPos.getX() + 1, oldPos.getY()));
                 break;
             }
             // vers la gauche
             case "Q": {
-                this.perso.move(new Point2D(oldPos.getX() - 1, oldPos.getY()));
+                effected = this.perso.move(new Point2D(oldPos.getX() - 1, oldPos.getY()));
                 break;
             }
             default: {
                 System.out.println("Déplacement non compris");
             }
         }
-        System.out.println("Ta nouvelle position " + perso.getPos());
+        if (effected) {
+            System.out.println("Ta nouvelle position " + perso.getPos());
+        }
     }
 
     private void combatAvecChoix(String choixCombat) {
@@ -75,7 +87,7 @@ public class Joueur {
         }
     }
 
-    private void boirePotion(String choix) {
+    private void boirePotion(String choix) throws NumberFormatException {
         String[] posArray = choix.split("\\s+");
         Point2D newPos = new Point2D(Integer.parseInt((posArray[0])), Integer.parseInt((posArray[1])));
 
@@ -83,7 +95,7 @@ public class Joueur {
             System.out.println("⛔ Case vide");
         } else if (NewWorld.map.get(newPos) instanceof Potion) {
             perso.deplaceEtBoirePotion((Potion) NewWorld.map.get(newPos));
-        }else if (NewWorld.map.get(newPos) instanceof Nourriture) {
+        } else if (NewWorld.map.get(newPos) instanceof Nourriture) {
             perso.ramasseNourriture((Nourriture) NewWorld.map.get(newPos));
         } else {
             System.out.println("⛔ Case avec une Creature");
@@ -91,28 +103,41 @@ public class Joueur {
     }
 
     public boolean askNextAction() {
-        showInfos();
-        showElementAround();
-        Scanner myObj = new Scanner(System.in);  // Create a Scanner object
+        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
         System.out.println("Veux tu te déplacer (D), combattre (C) ou ramasser un objet (R) ou quitter(Q) ?");
-        String choix = myObj.nextLine();
+        String choix = scanner.nextLine();
         switch (choix) {
             case "D":
                 System.out.println("Ta position actuelle: " + perso.getPos());
                 System.out.println("Choisis ton déplacement avec les touches Z (monte), Q (gauche), S (descend), D (droite) :");
-                deplaceAvecChoix(myObj.nextLine());
+                deplaceAvecChoix(scanner.nextLine());
                 break;
             case "C":
                 System.out.println("Position du perso que tu attaques sous la forme: 'X Y'");
-                combatAvecChoix(myObj.nextLine());
+                combatAvecChoix(scanner.nextLine());
                 break;
             case "R":
                 System.out.println("Position de l'objet: 'X Y'");
-                boirePotion(myObj.nextLine());
+                try {
+                    boirePotion(scanner.nextLine());
+                } catch (NumberFormatException e) {
+                    System.out.println("Position non valable");
+                }
                 break;
             case "Q":
-                System.out.println("Arret du jeu");
-                Save.saveGame(this, "game.txt");
+                System.out.println("Veux-tu sauvegarder la partie (S) ou quitter définitivement (Q) ?");
+                String choice = scanner.nextLine();
+                switch (choice) {
+                    case "S": {
+                        System.out.println("Nom de la sauvegarde");
+                        String backupName = scanner.nextLine();
+                        Save.saveGame(this, backupName + ".txt");
+                        break;
+                    }
+                    case "Q": {
+                        return false;
+                    }
+                }
                 return false;
             default:
                 this.askNextAction();
@@ -121,7 +146,7 @@ public class Joueur {
         return true;
     }
 
-    private void showElementAround() {
+    public void showElementAround() {
         System.out.println("======= Ton entourage =======");
         int x = perso.getPos().getX();
         int y = perso.getPos().getY();
@@ -129,7 +154,7 @@ public class Joueur {
             for (int j = y - 1; j < y + 2; j++) {
                 Point2D pt = new Point2D(i, j);
                 if (!pt.equals(perso.getPos())) {
-                    System.out.println(pt.toString() + " -> " + (NewWorld.map.get(pt) != null ? NewWorld.map.get(pt) : "Case vide"));
+                    System.out.println("pos " + pt.toString() + " -> " + (NewWorld.map.get(pt) != null ? NewWorld.map.get(pt) : "Case vide"));
                 } else {
                     System.out.println(pt.toString() + " -> " + " << ----- 🙋 Ton Perso ---- >>");
                 }
@@ -139,13 +164,17 @@ public class Joueur {
         NewWorld.showMap(this);
     }
 
-    private void showInfos() {
+    public void showPersoInfos() {
         System.out.println("======= 🙋 Ton Perso 🙋 =======");
         System.out.println(perso);
     }
 
     public void afficheMap() {
-        System.out.print("🙋" + perso.getNom().substring(0, 4));
+        if (perso.getNom().length() <= 4) {
+            System.out.print("🙋" + perso.getNom());
+        } else {
+            System.out.print("🙋" + perso.getNom().substring(0, 4));
+        }
     }
 
     /**
@@ -165,6 +194,7 @@ public class Joueur {
                 String name = myObj.nextLine();
                 this.perso = new Archer(name, 100, random.nextInt(50) + 50, random.nextInt(30), random.nextInt(80) + 20, random.nextInt(80) + 20, random.nextInt(50) + 50, random.nextInt(50) + 50,
                         random.nextInt(50) + 10, random.nextInt(50) + 50, random.nextInt(15) + 2, new Point2D(21, 23), random.nextInt(15) + 5);
+                this.className = Archer.class.getSimpleName();
                 break;
             }
             case "guerrier": {
@@ -172,6 +202,7 @@ public class Joueur {
                 String name = myObj.nextLine();
                 this.perso = new Guerrier(name, 100, random.nextInt(40), random.nextInt(30), random.nextInt(80) + 20, random.nextInt(80) + 20, random.nextInt(20) + 10, random.nextInt(30) + 10,
                         random.nextInt(50) + 50, random.nextInt(20) + 10, 1, new Point2D(21, 23));
+                this.className = Guerrier.class.getSimpleName();
                 break;
             }
             case "mage": {
@@ -179,6 +210,7 @@ public class Joueur {
                 String name = myObj.nextLine();
                 this.perso = new Mage(name, 100, random.nextInt(50) + 50, random.nextInt(30), random.nextInt(80) + 20, random.nextInt(80) + 20, random.nextInt(50) + 50, random.nextInt(50) + 50,
                         random.nextInt(50) + 10, random.nextInt(50) + 50, random.nextInt(8) + 2, new Point2D(21, 23));
+                this.className = Mage.class.getSimpleName();
                 break;
             }
             default: {
@@ -186,12 +218,38 @@ public class Joueur {
                 this.choosePerso();
             }
         }
-
         return this.perso;
     }
 
+    /**
+     * attaque automatiques des Loups sur le joeur
+     */
+    public void attaqueDesLoups() {
+        int x = perso.getPos().getX();
+        int y = perso.getPos().getY();
+        // positions environnantes
+        for (int i = x - 1; i < x + 2; i++) {
+            for (int j = y - 1; j < y + 2; j++) {
+                // pas les diagonales
+                if (i == x || j == y) {
+                    Point2D pt = new Point2D(i, j);
+                    if (NewWorld.map.get(pt) instanceof Loup) {
+                        Loup loup = (Loup) NewWorld.map.get(pt);
+                        loup.combattre(this.perso);
+                        return;
+                    }
+                }
+
+            }
+        }
+    }
+
+    public boolean isAlive() {
+        return this.perso.getPtVie() >= 1;
+    }
+
     public String saveObject() {
-        return String.format("Joueur %s\n", this.perso.toSave());
+        return String.format("Joueur %s %s\n", this.className, this.perso.toSave());
     }
 }
 

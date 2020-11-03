@@ -33,10 +33,16 @@ public class ElementDeJeu {
         this.pos = pos;
     }
 
+    /**
+     * formatage de l'objet pour sauvegarder la partie
+     */
     public String saveObject() {
         return "case vide";
     }
 
+    /**
+     * affichage court sur la carte
+     */
     public void afficheMap() {
         System.out.print("  o   ");
     }

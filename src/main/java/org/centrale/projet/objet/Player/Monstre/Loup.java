@@ -19,7 +19,7 @@ public class Loup extends Monstre implements Combattant {
      * @param random
      */
     public Loup(String nom, Random random) {
-        super(nom, random.nextInt(50) + 50, random.nextInt(40), random.nextInt(30), random.nextInt(80) + 20, new Point2D());
+        super(nom, random.nextInt(50) + 50, random.nextInt(40) + 50, random.nextInt(30) + 50, random.nextInt(80) + 20, new Point2D());
     }
 
     public Loup(String nom, int ptVie, int pourcentageAtt, int pourcentagePar, int degAtt, Point2D pos) {

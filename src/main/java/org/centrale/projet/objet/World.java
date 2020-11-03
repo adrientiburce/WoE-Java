@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * @deprecated used before TP6, now use NewWorld
+ * @deprecated classe utilisé avant le TP6, class actuelle: NewWorld
  */
 public class World {
 

@@ -239,7 +239,8 @@ public abstract class Personnage extends Creature {
                         ", pourcentageResistMag=" + pourcentageResistMag +
                         ", degAtt=" + degAtt +
                         ", degMag=" + degMag +
-                        ", distAttMax=" + distAttMax;
+                        ", distAttMax=" + distAttMax +
+                        ", nourritures=" + nourritures;
     }
 
     public String toSave() {

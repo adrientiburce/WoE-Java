@@ -89,9 +89,21 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
         if (this.getPos().distance(newPos) > Math.sqrt(2)) {
             System.out.println("⛔ déplacement non autorisé");
         } else if (NewWorld.map.get(newPos) == null) {
-            NewWorld.map.remove(this.pos);
+            return deplaceDansGrille(this.pos, newPos);
+        } else {
+            System.out.println("⛔ case occupée");
+        }
+        return false;
+    }
+
+    public boolean deplaceDansGrille(Point2D oldPos, Point2D newPos) {
+        if (newPos.isPositionValable()) {
+            NewWorld.map.remove(oldPos);
             this.setPos(newPos);
             NewWorld.map.put(newPos, this);
+            return true;
+        } else {
+            System.out.println("⛔ déplacement hors grille");
         }
         return false;
     }

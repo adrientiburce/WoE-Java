@@ -1,6 +1,7 @@
-package org.centrale.projet.objet;
+package org.centrale.projet.objet.TestSeance;
 
 import org.centrale.projet.objet.Grille.Point2D;
+import org.centrale.projet.objet.World;
 
 public class TestSeance1 {
 

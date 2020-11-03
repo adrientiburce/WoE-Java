@@ -39,7 +39,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>org.centrale.projet.objet.TestSeance6</mainClass>
+                            <mainClass>org.centrale.projet.objet.Play</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

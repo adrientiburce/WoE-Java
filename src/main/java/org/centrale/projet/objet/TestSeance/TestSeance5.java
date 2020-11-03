@@ -1,7 +1,9 @@
-package org.centrale.projet.objet;
+package org.centrale.projet.objet.TestSeance;
 
 
+import org.centrale.projet.objet.Joueur;
 import org.centrale.projet.objet.Player.Creature;
+import org.centrale.projet.objet.World;
 
 import java.util.Random;
 import java.util.Scanner;

@@ -4,7 +4,6 @@ import org.centrale.projet.objet.ElementDeJeu;
 import org.centrale.projet.objet.Grille.Point2D;
 import org.centrale.projet.objet.Joueur;
 import org.centrale.projet.objet.NewWorld;
-import org.centrale.projet.objet.Player.Personnage.Personnage;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -16,7 +15,6 @@ public class Save {
      * sauvegarde un jeu avec tous les objets sur la Map et le Joueur
      */
     public static void saveGame(Joueur joueur, String backupName) {
-
         try (FileWriter writer = new FileWriter(backupName); // saved at project's root
              BufferedWriter bw = new BufferedWriter(writer)) {
             // sauvegarde de la grille
@@ -28,7 +26,7 @@ public class Save {
                     if (NewWorld.map.get(new Point2D(i, j)) != null) {
                         Point2D pt = new Point2D(i, j);
                         if (!pt.equals(joueur.perso.getPos())) {
-                            saveElemeDeJeuInLine(bw, NewWorld.map.get(pt));
+                            saveElemDeJeuInLine(bw, NewWorld.map.get(pt));
                         } else {
                             // sauvegarde du joueur
                             bw.write(joueur.saveObject());
@@ -37,8 +35,7 @@ public class Save {
                 }
             }
 
-
-
+            System.out.println("Sauvegarde effectuée 👌");
         } catch (IOException e) {
             System.err.format("IOException: %s%n", e);
         }
@@ -53,7 +50,7 @@ public class Save {
         }
     }
 
-    public static void saveElemeDeJeuInLine(BufferedWriter bw, ElementDeJeu elem) {
+    public static void saveElemDeJeuInLine(BufferedWriter bw, ElementDeJeu elem) {
         try {
             bw.write(elem.saveObject()); // newLine in saveObject
         } catch (IOException e) {

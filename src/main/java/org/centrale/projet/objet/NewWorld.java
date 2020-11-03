@@ -10,6 +10,7 @@ import org.centrale.projet.objet.Player.Personnage.Archer;
 import org.centrale.projet.objet.Player.Personnage.Guerrier;
 import org.centrale.projet.objet.Player.Personnage.Mage;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -45,16 +46,20 @@ public class NewWorld {
     /**
      * Génère un monde aléatoire avec des positions pour chacun des personnages
      */
-    public void creerMondeAlea(int nombrePersos) throws Exception {
+    public void creerMondeAlea(int nombrePersos) {
         int persoToPut = nombrePersos;
         Random random = new Random();
 
         for (int i = 1; i <= TAILLE_GRILLE; i++) {
             for (int j = 1; j <= TAILLE_GRILLE; j++) {
                 if (random.nextInt(TAILLE_GRILLE * TAILLE_GRILLE + nombrePersos) > nombrePersos && (i != 3 && j != 3)) {
-                    ElementDeJeu elem = getRandomPerso();
-                    elem.putOnMap(new Point2D(i, j));
-                    persoToPut--;
+                    try {
+                        ElementDeJeu elem = getRandomPerso();
+                        elem.putOnMap(new Point2D(i, j));
+                        persoToPut--;
+                    } catch (Exception e) {
+                        System.out.println("perso non placé");
+                    }
                 }
                 if (persoToPut == 0) {
                     return;
@@ -68,7 +73,7 @@ public class NewWorld {
         int r = random.nextInt(12);
         switch (r) {
             case 0:
-                return new Archer("🏹archerGénéré", random);
+                return new Archer("archerGénéré", random);
             case 1:
                 return new Mage("mageGénéré", random);
             case 2:
@@ -109,7 +114,6 @@ public class NewWorld {
             System.out.println();
         }
     }
-
 
     @Override
     public String toString() {

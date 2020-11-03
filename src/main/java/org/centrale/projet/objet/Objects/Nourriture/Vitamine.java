@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class Vitamine extends Nourriture {
 
-    private int degAttBonus;
+    private final int degAttBonus;
 
     public Vitamine(String nom, Random random) {
         super(nom, random.nextInt(2) + 1);
@@ -23,15 +23,19 @@ public class Vitamine extends Nourriture {
         return degAttBonus;
     }
 
-    public void setDegAttBonus(int degAttBonus) {
-        this.degAttBonus = degAttBonus;
-    }
-
     public String saveObject() {
-        return String.format("Vitamine %s\n", this.getPos() + " " + degAttBonus);
+        return String.format("Vitamine %s\n", this.getNom() + " " + this.getDureeEffet() + " " + degAttBonus + " " + this.pos);
     }
 
     public void afficheMap() {
-        System.out.print( "🥝Vita");
+        System.out.print("🥝Vita");
+    }
+
+    @Override
+    public String toString() {
+        return "Vitamine{" +
+                "dureeEffet=" + this.getDureeEffet() +
+                "degAttBonus=" + degAttBonus +
+                "}";
     }
 }

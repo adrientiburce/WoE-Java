@@ -7,7 +7,7 @@ import java.util.Random;
  */
 public class CigueToxique extends Nourriture {
 
-    private int degAttMalus;
+    private final int degAttMalus;
 
     public CigueToxique(String nom, Random random) {
         super(nom, random.nextInt(2) + 1);
@@ -23,15 +23,21 @@ public class CigueToxique extends Nourriture {
         return degAttMalus;
     }
 
-    public void setDegAttMalus(int degAttMalus) {
-        this.degAttMalus = degAttMalus;
-    }
-
+    @Override
     public String saveObject() {
-        return String.format("CigueToxique %s\n", this.getPos() + " " + degAttMalus);
+        return String.format("CigueToxique %s\n", this.getNom() + " " + this.getDureeEffet() + " " + degAttMalus + " " + this.pos);
     }
 
+    @Override
     public void afficheMap() {
-        System.out.print( "Toxiq");
+        System.out.print("🤢Toxi");
+    }
+
+    @Override
+    public String toString() {
+        return "CigueToxique{" +
+                "dureeEffet=" + this.getDureeEffet() +
+                "degAttMalus=" + degAttMalus +
+                "}";
     }
 }

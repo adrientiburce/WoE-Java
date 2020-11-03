@@ -1,4 +1,4 @@
-package org.centrale.projet.objet;
+package org.centrale.projet.objet.TestSeance;
 
 
 import org.centrale.projet.objet.Grille.Point2D;
@@ -6,6 +6,7 @@ import org.centrale.projet.objet.Player.Monstre.Loup;
 import org.centrale.projet.objet.Player.Personnage.Archer;
 import org.centrale.projet.objet.Player.Personnage.Guerrier;
 import org.centrale.projet.objet.Player.Personnage.Mage;
+import org.centrale.projet.objet.World;
 
 public class TestSeance4 {
 
