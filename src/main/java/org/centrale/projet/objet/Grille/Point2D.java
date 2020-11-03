@@ -1,5 +1,6 @@
 package org.centrale.projet.objet.Grille;
 
+import org.centrale.projet.objet.NewWorld;
 import org.centrale.projet.objet.World;
 
 import java.util.Objects;
@@ -90,11 +91,11 @@ public class Point2D {
 
     public boolean isPositionValable() {
         // si x sort de la grille
-        if (this.x > World.TAILLE_GRILLE | this.x <= 0) {
+        if (this.x > NewWorld.TAILLE_GRILLE | this.x <= 0) {
             return false;
         }
         // même chose pour y
-        if (this.y > World.TAILLE_GRILLE | this.y <= 0) {
+        if (this.y > NewWorld.TAILLE_GRILLE | this.y <= 0) {
             return false;
         }
         return true;

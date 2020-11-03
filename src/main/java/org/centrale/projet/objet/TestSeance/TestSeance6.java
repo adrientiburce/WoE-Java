@@ -25,8 +25,8 @@ public class TestSeance6 {
         joueur.perso.putOnMap(new Point2D(3, 3));
 
 
-        boolean res = true;
-        while (res) {
+        int res = 1;
+        while (res == 1) {
             res = joueur.askNextAction();
         }
     }

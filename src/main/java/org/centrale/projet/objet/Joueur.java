@@ -40,7 +40,7 @@ public class Joueur {
     public Joueur() {
     }
 
-    private void deplaceAvecChoix(String deplaceChoice) {
+    private int deplaceAvecChoix(String deplaceChoice) {
         deplaceChoice = deplaceChoice.toUpperCase();
         Point2D oldPos = this.perso.getPos();
         boolean effected = false;
@@ -67,14 +67,17 @@ public class Joueur {
             }
             default: {
                 System.out.println("Déplacement non compris");
+                return -1;
             }
         }
         if (effected) {
             System.out.println("Ta nouvelle position " + perso.getPos());
+            return 1;
         }
+        return -1;
     }
 
-    private void combatAvecChoix(String choixCombat) {
+    private int combatAvecChoix(String choixCombat) {
         String[] posArray = choixCombat.split("\\s+");
         Point2D newPos = new Point2D(Integer.parseInt((posArray[0])), Integer.parseInt((posArray[1])));
 
@@ -82,48 +85,56 @@ public class Joueur {
             System.out.println("⛔ Case vide");
         } else if (NewWorld.map.get(newPos) instanceof Creature) {
             perso.combattre((Creature) NewWorld.map.get(newPos));
+            return 1;
         } else {
             System.out.println("⛔ Case avec une potion");
         }
+        return -1;
     }
 
-    private void boirePotion(String choix) throws NumberFormatException {
+    private int boirePotion(String choix) throws NumberFormatException {
         String[] posArray = choix.split("\\s+");
         Point2D newPos = new Point2D(Integer.parseInt((posArray[0])), Integer.parseInt((posArray[1])));
 
         if (NewWorld.map.get(newPos) == null) {
             System.out.println("⛔ Case vide");
+            return -1;
         } else if (NewWorld.map.get(newPos) instanceof Potion) {
             perso.deplaceEtBoirePotion((Potion) NewWorld.map.get(newPos));
         } else if (NewWorld.map.get(newPos) instanceof Nourriture) {
             perso.ramasseNourriture((Nourriture) NewWorld.map.get(newPos));
         } else {
             System.out.println("⛔ Case avec une Creature");
+            return -1;
         }
+        return 1;
     }
 
-    public boolean askNextAction() {
-        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
+    public int askNextAction() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Veux tu te déplacer (D), combattre (C) ou ramasser un objet (R) ou quitter(Q) ?");
         String choix = scanner.nextLine();
         switch (choix) {
             case "D":
                 System.out.println("Ta position actuelle: " + perso.getPos());
                 System.out.println("Choisis ton déplacement avec les touches Z (monte), Q (gauche), S (descend), D (droite) :");
-                deplaceAvecChoix(scanner.nextLine());
-                break;
+                return deplaceAvecChoix(scanner.nextLine());
             case "C":
                 System.out.println("Position du perso que tu attaques sous la forme: 'X Y'");
-                combatAvecChoix(scanner.nextLine());
-                break;
+                try {
+                    return combatAvecChoix(scanner.nextLine());
+                } catch (NumberFormatException e) {
+                    System.out.println("Position non valable");
+                    return -1;
+                }
             case "R":
                 System.out.println("Position de l'objet: 'X Y'");
                 try {
-                    boirePotion(scanner.nextLine());
+                    return boirePotion(scanner.nextLine());
                 } catch (NumberFormatException e) {
                     System.out.println("Position non valable");
+                    return -1;
                 }
-                break;
             case "Q":
                 System.out.println("Veux-tu sauvegarder la partie (S) ou quitter définitivement (Q) ?");
                 String choice = scanner.nextLine();
@@ -135,15 +146,14 @@ public class Joueur {
                         break;
                     }
                     case "Q": {
-                        return false;
+                        return 0;
                     }
                 }
-                return false;
+                return 0;
             default:
                 this.askNextAction();
-                return true;
+                return 1;
         }
-        return true;
     }
 
     public void showElementAround() {

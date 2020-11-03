@@ -53,16 +53,25 @@ public class Play {
     }
 
     private static void play() {
-        boolean res = true;
-        while (res) {
-            joueur.showPersoInfos();
-            joueur.showElementAround();
-            res = joueur.askNextAction();
-            joueur.attaqueDesLoups();
+        joueur.showPersoInfos();
+        joueur.showElementAround();
 
+        int res = 1;
+        while (res == 1) {
+
+            res = joueur.askNextAction();
+            // si une action a été effectué
+            if (res == 1) {
+                joueur.showPersoInfos();
+                joueur.showElementAround();
+                joueur.attaqueDesLoups();
+            } // si aucune action
+            else if (res == -1) {
+                res = 1;
+            }
             if (!joueur.isAlive()) {
                 System.out.println("😵 La partie est finie vous ête mort !");
-                res = false;
+                res = 0;
             }
 
         }

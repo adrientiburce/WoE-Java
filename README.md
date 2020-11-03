@@ -1,4 +1,6 @@
-![Java CI](https://github.com/adrientiburce/WoE-Java/workflows/Java%20CI/badge.svg) ![](https://img.shields.io/badge/JDK-12-f39f37)
+[![Java CI](https://github.com/adrientiburce/WoE-Java/workflows/Java%20CI/badge.svg)](https://github.com/adrientiburce/WoE-Java/actions)
+
+![](https://img.shields.io/badge/JDK-11-f39237) ![](https://img.shields.io/badge/JDK-12-f39f37) ![](https://img.shields.io/badge/JDK-14-f39f37)
 ## World of ECN
 
 Javen project build with Maven to learn OOP : object-oriented programming 
