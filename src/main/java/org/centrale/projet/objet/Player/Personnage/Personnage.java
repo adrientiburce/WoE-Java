@@ -140,33 +140,54 @@ public abstract class Personnage extends Creature {
 
     protected int getPointsMalus() {
         Iterator<Nourriture> iter = this.getNourritures().iterator();
-        List<Nourriture> nourritureEmpty = new ArrayList<>();
         int resMalus = 0;
         while (iter.hasNext()) {
             Nourriture n = iter.next();
             if (n instanceof CigueToxique) {
                 resMalus += ((CigueToxique) n).getDegAttMalus();
-                n.setDureeEffet(n.getDureeEffet() - 1);
-                nourritureEmpty.add(n);
             }
         }
-        nourritures.removeAll(nourritureEmpty);
         return resMalus;
     }
 
     protected int getPointsBonus() {
         Iterator<Nourriture> iter = this.getNourritures().iterator();
-        List<Nourriture> nourritureEmpty = new ArrayList<>();
         int resBonus = 0;
         while (iter.hasNext()) {
             Nourriture n = iter.next();
             if (n instanceof Vitamine) {
                 resBonus += ((Vitamine) n).getDegAttBonus();
-                n.setDureeEffet(n.getDureeEffet() - 1);
             }
         }
-        nourritures.removeAll(nourritureEmpty);
         return resBonus;
+    }
+
+    /**
+     * met a jour les durées d'effet des getNourritures et supprime si besoin
+     */
+    public void updateNourrituresEffet() {
+        Iterator<Nourriture> iter = this.getNourritures().iterator();
+        List<Nourriture> nourritureToRemove = new ArrayList<>();
+        while (iter.hasNext()) {
+            Nourriture n = iter.next();
+            n.setDureeEffet(n.getDureeEffet() - 1);
+            if (n.getDureeEffet() <= 0) {
+                nourritureToRemove.add(n);
+            }
+        }
+        nourritures.removeAll(nourritureToRemove);
+    }
+
+    public void showNourritureBag() {
+        System.out.print("   👜  Ta besace 👜 : ");
+        if (this.getNourritures().isEmpty()) {
+            System.out.print("Vide");
+        }
+        for (Nourriture n : this.getNourritures()) {
+            n.afficheMap();
+            System.out.printf(" (durée: %d) /", n.getDureeEffet());
+        }
+        System.out.println();
     }
 
     /**
@@ -239,8 +260,7 @@ public abstract class Personnage extends Creature {
                         ", pourcentageResistMag=" + pourcentageResistMag +
                         ", degAtt=" + degAtt +
                         ", degMag=" + degMag +
-                        ", distAttMax=" + distAttMax +
-                        ", nourritures=" + nourritures;
+                        ", distAttMax=" + distAttMax;
     }
 
     public String toSave() {

@@ -65,28 +65,30 @@ public class Point2D {
         this.translater(dX, dY);
     }
 
+
     /**
      * translatte un point en vérifiant qu'il reste dans la grille
      *
      * @param dx distance de translation selon X
      * @param dy distance de translation selon Y
      */
-    public void translater(int dx, int dy) {
-        this.x += dx;
-        this.y += dy;
+    public Point2D translater(int dx, int dy) {
+        int newX = this.x + dx;
+        int newY = this.y + dy;
 
         // si x sort de la grille on le met en bordure de la grille.
-        if (this.x > World.TAILLE_GRILLE) {
-            this.x = World.TAILLE_GRILLE;
-        } else if (this.x < 0) {
-            this.x = 0;
+        if (newX > World.TAILLE_GRILLE) {
+            newX = World.TAILLE_GRILLE;
+        } else if (newX < 0) {
+            newX = 0;
         }
         // même chose pour y
-        if (this.y > World.TAILLE_GRILLE) {
-            this.y = World.TAILLE_GRILLE;
-        } else if (this.y < 0) {
-            this.y = 0;
+        if (newY > World.TAILLE_GRILLE) {
+            newY = World.TAILLE_GRILLE;
+        } else if (newY < 0) {
+            newY = 0;
         }
+        return new Point2D(newX, newY);
     }
 
     public boolean isPositionValable() {

@@ -21,7 +21,7 @@ public class Archer extends Personnage implements Combattant {
     }
 
     public Archer(String nom, Random random) {
-        super(nom, random.nextInt(50) + 50, random.nextInt(50) + 50, random.nextInt(30), random.nextInt(20) + 80, random.nextInt(80) + 20, random.nextInt(50) + 50, random.nextInt(50) + 50,
+        super(nom, random.nextInt(50) + 50, random.nextInt(50) + 50, random.nextInt(30) + 10, random.nextInt(20) + 80, random.nextInt(80) + 20, random.nextInt(50) + 50, random.nextInt(50) + 50,
                 random.nextInt(50) + 10, random.nextInt(50) + 50, random.nextInt(15) + 2, new Point2D());
         this.setNbFleches(random.nextInt(15) + 5);
     }
@@ -66,8 +66,12 @@ public class Archer extends Personnage implements Combattant {
             int bonus = getPointsBonus();
             int malus = getPointsMalus();
             int newPtvie = defenseur.getPtVie() - this.getDegAtt() - bonus + malus;
-            defenseur.setPtVie(newPtvie);
-            System.out.println("👌 perte de vie de : " + (this.getDegAtt() + bonus - malus));
+
+            // vérifier si parade trop forte
+            if (newPtvie < defenseur.getPtVie()) {
+                defenseur.setPtVie(newPtvie);
+                System.out.println("👌 perte de vie de : " + (this.getDegAtt() + bonus - malus));
+            }
         } else {
             System.out.println("⛔ échec de l'attaque");
         }

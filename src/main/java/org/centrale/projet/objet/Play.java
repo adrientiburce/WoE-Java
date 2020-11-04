@@ -57,15 +57,23 @@ public class Play {
         joueur.showElementAround();
 
         int res = 1;
-        while (res == 1) {
-
+        while (res >= 1) {
             res = joueur.askNextAction();
+
+            // si action était de ramasser on ne MAJ pas la besace
+            if (res != 2) {
+                joueur.perso.updateNourrituresEffet();
+            }
             // si une action a été effectué
-            if (res == 1) {
+            if (res >= 1) {
+                joueur.attaqueDesLoups();
+                NewWorld.removeDeadCreature();
+                NewWorld.moveAllCreature(joueur);
+
                 joueur.showPersoInfos();
                 joueur.showElementAround();
-                joueur.attaqueDesLoups();
-            } // si aucune action
+            }
+            // si aucune action
             else if (res == -1) {
                 res = 1;
             }
@@ -73,7 +81,6 @@ public class Play {
                 System.out.println("😵 La partie est finie vous ête mort !");
                 res = 0;
             }
-
         }
     }
 

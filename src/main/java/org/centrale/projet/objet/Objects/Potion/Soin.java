@@ -31,6 +31,6 @@ public class Soin extends Potion {
     }
 
     public void afficheMap() {
-        System.out.print("🍵 Vie");
+        System.out.print("🍵Soin");
     }
 }

@@ -14,7 +14,7 @@ public class Mage extends Personnage implements Combattant {
     }
 
     public Mage(String nom, Random random) {
-        super(nom, random.nextInt(50) + 50, random.nextInt(50) + 50, random.nextInt(30), random.nextInt(80) + 20, random.nextInt(80) + 20, random.nextInt(50) + 50, random.nextInt(50) + 50,
+        super(nom, random.nextInt(50) + 50, random.nextInt(50) + 50, random.nextInt(30)+ 10, random.nextInt(70) + 30, random.nextInt(80) + 20, random.nextInt(50) + 50, random.nextInt(50) + 50,
                 random.nextInt(50) + 10, random.nextInt(50) + 50, random.nextInt(8) + 2, new Point2D());
     }
 
@@ -80,8 +80,11 @@ public class Mage extends Personnage implements Combattant {
             else {
                 newPtvie = Integer.max(defenseur.getPtVie() - this.getDegMag(), 0);
             }
-            System.out.printf("%s 👌 perte de vie engendré: %d \n", res, defenseur.getPtVie() - newPtvie);
-            defenseur.setPtVie(newPtvie);
+            // vérifier si parade trop forte
+            if (newPtvie < defenseur.getPtVie()) {
+                System.out.printf("%s 👌 Perte de vie engendrée: %d\n", res, defenseur.getPtVie() - newPtvie);
+                defenseur.setPtVie(newPtvie);
+            }
         } else {
             System.out.println("⛔ échec de l'attaque");
         }

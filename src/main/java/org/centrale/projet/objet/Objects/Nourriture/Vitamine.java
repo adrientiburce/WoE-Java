@@ -35,7 +35,7 @@ public class Vitamine extends Nourriture {
     public String toString() {
         return "Vitamine{" +
                 "dureeEffet=" + this.getDureeEffet() +
-                "degAttBonus=" + degAttBonus +
+                "; degAttBonus=" + degAttBonus +
                 "}";
     }
 }

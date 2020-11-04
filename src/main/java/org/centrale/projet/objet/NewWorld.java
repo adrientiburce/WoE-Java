@@ -5,15 +5,13 @@ import org.centrale.projet.objet.Objects.Nourriture.CigueToxique;
 import org.centrale.projet.objet.Objects.Nourriture.Vitamine;
 import org.centrale.projet.objet.Objects.Potion.Mana;
 import org.centrale.projet.objet.Objects.Potion.Soin;
+import org.centrale.projet.objet.Player.Creature;
 import org.centrale.projet.objet.Player.Monstre.Loup;
 import org.centrale.projet.objet.Player.Personnage.Archer;
 import org.centrale.projet.objet.Player.Personnage.Guerrier;
 import org.centrale.projet.objet.Player.Personnage.Mage;
 
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class NewWorld {
 
@@ -41,6 +39,63 @@ public class NewWorld {
                 NewWorld.map.put(new Point2D(i, j), null);
             }
         }
+    }
+
+    /**
+     * supprimes les créatures qui n'ont plus de vie
+     */
+    public static void removeDeadCreature() {
+        for (int i = 1; i <= TAILLE_GRILLE; i++) {
+            for (int j = 1; j <= TAILLE_GRILLE; j++) {
+                Point2D pt = new Point2D(i, j);
+                if (NewWorld.map.get(pt) instanceof Creature) {
+                    Creature c = (Creature) NewWorld.map.get(pt);
+                    if (c.getPtVie() <= 0) {
+                        NewWorld.map.remove(new Point2D(i, j));
+                    }
+                }
+            }
+        }
+    }
+
+    public static void moveAllCreature(Joueur joueur) {
+        for (int i = 1; i <= TAILLE_GRILLE; i++) {
+            for (int j = 1; j <= TAILLE_GRILLE; j++) {
+                Point2D pt = new Point2D(i, j);
+
+                if (NewWorld.map.get(pt) instanceof Creature && !pt.equals(joueur.perso.getPos())) {
+                    Creature c = (Creature) NewWorld.map.get(pt);
+                    for (Point2D newPos : getAdjacentPos(c.pos)) {
+                        if (NewWorld.map.get(newPos) == null) {
+                            c.move(newPos);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public static ArrayList<Point2D> getAdjacentPos(Point2D pt) {
+        ArrayList<Point2D> res = new ArrayList<>();
+        if (pt.getX() > 1) {
+            Point2D newPt = pt.translater(-1, 0);
+            res.add(newPt);
+        }
+        if (pt.getX() < NewWorld.TAILLE_GRILLE) {
+            Point2D newPt = pt.translater(1, 0);
+            res.add(newPt);
+        }
+        if (pt.getY() < NewWorld.TAILLE_GRILLE) {
+            Point2D newPt = pt.translater(0, 1);
+            res.add(newPt);
+        }
+        if (pt.getY() > 1) {
+            Point2D newPt = pt.translater(0, -1);
+            res.add(newPt);
+        }
+        Collections.shuffle(res);
+        return res;
     }
 
     /**

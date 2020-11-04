@@ -45,7 +45,6 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
      */
     protected void combatCorpsACorps(Creature defenseur, int bonus, int malus) {
         Random randomGenerator = new Random();
-        String nameDefenseur = "";
         System.out.printf("⚔️ Combat au corps à corps:  %s attaque %s ⚔️ \n", this.getNom(), defenseur.getNom());
         // attaque réussie
         if (randomGenerator.nextInt(101) <= this.getPourcentageAtt()) {
@@ -53,14 +52,17 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
             String res = "";
             // parade réussie
             if (randomGenerator.nextInt(101) <= defenseur.getPourcentagePar()) {
-                newPtvie = Integer.max(defenseur.getPtVie() - this.getDegAtt() + defenseur.getPtPar(), 0);
+                newPtvie = Integer.max(newPtvie + defenseur.getPtPar(), 0);
                 res = "🛡️ Parade,";
             } // aucune parade
             else {
-                newPtvie = Integer.max(defenseur.getPtVie() - this.getDegAtt(), 0);
+                newPtvie = Integer.max(newPtvie, 0);
             }
-            System.out.printf("%s 👌 Perte de vie engendrée: %d\n", res, defenseur.getPtVie() - newPtvie);
-            defenseur.setPtVie(newPtvie);
+            // vérifier parade trop forte
+            if (newPtvie < defenseur.getPtVie()) {
+                System.out.printf("%s 👌 Perte de vie engendrée: %d\n", res, defenseur.getPtVie() - newPtvie);
+                defenseur.setPtVie(newPtvie);
+            }
         } else {
             System.out.println("⛔ échec de l'attaque");
         }

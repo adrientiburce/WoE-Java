@@ -37,7 +37,7 @@ public class CigueToxique extends Nourriture {
     public String toString() {
         return "CigueToxique{" +
                 "dureeEffet=" + this.getDureeEffet() +
-                "degAttMalus=" + degAttMalus +
+                "; degAttMalus=" + degAttMalus +
                 "}";
     }
 }

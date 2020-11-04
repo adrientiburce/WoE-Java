@@ -15,11 +15,12 @@ public class Guerrier extends Personnage implements Combattant {
 
     /**
      * attributs random
+     *
      * @param nom
      * @param random
      */
     public Guerrier(String nom, Random random) {
-        super(nom, random.nextInt(50) + 50, random.nextInt(40), random.nextInt(30), random.nextInt(80) + 20, random.nextInt(80) + 20, random.nextInt(20) + 10, random.nextInt(30) + 10,
+        super(nom, random.nextInt(50) + 50, random.nextInt(40) + 10, random.nextInt(30) + 10, random.nextInt(50) + 50, random.nextInt(80) + 20, random.nextInt(20) + 10, random.nextInt(30) + 10,
                 random.nextInt(50) + 50, random.nextInt(20) + 10, 1, new Point2D());
     }
 

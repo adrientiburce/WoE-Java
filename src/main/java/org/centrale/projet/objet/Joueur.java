@@ -92,7 +92,7 @@ public class Joueur {
         return -1;
     }
 
-    private int boirePotion(String choix) throws NumberFormatException {
+    private int ramasseObjet(String choix) throws NumberFormatException {
         String[] posArray = choix.split("\\s+");
         Point2D newPos = new Point2D(Integer.parseInt((posArray[0])), Integer.parseInt((posArray[1])));
 
@@ -107,9 +107,14 @@ public class Joueur {
             System.out.println("⛔ Case avec une Creature");
             return -1;
         }
-        return 1;
+        return 2;
     }
 
+    /**
+     *
+     * @return -1: tour de jeu non effectué (non compris)u, 0: arrêt du jeu,
+     *  1: se déplacer ou combattre,  2: ramasser un objet
+     */
     public int askNextAction() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Veux tu te déplacer (D), combattre (C) ou ramasser un objet (R) ou quitter(Q) ?");
@@ -130,7 +135,7 @@ public class Joueur {
             case "R":
                 System.out.println("Position de l'objet: 'X Y'");
                 try {
-                    return boirePotion(scanner.nextLine());
+                    return ramasseObjet(scanner.nextLine());
                 } catch (NumberFormatException e) {
                     System.out.println("Position non valable");
                     return -1;
@@ -175,8 +180,10 @@ public class Joueur {
     }
 
     public void showPersoInfos() {
-        System.out.println("======= 🙋 Ton Perso 🙋 =======");
+        System.out.print("======= 🙋 Ton Perso ");this.perso.afficheMap();
+        System.out.println(" 🙋 =======");
         System.out.println(perso);
+        perso.showNourritureBag();
     }
 
     public void afficheMap() {
@@ -202,24 +209,21 @@ public class Joueur {
             case "archer": {
                 System.out.println("Nom de l'archer ?");
                 String name = myObj.nextLine();
-                this.perso = new Archer(name, 100, random.nextInt(50) + 50, random.nextInt(30), random.nextInt(80) + 20, random.nextInt(80) + 20, random.nextInt(50) + 50, random.nextInt(50) + 50,
-                        random.nextInt(50) + 10, random.nextInt(50) + 50, random.nextInt(15) + 2, new Point2D(21, 23), random.nextInt(15) + 5);
+                this.perso = new Archer(name, random);
                 this.className = Archer.class.getSimpleName();
                 break;
             }
             case "guerrier": {
                 System.out.println("Nom du guerrier ?");
                 String name = myObj.nextLine();
-                this.perso = new Guerrier(name, 100, random.nextInt(40), random.nextInt(30), random.nextInt(80) + 20, random.nextInt(80) + 20, random.nextInt(20) + 10, random.nextInt(30) + 10,
-                        random.nextInt(50) + 50, random.nextInt(20) + 10, 1, new Point2D(21, 23));
+                this.perso = new Guerrier(name, random);
                 this.className = Guerrier.class.getSimpleName();
                 break;
             }
             case "mage": {
                 System.out.println("Nom du mage ?");
                 String name = myObj.nextLine();
-                this.perso = new Mage(name, 100, random.nextInt(50) + 50, random.nextInt(30), random.nextInt(80) + 20, random.nextInt(80) + 20, random.nextInt(50) + 50, random.nextInt(50) + 50,
-                        random.nextInt(50) + 10, random.nextInt(50) + 50, random.nextInt(8) + 2, new Point2D(21, 23));
+                this.perso = new Mage(name, random);;
                 this.className = Mage.class.getSimpleName();
                 break;
             }
@@ -232,7 +236,7 @@ public class Joueur {
     }
 
     /**
-     * attaque automatiques des Loups sur le joeur
+     * attaque automatiques des Loups sur le joueur
      */
     public void attaqueDesLoups() {
         int x = perso.getPos().getX();
@@ -249,7 +253,6 @@ public class Joueur {
                         return;
                     }
                 }
-
             }
         }
     }
