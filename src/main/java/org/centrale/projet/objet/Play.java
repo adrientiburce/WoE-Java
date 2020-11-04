@@ -52,6 +52,10 @@ public class Play {
         play();
     }
 
+    /**
+     * logique des tours de jeux
+     * pour comprendre la logique voit ce que renvoie askNextAction()
+     */
     private static void play() {
         joueur.showPersoInfos();
         joueur.showElementAround();
@@ -66,9 +70,7 @@ public class Play {
             }
             // si une action a été effectué
             if (res >= 1) {
-                joueur.attaqueDesLoups();
-                NewWorld.removeDeadCreature();
-                NewWorld.moveAllCreature(joueur);
+                NewWorld.removeDeadCreatureAndMoveCreatures(joueur);
 
                 joueur.showPersoInfos();
                 joueur.showElementAround();
@@ -85,6 +87,9 @@ public class Play {
     }
 
 
+    /**
+     * créé une nouvelle partie avec un nouveau perso
+     */
     public static void newGame() {
         NewWorld monde = new NewWorld(10);
         monde.creerMondeAlea(50);

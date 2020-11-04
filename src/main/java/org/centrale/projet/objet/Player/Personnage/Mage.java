@@ -35,14 +35,6 @@ public class Mage extends Personnage implements Combattant {
         System.out.printf("🎩 Mage{%s}\n", this.toString());
     }
 
-    public String saveObject() {
-        return String.format("Mage %s\n", this.toSave());
-    }
-
-    public void afficheMap() {
-        System.out.print("🎩Mage");
-    }
-
     /**
      * combat avec combat magique et corps à corps
      *
@@ -89,6 +81,16 @@ public class Mage extends Personnage implements Combattant {
             System.out.println("⛔ échec de l'attaque");
         }
         this.setPtMana(this.getPtMana() - 1);
+    }
+
+    @Override
+    public String saveObject() {
+        return String.format("Mage %s\n", this.toSave());
+    }
+
+    @Override
+    public void afficheMap() {
+        System.out.print("🎩Mage");
     }
 
 }

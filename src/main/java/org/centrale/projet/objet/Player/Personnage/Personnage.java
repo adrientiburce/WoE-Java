@@ -263,6 +263,10 @@ public abstract class Personnage extends Creature {
                         ", distAttMax=" + distAttMax;
     }
 
+    /**
+     * utilisé par les classe filles pour saveObject()
+     * @return sauvegarde des attributs sur une ligne
+     */
     public String toSave() {
         return nom + " " + ptVie + " " + ptMana + " " + ptPar + " " + pourcentageAtt + " " + pourcentagePar + " " +
                 pourcentageMag + " " + pourcentageResistMag + " " + degAtt + " " + degMag + " " + distAttMax + " " + pos;

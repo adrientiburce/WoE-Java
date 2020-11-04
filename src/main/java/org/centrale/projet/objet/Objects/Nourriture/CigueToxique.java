@@ -36,7 +36,7 @@ public class CigueToxique extends Nourriture {
     @Override
     public String toString() {
         return "CigueToxique{" +
-                "dureeEffet=" + this.getDureeEffet() +
+                "duréeEffet=" + this.getDureeEffet() +
                 "; degAttMalus=" + degAttMalus +
                 "}";
     }

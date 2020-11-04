@@ -41,14 +41,6 @@ public class Guerrier extends Personnage implements Combattant {
         System.out.printf("Guerrier{%s}\n", this.toString());
     }
 
-    public void afficheMap() {
-        System.out.print("⚔️Guer");
-    }
-
-    public String saveObject() {
-        return String.format("Guerrier %s\n", this.toSave());
-    }
-
     /**
      * Guerrier ne peut attaquer qu'au corps à corps
      *
@@ -63,4 +55,15 @@ public class Guerrier extends Personnage implements Combattant {
             System.out.println("⛔ Trop loin pour attaquer");
         }
     }
+
+    @Override
+    public void afficheMap() {
+        System.out.print("⚔️Guer");
+    }
+
+    @Override
+    public String saveObject() {
+        return String.format("Guerrier %s\n", this.toSave());
+    }
+
 }

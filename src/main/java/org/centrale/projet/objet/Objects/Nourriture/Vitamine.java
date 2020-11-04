@@ -34,7 +34,7 @@ public class Vitamine extends Nourriture {
     @Override
     public String toString() {
         return "Vitamine{" +
-                "dureeEffet=" + this.getDureeEffet() +
+                "duréeEffet=" + this.getDureeEffet() +
                 "; degAttBonus=" + degAttBonus +
                 "}";
     }

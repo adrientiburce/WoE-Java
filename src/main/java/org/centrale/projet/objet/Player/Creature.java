@@ -68,25 +68,7 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
         }
     }
 
-    /**
-     * action de déplacement aléatoire (de 1 unité maximum selon X et Y)
-     */
-    public boolean deplace() {
-        Point2D newPos = new Point2D(this.pos);
-        newPos.getNextPosition();
-        if (this.verifDeplacement(this, newPos)) {
-            this.setPos(newPos);
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * action de déplacement vers la nouvelle position
-     * met a jour la map
-     *
-     * @param newPos nouvelle position
-     */
+    @Override
     public boolean move(Point2D newPos) {
         if (this.getPos().distance(newPos) > Math.sqrt(2)) {
             System.out.println("⛔ déplacement non autorisé");
@@ -111,7 +93,22 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
     }
 
     /**
+     * action de déplacement aléatoire (de 1 unité maximum selon X et Y)
+     * @deprecated
+     */
+    public boolean deplace() {
+        Point2D newPos = new Point2D(this.pos);
+        newPos.getNextPosition();
+        if (this.verifDeplacement(this, newPos)) {
+            this.setPos(newPos);
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * action de déplacement avec la nouvelle position
+     * @deprecated
      *
      * @param newPos nouvelle position
      */
@@ -125,6 +122,12 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
         return false;
     }
 
+    /**
+     * @deprecated
+     * @param c
+     * @param newPos
+     * @return
+     */
     private boolean verifDeplacement(Creature c, Point2D newPos) {
         if (!World.mapPositions.containsKey(newPos)) {
             World.mapPositions.remove(this.getPos());
@@ -182,7 +185,6 @@ public abstract class Creature extends ElementDeJeu implements Deplacable {
     public void setNom(String nom) {
         this.nom = nom;
     }
-
 
     public void combattre(Creature defenseur) {
 

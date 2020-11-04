@@ -41,36 +41,44 @@ public class NewWorld {
         }
     }
 
+
     /**
-     * supprimes les créatures qui n'ont plus de vie
+     * Enlève les créature mortes et déplace les autres
      */
-    public static void removeDeadCreature() {
+    public static void removeDeadCreatureAndMoveCreatures(Joueur joueur) {
         for (int i = 1; i <= TAILLE_GRILLE; i++) {
             for (int j = 1; j <= TAILLE_GRILLE; j++) {
                 Point2D pt = new Point2D(i, j);
-                if (NewWorld.map.get(pt) instanceof Creature) {
-                    Creature c = (Creature) NewWorld.map.get(pt);
-                    if (c.getPtVie() <= 0) {
-                        NewWorld.map.remove(new Point2D(i, j));
-                    }
-                }
+
+                removeDeadCreature(pt);
+                moveAllCreature(pt, joueur);
             }
         }
     }
 
-    public static void moveAllCreature(Joueur joueur) {
-        for (int i = 1; i <= TAILLE_GRILLE; i++) {
-            for (int j = 1; j <= TAILLE_GRILLE; j++) {
-                Point2D pt = new Point2D(i, j);
+    /**
+     * supprimes les créatures qui n'ont plus de vie
+     */
+    private static void removeDeadCreature(Point2D pt) {
+        if (NewWorld.map.get(pt) instanceof Creature) {
+            Creature c = (Creature) NewWorld.map.get(pt);
+            if (c.getPtVie() <= 0) {
+                System.out.printf("👌 La créature %s est morte ", c.getNom());
+                NewWorld.map.remove(pt);
+            }
+        }
+    }
 
-                if (NewWorld.map.get(pt) instanceof Creature && !pt.equals(joueur.perso.getPos())) {
-                    Creature c = (Creature) NewWorld.map.get(pt);
-                    for (Point2D newPos : getAdjacentPos(c.pos)) {
-                        if (NewWorld.map.get(newPos) == null) {
-                            c.move(newPos);
-                            break;
-                        }
-                    }
+    /**
+     * déplace aléatoire les créatures sur la Map
+     */
+    private static void moveAllCreature(Point2D pt, Joueur joueur) {
+        if (NewWorld.map.get(pt) instanceof Creature && !pt.equals(joueur.perso.getPos())) {
+            Creature c = (Creature) NewWorld.map.get(pt);
+            for (Point2D newPos : getAdjacentPos(c.pos)) {
+                if (NewWorld.map.get(newPos) == null) {
+                    c.move(newPos);
+                    break;
                 }
             }
         }

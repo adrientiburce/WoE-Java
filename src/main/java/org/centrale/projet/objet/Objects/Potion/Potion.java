@@ -8,12 +8,6 @@ import org.centrale.projet.objet.Objects.Objet;
  */
 public class Potion extends Objet {
 
-    /**
-     * nom de la potion
-     */
-    private String nom;
-
-
     public Potion(String nom) {
         super(nom);
     }

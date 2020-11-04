@@ -35,13 +35,14 @@ public class ElementDeJeu {
 
     /**
      * formatage de l'objet pour sauvegarder la partie
+     * chaque classe @Override la méthode et ajoute toutes les infos pour reconstruire l'objet
      */
     public String saveObject() {
         return "case vide";
     }
 
     /**
-     * affichage court sur la carte
+     * affichage court pour la carte de la CLI
      */
     public void afficheMap() {
         System.out.print("  o   ");

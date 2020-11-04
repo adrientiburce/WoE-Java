@@ -26,17 +26,16 @@ public class Loader {
 
     private static FileReader reader;
 
-    public static void main(String[] args) throws Exception {
-        Joueur j = new Joueur();
-        load("game.txt", j);
-        NewWorld.showMap(j);
-    }
-
+    /**
+     *  Charge un fichier de sauvegarde
+     * @param backupName nom de la sauvegarde
+     * @param joueur joueur a peupler
+     * @throws Exception Vérifie que le joueur est dans la sauvegarde
+     */
     public static void load(String backupName, Joueur joueur) throws Exception {
-        // open the file
         Loader.reader = new FileReader(new File(backupName));
 
-        // read the file
+        // lit le fichier
         try {
             BufferedReader b = new BufferedReader(Loader.reader);
             String readLine = "";
@@ -64,6 +63,10 @@ public class Loader {
     }
 
 
+    /**
+     * Crée le monde avec les infos de la sauvegarde
+     * @param hauteur
+     */
     public static void createWorld(String hauteur) {
         StringTokenizer tokenizer = new StringTokenizer(hauteur, " ");
         tokenizer.nextToken();
@@ -71,6 +74,13 @@ public class Loader {
         new NewWorld(h);
     }
 
+    /**
+     * lit chaque ligne et l'ajoute dans la Map du monde
+     * @param str
+     * @param isJoueur
+     * @param joueur
+     * @throws Exception
+     */
     public static void loadElemJeu(String str, boolean isJoueur, Joueur joueur) throws Exception {
         List<Integer> tokens = new ArrayList<>();
         StringTokenizer tokenizer = new StringTokenizer(str, " ");
@@ -103,6 +113,13 @@ public class Loader {
         }
     }
 
+    /**
+     * créé la Créature/Objet avec tous les paramètres stockés dans la ligne
+     * @param className classe du perso du joueur
+     * @param tokens liste des paramètres entiers
+     * @param name nom de l'Element
+     * @return ElementDeJeu créé
+     */
     public static ElementDeJeu getElemDeJeu(String className, List<Integer> tokens, String name) {
         switch (className) {
             case "Archer":

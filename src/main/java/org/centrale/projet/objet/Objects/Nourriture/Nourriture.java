@@ -2,7 +2,16 @@ package org.centrale.projet.objet.Objects.Nourriture;
 
 import org.centrale.projet.objet.Objects.Objet;
 
+/**
+ * Objet temporaires permettant au perso de gagner des bonus/malus
+ * pendant un nombre de tour défini
+ */
 public class Nourriture extends Objet {
+
+    /**
+     * nombre de tours ou le bonus/malus prend effet
+     */
+    private int dureeEffet;
 
     public int getDureeEffet() {
         return dureeEffet;
@@ -16,11 +25,6 @@ public class Nourriture extends Objet {
     public void setDureeEffet(int dureeEffet) {
         this.dureeEffet = dureeEffet;
     }
-
-    /**
-     * nombre de tours ou le bonus/malus prend effet
-     */
-    private int dureeEffet;
 
 
     @Override

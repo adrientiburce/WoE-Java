@@ -12,12 +12,7 @@ public class NuageToxique implements Combattant, Deplacable {
     }
 
     @Override
-    public boolean deplace() {
-        return false;
-    }
-
-    @Override
-    public boolean deplace(Point2D newPos) {
+    public boolean move(Point2D newPos) {
         return false;
     }
 }

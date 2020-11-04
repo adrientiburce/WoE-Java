@@ -82,19 +82,21 @@ public class Archer extends Personnage implements Combattant {
         System.out.printf("Archer{%s, nbFleches=%s}\n", this.toString(), nbFleches);
     }
 
-    public void afficheMap() {
-        System.out.print("🏹Arch");
-    }
-
-    public String saveObject() {
-        return String.format("Archer %s\n", this.toSave() + " " + nbFleches);
-    }
-
     public int getNbFleches() {
         return nbFleches;
     }
 
     public void setNbFleches(int nbFleches) {
         this.nbFleches = nbFleches;
+    }
+
+    @Override
+    public void afficheMap() {
+        System.out.print("🏹Arch");
+    }
+
+    @Override
+    public String saveObject() {
+        return String.format("Archer %s\n", this.toSave() + " " + nbFleches);
     }
 }

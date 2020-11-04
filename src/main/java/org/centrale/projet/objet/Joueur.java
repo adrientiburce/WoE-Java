@@ -19,23 +19,25 @@ import java.util.Scanner;
  */
 public class Joueur {
 
-    public Personnage getPerso() {
-        return perso;
-    }
-
-    /**
-     * nom de la classe du personnage
-     */
-    private String className;
-
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
     /**
      * personnage choisit par le joueur
      */
     public Personnage perso;
+
+    /**
+     * nom de la classe du personnage
+     * utile pour la sauvegarde de la partie
+     */
+    private String className;
+
+    public Personnage getPerso() {
+        return perso;
+    }
+
+
+    public void setClassName(String className) {
+        this.className = className;
+    }
 
     public Joueur() {
     }
@@ -43,7 +45,7 @@ public class Joueur {
     private int deplaceAvecChoix(String deplaceChoice) {
         deplaceChoice = deplaceChoice.toUpperCase();
         Point2D oldPos = this.perso.getPos();
-        boolean effected = false;
+        boolean effected;
         switch (deplaceChoice) {
             // avance
             case "Z": {
@@ -77,6 +79,11 @@ public class Joueur {
         return -1;
     }
 
+    /**
+     * Récupère la position de l'attaqué et le combat
+     * @param choixCombat
+     * @return
+     */
     private int combatAvecChoix(String choixCombat) {
         String[] posArray = choixCombat.split("\\s+");
         Point2D newPos = new Point2D(Integer.parseInt((posArray[0])), Integer.parseInt((posArray[1])));
@@ -92,6 +99,12 @@ public class Joueur {
         return -1;
     }
 
+    /**
+     * Récupère la position de l'utilisateur et réalise l'action
+     * @param choix
+     * @return
+     * @throws NumberFormatException
+     */
     private int ramasseObjet(String choix) throws NumberFormatException {
         String[] posArray = choix.split("\\s+");
         Point2D newPos = new Point2D(Integer.parseInt((posArray[0])), Integer.parseInt((posArray[1])));
@@ -112,8 +125,8 @@ public class Joueur {
 
     /**
      *
-     * @return -1: tour de jeu non effectué (non compris)u, 0: arrêt du jeu,
-     *  1: se déplacer ou combattre,  2: ramasser un objet
+     * @return -1: tour de jeu non effectué (non compris) / 0: arrêt du jeu par l'utilisateur
+     *  1: se déplacer ou combattre /  2: ramasser un objet
      */
     public int askNextAction() {
         Scanner scanner = new Scanner(System.in);
@@ -161,6 +174,9 @@ public class Joueur {
         }
     }
 
+    /**
+     * Montre la nouvelle Map au joueur après chaque tour
+     */
     public void showElementAround() {
         System.out.println("======= Ton entourage =======");
         int x = perso.getPos().getX();
@@ -179,6 +195,9 @@ public class Joueur {
         NewWorld.showMap(this);
     }
 
+    /**
+     * Montre les infos de son perso au joueur
+     */
     public void showPersoInfos() {
         System.out.print("======= 🙋 Ton Perso ");this.perso.afficheMap();
         System.out.println(" =======");
@@ -236,7 +255,7 @@ public class Joueur {
     }
 
     /**
-     * attaque automatiques des Loups sur le joueur
+     * attaque automatiques des Loups sur le joueur si distance assez proche
      */
     public void attaqueDesLoups() {
         int x = perso.getPos().getX();
@@ -257,6 +276,10 @@ public class Joueur {
         }
     }
 
+    /**
+     * vérifie si la partie doit continuer
+     * @return
+     */
     public boolean isAlive() {
         return this.perso.getPtVie() >= 1;
     }

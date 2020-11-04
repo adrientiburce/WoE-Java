@@ -41,6 +41,11 @@ public class Save {
         }
     }
 
+    /**
+     * sauvegarde la grille
+     * @param bw
+     * @param tailleGrille
+     */
     private static void saveGrilleInfo(BufferedWriter bw, int tailleGrille) {
         try {
             bw.write(String.format("Largeur %s\n", tailleGrille));
@@ -50,6 +55,11 @@ public class Save {
         }
     }
 
+    /**
+     * sauvegarde chaque ElementDeJeu présent sur la Map
+     * @param bw
+     * @param elem
+     */
     public static void saveElemDeJeuInLine(BufferedWriter bw, ElementDeJeu elem) {
         try {
             bw.write(elem.saveObject()); // newLine in saveObject

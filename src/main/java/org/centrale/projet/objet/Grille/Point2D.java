@@ -91,6 +91,10 @@ public class Point2D {
         return new Point2D(newX, newY);
     }
 
+    /**
+     * vérifie que la nouvelle position se situe dans la grille
+     * @return
+     */
     public boolean isPositionValable() {
         // si x sort de la grille
         if (this.x > NewWorld.TAILLE_GRILLE | this.x <= 0) {

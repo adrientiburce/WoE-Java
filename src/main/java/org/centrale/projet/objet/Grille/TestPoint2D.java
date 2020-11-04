@@ -1,5 +1,8 @@
 package org.centrale.projet.objet.Grille;
 
+/**
+ * Classe utilisé au TP1 pour tester notre Classe Point2D
+ */
 public class TestPoint2D {
 
     public static void main(String[] args) {
