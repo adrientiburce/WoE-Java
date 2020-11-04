@@ -63,7 +63,7 @@ public class NewWorld {
         if (NewWorld.map.get(pt) instanceof Creature) {
             Creature c = (Creature) NewWorld.map.get(pt);
             if (c.getPtVie() <= 0) {
-                System.out.printf("👌 La créature %s est morte ", c.getNom());
+                System.out.printf("==> La créature %s est morte !\n", c.getNom());
                 NewWorld.map.remove(pt);
             }
         }

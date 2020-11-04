@@ -65,7 +65,7 @@ public class Play {
             res = joueur.askNextAction();
 
             // si action était de ramasser on ne MAJ pas la besace
-            if (res != 2) {
+            if (res == 1) {
                 joueur.perso.updateNourrituresEffet();
             }
             // si une action a été effectué

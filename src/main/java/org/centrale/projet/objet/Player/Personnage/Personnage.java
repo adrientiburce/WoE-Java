@@ -185,7 +185,7 @@ public abstract class Personnage extends Creature {
         }
         for (Nourriture n : this.getNourritures()) {
             n.afficheMap();
-            System.out.printf(" (durée: %d) /", n.getDureeEffet());
+            System.out.printf(" (durée: %d) / ", n.getDureeEffet());
         }
         System.out.println();
     }
