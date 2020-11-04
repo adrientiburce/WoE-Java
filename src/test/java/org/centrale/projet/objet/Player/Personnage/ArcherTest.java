@@ -55,12 +55,14 @@ public class ArcherTest extends TestCase {
         attaquant.combattre(defenseur);
         // prend en compte le bonus vitamine
         assertEquals(90 - 25 - 6, defenseur.getPtVie());
+        attaquant.updateNourrituresEffet();
         assertEquals(1, vitamine.getDureeEffet());
     }
 
     public void testCombatAvecCigueDureeUnique() {
         attaquant.ramasseNourriture(cigue);
         attaquant.combattre(defenseur);
+        attaquant.updateNourrituresEffet();
         // prend en compte le malus
         assertEquals(90 - 25 + 3, defenseur.getPtVie());
         assertEquals(0, attaquant.getNourritures().size());
@@ -72,6 +74,7 @@ public class ArcherTest extends TestCase {
         assertEquals(2, attaquant.getNourritures().size());
 
         attaquant.combattre(defenseur);
+        attaquant.updateNourrituresEffet();
         assertEquals(90 - 25 - 6 + 3, defenseur.getPtVie());
         assertEquals(1, attaquant.getNourritures().size());
     }

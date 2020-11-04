@@ -169,9 +169,9 @@ public class Joueur {
             for (int j = y - 1; j < y + 2; j++) {
                 Point2D pt = new Point2D(i, j);
                 if (!pt.equals(perso.getPos())) {
-                    System.out.println("pos " + pt.toString() + " -> " + (NewWorld.map.get(pt) != null ? NewWorld.map.get(pt) : "Case vide"));
+                    System.out.println("position " + pt.toString() + " -> " + (NewWorld.map.get(pt) != null ? NewWorld.map.get(pt) : "Case vide"));
                 } else {
-                    System.out.println(pt.toString() + " -> " + " << ----- 🙋 Ton Perso ---- >>");
+                    System.out.println("position: " + pt.toString() + " -> " + " << ----- 🙋 Ton Perso ---- >>");
                 }
             }
         }
@@ -181,7 +181,7 @@ public class Joueur {
 
     public void showPersoInfos() {
         System.out.print("======= 🙋 Ton Perso ");this.perso.afficheMap();
-        System.out.println(" 🙋 =======");
+        System.out.println(" =======");
         System.out.println(perso);
         perso.showNourritureBag();
     }

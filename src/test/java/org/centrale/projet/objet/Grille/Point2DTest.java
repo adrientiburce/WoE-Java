@@ -10,11 +10,11 @@ public class Point2DTest extends TestCase {
 
     public void testTranslater() {
         Point2D pt = new Point2D(2, 3);
-        pt.translater(2, 5);
-        assertEquals(new Point2D(4, 8), pt);
+        Point2D pt1 = pt.translater(2, 5);
+        assertEquals(new Point2D(4, 8), pt1);
 
-        pt.translater(-5, -2);
-        assertEquals(new Point2D(0, 6), pt);
+        Point2D pt2 = pt1.translater(-5, -2);
+        assertEquals(new Point2D(0, 6), pt2);
     }
 
     public void testDistance() {
